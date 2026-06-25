@@ -39,7 +39,7 @@ The CMS loads with no login screen — local proxy mode skips authentication. Yo
 - Review the diff (`git diff`) before committing
 - Commit manually: `git add -p && git commit -m "content: [description]"`
 
-The editorial workflow states (Draft / In Review / Ready) are visible in the UI but do not trigger Git operations in Phase 1.
+**There is no "Save" button in Phase 1.** The action button is labelled "Publish now". This is a naming quirk of Decap without `editorial_workflow` — "Publish now" means "write to disk", not "make live". Whether an article is live depends entirely on the `draft` field in the frontmatter, not on which Decap action was used. Always check the `draft` toggle before clicking "Publish now".
 
 ---
 
@@ -90,9 +90,11 @@ If `pnpm build` fails after a Decap edit, the most likely cause is invalid front
 
 ## How to handle a draft that is not ready to publish
 
-Leave the `draft: true` field set in frontmatter. The Astro build does not exclude drafts automatically — the `draft` field is informational in Phase 1. The article will still build and render locally.
+Set `draft: true` in the article form before clicking "Publish now". The Astro production build excludes all articles with `draft: true` — they will not generate a page, will not appear in hub indexes, and will not appear in the homepage latest-articles panel.
 
-To actually hide it from the live site: do not commit the MDX file to `main`. Keep it on a local branch or leave it uncommitted until it is ready.
+Drafts are visible in the local dev server (`pnpm dev`) so you can preview the article while writing. They are excluded only from `pnpm build` output.
+
+To publish: open the article in Decap, toggle Draft to OFF, click "Publish now", then commit and push.
 
 ---
 

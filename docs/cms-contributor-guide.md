@@ -150,14 +150,12 @@ Write in British English: `moisturiser`, `colour`, `flavour`.
 
 ## How drafts work
 
-When you click **Save**, the article is saved as a draft. In the workflow view on the dashboard, it appears under **Drafts**.
+The action button is labelled **Publish now** — this writes your article to disk. It does not make it live on the site. Whether the article is live depends on the **Draft** toggle in the form.
 
-States:
-1. **Drafts** — still working on it
-2. **In review** — finished writing; admin should check it
-3. **Ready** — admin approved; ready to publish
+- **Draft toggle ON (blue)** → article is saved but excluded from the live site. Use this while writing.
+- **Draft toggle OFF (grey)** → article will appear on the live site after the next build and deploy.
 
-Move articles between states by dragging the card in the workflow view, or by opening the article and changing the status in the top bar.
+Always check the Draft toggle before clicking "Publish now". When you are finished writing and the article is ready for review, leave Draft ON and notify the editor. The editor will turn Draft OFF and publish when ready.
 
 **Phase 1 note:** In local mode, state changes do not create Git branches — files are written directly to the working tree. The branching behaviour activates in Phase 2.
 
