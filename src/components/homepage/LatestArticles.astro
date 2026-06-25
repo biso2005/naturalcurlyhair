@@ -38,30 +38,39 @@ function formatDate(iso: string): string {
     <ol class="list-none m-0 p-0">
       {articles.map(article => (
         <li class="border-t border-line py-5">
-          <a href={article.href} class="no-underline group flex items-baseline justify-between gap-4">
-            <div class="flex items-baseline gap-3 min-w-0">
-              <span class="font-sans text-taupe flex-shrink-0" style="font-size:12px;">
+          <a href={article.href} class="no-underline group block md:flex md:items-baseline md:justify-between md:gap-4">
+
+            <!-- Mobile: two-line layout. Desktop: single-line. -->
+
+            <!-- Date + tag — always on same line -->
+            <div class="flex items-baseline gap-3 mb-1 md:mb-0 md:flex-shrink-0">
+              <span class="font-sans text-taupe" style="font-size:12px;">
                 {formatDate(article.published)}
               </span>
               <span
-                class="font-sans text-berry uppercase flex-shrink-0"
+                class="font-sans text-berry uppercase"
                 style="font-size:11px;letter-spacing:0.10em;"
               >
                 {article.hub.toUpperCase()}
               </span>
-              <span
-                class="text-ink group-hover:text-berry transition-colors duration-150 truncate"
-                style="font-family:'Fraunces Variable',Georgia,serif;font-size:17px;font-weight:400;letter-spacing:-0.012em;line-height:1.2;font-variation-settings:'opsz' 18,'SOFT' 10;"
-              >
-                {article.title}
-              </span>
             </div>
-            <div class="flex items-baseline gap-3 flex-shrink-0">
-              <span class="font-sans text-taupe hidden md:inline" style="font-size:12px;">
+
+            <!-- Title: wraps on mobile, truncates on desktop -->
+            <span
+              class="md:flex-1 md:truncate md:mx-3 group-hover:text-berry transition-colors duration-150 block"
+              style="font-family:'Fraunces Variable',Georgia,serif;font-size:17px;font-weight:400;letter-spacing:-0.012em;line-height:1.35;font-variation-settings:'opsz' 18,'SOFT' 10;color:#2C1D17;"
+            >
+              {article.title}
+            </span>
+
+            <!-- Read time + arrow: on same line as title on mobile, end of row on desktop -->
+            <div class="flex items-baseline gap-3 mt-1 md:mt-0 md:flex-shrink-0">
+              <span class="font-sans text-taupe" style="font-size:12px;">
                 {article.readTime}
               </span>
               <span class="font-sans text-berry" style="font-size:12px;" aria-hidden="true">→</span>
             </div>
+
           </a>
         </li>
       ))}

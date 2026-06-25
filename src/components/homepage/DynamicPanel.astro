@@ -7,7 +7,8 @@ interface Props {
   }
   panel: {
     humidity: number
-    prose: string
+    proseBefore: string
+    proseAfter: string
     ctaHref: string
   }
 }
@@ -36,7 +37,7 @@ const { copy, panel } = Astro.props
       <div class="flex-1">
         <div class="flex items-center gap-2 mb-1">
           <span
-            class="pulse-dot inline-block rounded-full flex-shrink-0"
+            class="pulse-dot inline-block flex-shrink-0"
             style="width:7px;height:7px;background:#A2384B;border-radius:50%;"
             aria-hidden="true"
           ></span>
@@ -50,8 +51,11 @@ const { copy, panel } = Astro.props
         <p
           class="text-ink max-w-prose"
           style="font-family:'Newsreader',Georgia,serif;font-size:15px;line-height:1.6;"
-          set:html={panel.prose}
-        />
+        >
+          {panel.proseBefore}{' '}
+          <strong style="font-size:22px;font-style:italic;">{panel.humidity}%</strong>
+          {' '}{panel.proseAfter}
+        </p>
       </div>
 
       <!-- Right: CTA -->
