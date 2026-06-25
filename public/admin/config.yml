@@ -1,5 +1,6 @@
 backend:
-  name: git-gateway
+  name: proxy
+  proxy_url: http://localhost:8081/api/v1
   branch: main
 
 publish_mode: editorial_workflow
@@ -77,7 +78,7 @@ collections:
         name: readTime
         widget: string
         required: false
-        hint: "e.g. '6 min'. Leave blank to use site default."
+        hint: "e.g. '7 min'. Leave blank otherwise."
 
       - label: Featured
         name: featured
@@ -95,7 +96,7 @@ collections:
         name: draft
         widget: boolean
         default: true
-        hint: "Leave as true until the article is ready to publish. The editorial workflow controls visibility — this is an additional safeguard."
+        hint: "Leave as true until the article is ready to publish."
 
       - label: Confidence grade
         name: confidence_grade
@@ -140,13 +141,13 @@ collections:
         name: standfirst
         widget: text
         required: false
-        hint: "Longer intro shown beneath the title. 1–2 sentences."
+        hint: "1–2 sentence intro shown beneath the article title."
 
       - label: Short answer
         name: shortAnswer
         widget: text
         required: false
-        hint: "40–60 word direct answer, shown in the highlighted box at the top of the article."
+        hint: "40–60 word direct answer shown in the highlighted box at the top of the article."
 
       # ── Body ───────────────────────────────────────────────────────────────
       - label: Body
@@ -181,9 +182,12 @@ collections:
 
   # ── Contributors ────────────────────────────────────────────────────────────
   # Writes to src/data/contributors.json as a files collection.
-  # Shape matches the existing file: id, name, role, initials, colour are the
-  # committed fields. bio, portrait, credentials, active are additive — new
-  # entries should fill them; existing placeholders may leave them blank.
+  #
+  # Shape note: the existing contributors.json (committed in homepage v1) has
+  # `initials` and `colour` fields that this spec does not list. Both are
+  # included here as optional to match the committed shape. New fields from
+  # this spec (bio, portrait, credentials, active) are additive.
+  # Flagged to operator: existing placeholder entries lack bio/active.
   - name: contributors_data
     label: Contributors
     files:
@@ -200,7 +204,7 @@ collections:
                 name: id
                 widget: string
                 required: true
-                hint: "Slug format, e.g. 'amara-osei'. Used by articles to reference this contributor. Cannot be changed once articles reference it."
+                hint: "Slug format, e.g. 'amara-osei'. Cannot be changed once articles reference it."
 
               - label: Name
                 name: name
@@ -217,19 +221,19 @@ collections:
                 name: initials
                 widget: string
                 required: false
-                hint: "Two letters used in the avatar circle, e.g. 'YA'. Auto-generated from name if blank."
+                hint: "Two letters for the avatar circle, e.g. 'YA'. Existing entries use this field."
 
               - label: Colour
                 name: colour
                 widget: string
                 required: false
-                hint: "Hex colour for the avatar circle, e.g. '#9C7494'. Leave blank to use default."
+                hint: "Hex colour for the avatar circle, e.g. '#9C7494'. Existing entries use this field."
 
               - label: Bio
                 name: bio
                 widget: text
                 required: false
-                hint: "Max 300 characters. Plain text, no markdown."
+                hint: "Max 300 characters. Plain text."
 
               - label: Portrait
                 name: portrait
@@ -248,4 +252,4 @@ collections:
                 name: active
                 widget: boolean
                 default: true
-                hint: "Set to false to hide this contributor from article bylines without deleting their record."
+                hint: "Set to false to hide this contributor from bylines without deleting their record."
