@@ -107,6 +107,24 @@ Phase 2 is not complete until ALL of the following:
 
 ---
 
+## Phase 1 structural finding: contributors.json bare-array incompatibility
+
+`src/data/contributors.json` is a bare JSON array. Decap's `files` collection with a nested `list` widget writes `{ "field_name": [...] }` — a keyed object, not a bare array. Saving contributors via the Decap UI in Phase 1 would write the wrong shape and break the homepage import.
+
+**Phase 1 workaround:** contributors are added directly to `src/data/contributors.json` by editing the file. The Decap contributors collection is defined in `config.yml` for schema reference and UI completeness, but saving via the CMS UI is not safe in Phase 1.
+
+**Phase 2 decision required (pick one):**
+
+Option A — Change the file to a keyed object: rename the field to `{ "contributors": [...] }` and update the `import contributors from '../data/contributors.json'` line in `src/pages/index.astro` to `import { contributors } from '../data/contributors.json'`. Simple, breaks one import, testable in one build.
+
+Option B — Use a Decap folder collection: each contributor is a separate `src/data/contributors/{id}.json` file, and a build script (or Astro integration) merges them into the array the homepage needs. More work, more flexible for large contributor lists.
+
+Option C — Leave contributors as manual-only and remove the Decap collection stub: accept that contributors are git-managed, not CMS-managed. Works fine until contributor count makes git editing friction.
+
+The acceptance gate line "Contributors collection edits write correctly to `src/data/contributors.json`" cannot be checked green until one of these options is implemented.
+
+---
+
 ## Decisions deferred from Phase 1 to Phase 2
 
 **git-gateway deprecation.** Netlify deprecated git-gateway in 2024. It continues to function for existing setups. If git-gateway instability becomes a problem, the migration path is:

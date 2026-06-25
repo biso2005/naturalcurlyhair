@@ -3,8 +3,8 @@ interface Contributor {
   id: string
   name: string
   role: string
-  initials: string
-  colour: string
+  initials?: string
+  colour?: string
 }
 
 interface Props {
@@ -58,10 +58,10 @@ const { copy, contributors } = Astro.props
               <!-- Placeholder portrait: gradient circle with initials -->
               <div
                 class="flex-shrink-0 flex items-center justify-center font-sans font-semibold text-cream"
-                style={`width:40px;height:40px;border-radius:50%;background:${c.colour};font-size:12px;letter-spacing:0.02em;`}
+                style={`width:40px;height:40px;border-radius:50%;background:${c.colour ?? '#6E6056'};font-size:12px;letter-spacing:0.02em;`}
                 aria-hidden="true"
               >
-                {c.initials}
+                {c.initials ?? c.name.split(' ').map((w: string) => w[0]).join('').slice(0, 2).toUpperCase()}
               </div>
               <div>
                 <p

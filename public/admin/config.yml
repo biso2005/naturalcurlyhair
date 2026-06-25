@@ -188,15 +188,29 @@ collections:
   # included here as optional to match the committed shape. New fields from
   # this spec (bio, portrait, credentials, active) are additive.
   # Flagged to operator: existing placeholder entries lack bio/active.
+  # ── Contributors ────────────────────────────────────────────────────────────
+  # Phase 1 limitation: src/data/contributors.json is a bare JSON array.
+  # Decap's files collection wraps list output in an object key, which would
+  # break the homepage import (expects a bare array). This collection is
+  # defined so the schema is locked and the UI is usable for reference, but
+  # saving via Decap will write { "contributors_list": [...] } — not the
+  # bare array the homepage expects.
+  #
+  # Phase 1 workaround: add contributors directly to src/data/contributors.json
+  # by editing the file in an editor or via git. The Phase 2 handover doc
+  # records this as a structural decision to resolve: either migrate the file
+  # to { "contributors": [...] } and update the import, or use a folder
+  # collection with a merge build step.
   - name: contributors_data
     label: Contributors
     files:
-      - label: All contributors
+      - label: All contributors (read Phase 1 note above before saving)
         name: contributors
         file: src/data/contributors.json
+        format: json
         fields:
-          - label: Contributors
-            name: contributors
+          - label: Contributor list
+            name: contributors_list
             widget: list
             summary: "{{fields.name}} — {{fields.role}}"
             fields:
