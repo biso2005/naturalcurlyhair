@@ -16,7 +16,9 @@ function estimateReadTime(wordCount: number): string {
 }
 
 export async function getLatestArticles(count = 5): Promise<ArticleSummary[]> {
-  const all = await getCollection('articles')
+  const all = await getCollection('articles', ({ data }) =>
+    import.meta.env.PROD ? data.draft !== true : true
+  )
 
   return [...all]
     .sort((a, b) => b.data.published.localeCompare(a.data.published))
