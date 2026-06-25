@@ -57,20 +57,18 @@ collections:
 
       - label: Published date
         name: published
-        widget: datetime
+        widget: string
         required: true
-        date_format: "YYYY-MM-DD"
-        time_format: false
-        format: "YYYY-MM-DD"
+        hint: "YYYY-MM-DD format, e.g. 2026-06-25"
+        pattern: ['^\d{4}-\d{2}-\d{2}$', "Must be YYYY-MM-DD"]
         default: ""
 
       - label: Updated date
         name: updated
-        widget: datetime
+        widget: string
         required: false
-        date_format: "YYYY-MM-DD"
-        time_format: false
-        format: "YYYY-MM-DD"
+        hint: "YYYY-MM-DD format, e.g. 2026-06-25. Leave blank if not updated."
+        pattern: ['^\d{4}-\d{2}-\d{2}$', "Must be YYYY-MM-DD"]
 
       - label: Read time
         name: readTime
