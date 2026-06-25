@@ -1,0 +1,103 @@
+---
+import '../styles/fonts.css'
+import '../styles/global.css'
+import HubNavigation from '../components/HubNavigation.astro'
+
+interface Props {
+  title?: string
+}
+const { title } = Astro.props
+
+const footerColumns = [
+  {
+    heading: 'By curl type',
+    links: [
+      { label: '2A · 2B · 2C Waves', href: '/curl-types/waves' },
+      { label: '3A · 3B · 3C Curls', href: '/curl-types/curls' },
+      { label: '4A · 4B · 4C Coils', href: '/curl-types/coils' },
+    ],
+  },
+  {
+    heading: 'Explore',
+    links: [
+      { label: 'Hair Care',        href: '/hair-care' },
+      { label: 'Products',         href: '/products' },
+      { label: 'Parents',          href: '/parents' },
+    ],
+  },
+  {
+    heading: 'About',
+    links: [
+      { label: 'How we review', href: '/how-we-review' },
+      { label: 'How we test',   href: '/how-we-test' },
+      { label: 'Contact',       href: '/contact' },
+    ],
+  },
+  {
+    heading: 'Policies',
+    links: [
+      { label: 'Affiliate disclosure', href: '/affiliate-disclosure' },
+      { label: 'Privacy',              href: '/privacy' },
+      { label: 'Cookies',              href: '/cookies' },
+    ],
+  },
+]
+---
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title ?? 'naturalcurlyhair'}</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preload" href="/fonts/Fraunces-Variable.woff2"
+        as="font" type="font/woff2" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap"
+        rel="stylesheet">
+</head>
+<body class="bg-cream text-ink font-sans">
+
+  <HubNavigation />
+
+  <main>
+    <slot />
+  </main>
+
+  <footer class="bg-plum">
+    <div class="max-w-hub mx-auto px-6 py-16">
+
+      <a href="/" class="wordmark mb-12 leading-none block" aria-label="NaturalCurly home">
+        <span class="wordmark-natural">Natural</span><span class="wordmark-curly">Curly</span>
+      </a>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-10 mb-16">
+        {footerColumns.map(col => (
+          <div>
+            <p class="font-mono text-xs tracking-wider uppercase text-cream/45 mb-4">
+              {col.heading}
+            </p>
+            <ul class="list-none m-0 p-0 flex flex-col gap-3">
+              {col.links.map(link => (
+                <li>
+                  <a href={link.href}
+                     class="font-sans text-sm text-cream/75 visited:text-cream/75 hover:text-cream transition-colors duration-150 no-underline">
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+
+      <p class="font-sans text-xs text-cream/45 border-t border-cream/10 pt-8">
+        © 2026 naturalcurlyhair editorial · Made in the UK
+      </p>
+
+    </div>
+  </footer>
+
+</body>
+</html>

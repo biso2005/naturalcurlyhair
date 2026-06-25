@@ -1,0 +1,144 @@
+---
+import ImagePlaceholder from './ImagePlaceholder.astro'
+
+interface Props {
+  copy: {
+    kicker: string
+    headline_roman: string
+    headline_italic: string
+    subheading: string
+    tool: {
+      label: string
+      title: string
+      input_placeholder: string
+      cta_primary: string
+      cta_alt: string
+    }
+  }
+}
+
+const { copy } = Astro.props
+---
+
+<section class="bg-cream px-6 pt-16 pb-12 md:pt-20 md:pb-16">
+  <div class="max-w-hub mx-auto">
+
+    <!-- Desktop: two-column split (images left 1.6fr, thesis+tool right 1fr) -->
+    <!-- Mobile: stacked — single image with overlay, then tool block -->
+    <div class="grid grid-cols-1 md:grid-cols-[1.6fr_1fr] gap-8 md:gap-10 items-start">
+
+      <!-- LEFT: image column -->
+      <div>
+        <!-- Mobile: single image with text overlaid on bottom third -->
+        <div class="relative md:hidden">
+          <ImagePlaceholder
+            aspectRatio="4:5"
+            texture="mid-warm"
+            withSpiral={true}
+          />
+          <!-- Overlay gradient + kicker/h1/sub on bottom third -->
+          <div
+            class="absolute bottom-0 left-0 right-0 px-5 pb-6 pt-16"
+            style="background:linear-gradient(to top, rgba(44,29,23,0.85) 0%, transparent 100%);"
+          >
+            <p class="font-sans text-cream/70 uppercase mb-2" style="font-size:11px;letter-spacing:0.10em;">
+              {copy.kicker}
+            </p>
+            <h1
+              class="mb-2 leading-none"
+              style="font-family:'Fraunces Variable',Georgia,serif;font-size:34px;font-weight:400;letter-spacing:-0.022em;line-height:1.05;"
+            >
+              <span style="font-style:normal;color:#F8F3EA;font-variation-settings:'opsz' 36,'SOFT' 20;">{copy.headline_roman}</span><span style="font-style:italic;color:#A2384B;font-variation-settings:'opsz' 36,'SOFT' 20;">{copy.headline_italic}</span>
+            </h1>
+            <p
+              class="text-cream/80"
+              style="font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:15px;line-height:1.4;"
+            >
+              {copy.subheading}
+            </p>
+          </div>
+        </div>
+
+        <!-- Desktop: two-image stack -->
+        <div class="hidden md:flex flex-col gap-3">
+          <ImagePlaceholder
+            aspectRatio="4:5"
+            texture="mid-warm"
+            withSpiral={true}
+          />
+          <ImagePlaceholder
+            aspectRatio="4:5"
+            texture="dark-warm"
+            withSpiral={true}
+          />
+        </div>
+      </div>
+
+      <!-- RIGHT: thesis + tool column -->
+      <div class="flex flex-col gap-6">
+
+        <!-- Thesis (desktop only — hidden on mobile, shown in image overlay above) -->
+        <div class="hidden md:block">
+          <p class="font-sans text-taupe uppercase mb-4" style="font-size:11px;letter-spacing:0.10em;">
+            {copy.kicker}
+          </p>
+          <h1
+            class="mb-4 leading-none"
+            style="font-family:'Fraunces Variable',Georgia,serif;font-size:34px;font-weight:400;letter-spacing:-0.022em;line-height:1.05;"
+          >
+            <span style="font-style:normal;color:#2C1D17;font-variation-settings:'opsz' 36,'SOFT' 20;">{copy.headline_roman}</span><span style="font-style:italic;color:#A2384B;font-variation-settings:'opsz' 36,'SOFT' 20;">{copy.headline_italic}</span>
+          </h1>
+          <p
+            class="text-ink"
+            style="font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:15px;line-height:1.45;"
+          >
+            {copy.subheading}
+          </p>
+        </div>
+
+        <!-- Tool card -->
+        <div
+          class="flex flex-col gap-4 px-5 py-6"
+          style="background:#3E2230;border-radius:2px;"
+        >
+          <p class="font-sans text-cream/60 uppercase" style="font-size:11px;letter-spacing:0.10em;">
+            {copy.tool.label}
+          </p>
+          <p
+            class="text-cream"
+            style="font-family:'Fraunces Variable',Georgia,serif;font-size:17px;font-weight:400;line-height:1.25;font-variation-settings:'opsz' 18,'SOFT' 10;"
+          >
+            {copy.tool.title}
+          </p>
+
+          <form action="/tool/postcode" method="get" class="flex flex-col gap-3">
+            <input
+              type="text"
+              name="p"
+              placeholder={copy.tool.input_placeholder}
+              class="font-sans text-ink bg-cream px-4 py-3 w-full focus:outline-none focus:ring-2 focus:ring-berry placeholder:text-taupe"
+              style="font-size:15px;border-radius:2px;"
+              aria-label="Postcode"
+            />
+            <button
+              type="submit"
+              class="font-sans font-medium text-ink bg-cream px-5 py-3 hover:bg-cream-2 transition-colors duration-150"
+              style="font-size:15px;border-radius:2px;"
+            >
+              {copy.tool.cta_primary}
+            </button>
+          </form>
+
+          <a
+            href="/tool/"
+            class="font-sans text-cream/60 hover:text-cream transition-colors duration-150 no-underline"
+            style="font-size:12px;"
+          >
+            {copy.tool.cta_alt}
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>

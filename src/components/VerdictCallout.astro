@@ -1,0 +1,39 @@
+---
+interface Props {
+  headline: string
+  body: string
+  linkText?: string
+  linkHref?: string
+}
+
+const { headline, body, linkText, linkHref } = Astro.props
+---
+
+<aside class="my-8 bg-plum rounded px-5 md:px-6 py-5">
+
+  <p class="font-sans text-[10px] tracking-[0.1em] uppercase mb-1.5"
+     style="color:rgba(248,243,234,0.55);">
+    Verdict
+  </p>
+
+  <p class="mb-2.5 leading-snug"
+     style="font-family:'Fraunces Variable',Georgia,serif;font-style:italic;font-size:clamp(1.05rem,2.5vw,1.25rem);font-weight:400;font-variation-settings:'opsz' 20,'SOFT' 15;color:#F8F3EA;line-height:1.35;">
+    {headline}
+  </p>
+
+  <p class={`font-sans text-sm leading-relaxed${linkText ? ' mb-3' : ''}`}
+     style="color:rgba(248,243,234,0.82);">
+    {body}
+  </p>
+
+  {linkText && linkHref && (
+    <a href={linkHref}
+       class="font-sans text-xs no-underline pb-px transition-colors duration-150"
+       style="color:#F8F3EA;border-bottom:1px solid rgba(248,243,234,0.35);"
+       onmouseover="this.style.borderBottomColor='rgba(248,243,234,0.7)'"
+       onmouseout="this.style.borderBottomColor='rgba(248,243,234,0.35)'">
+      {linkText}
+    </a>
+  )}
+
+</aside>

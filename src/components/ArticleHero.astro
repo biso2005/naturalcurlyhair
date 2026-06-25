@@ -1,0 +1,104 @@
+---
+import AffiliateDisclosure from './AffiliateDisclosure.astro'
+
+interface Props {
+  image: string
+  imageAlt: string
+  imageCredit?: string
+  eyebrow: string
+  title: string
+  standfirst: string
+  author?: string
+  lastTested: string
+  readTime: string
+  shortAnswer: string
+}
+
+const {
+  image,
+  imageAlt,
+  imageCredit,
+  eyebrow,
+  title,
+  standfirst,
+  author = 'naturalcurlyhair editorial',
+  lastTested,
+  readTime,
+  shortAnswer,
+} = Astro.props
+---
+
+<!-- Hero image — full bleed, no max-w constraint -->
+<div class="relative w-full overflow-hidden border-b border-line"
+     style="aspect-ratio:4/3;">
+  <style>
+    @media (min-width: 768px) {
+      .hero-image-wrap { aspect-ratio: 16/7 !important; }
+    }
+  </style>
+  <div class="hero-image-wrap w-full h-full" style="aspect-ratio:4/3;">
+    <img
+      src={image}
+      alt={imageAlt}
+      width="1200"
+      height="525"
+      loading="eager"
+      fetchpriority="high"
+      decoding="async"
+      class="w-full h-full object-cover"
+    />
+  </div>
+
+  {imageCredit && (
+    <div class="absolute inset-x-0 bottom-0 pt-10"
+         style="background:linear-gradient(to top,rgba(44,29,23,0.6),transparent);">
+      <p class="px-4 pb-2 font-sans text-xs leading-tight"
+         style="color:rgba(241,232,217,0.75);">
+        {imageCredit}
+      </p>
+    </div>
+  )}
+</div>
+
+<!-- Article header content — constrained -->
+<div class="max-w-2xl mx-auto px-5 md:px-6">
+
+  <p class="font-sans text-xs tracking-widest uppercase text-berry mt-6">
+    {eyebrow}
+  </p>
+
+  <h1 class="mt-2 leading-snug"
+      style="font-family:'Fraunces Variable',Georgia,serif;font-size:clamp(1.65rem,5vw,2rem);font-weight:400;font-variation-settings:'opsz' 32,'SOFT' 15;color:#2C1D17;line-height:1.2;">
+    {title}
+  </h1>
+
+  <p class="mt-2 leading-relaxed"
+     style="font-family:'Newsreader',Georgia,serif;font-size:1rem;color:#6E6056;">
+    {standfirst}
+  </p>
+
+  <!-- Meta row -->
+  <div class="mt-4 border-t border-b border-line py-2.5 flex items-center gap-2 flex-wrap">
+    <span class="font-sans text-xs text-taupe">{author}</span>
+    <span class="w-[3px] h-[3px] rounded-full bg-line-strong flex-shrink-0" aria-hidden="true"></span>
+    <span class="font-sans text-xs text-taupe">Last tested {lastTested}</span>
+    <span class="w-[3px] h-[3px] rounded-full bg-line-strong flex-shrink-0" aria-hidden="true"></span>
+    <span class="font-sans text-xs text-taupe">{readTime}</span>
+  </div>
+
+  <!-- Affiliate disclosure -->
+  <div class="mt-3">
+    <AffiliateDisclosure />
+  </div>
+
+  <!-- Short answer box -->
+  <div class="mt-3 bg-cream-2 border-l-2 border-berry rounded-r px-4 py-3">
+    <p class="font-sans text-[10px] tracking-widest uppercase font-medium text-berry mb-1.5">
+      Short answer
+    </p>
+    <p style="font-family:'Newsreader',Georgia,serif;font-size:0.875rem;color:#2C1D17;line-height:1.7;">
+      {shortAnswer}
+    </p>
+  </div>
+
+</div>

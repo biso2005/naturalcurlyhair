@@ -1,0 +1,63 @@
+---
+type Verdict = 'BUY' | 'SKIP' | 'NOT YET TESTED'
+
+interface Row {
+  product:  string
+  bestFor:  string
+  tested:   string
+  price:    string
+  verdict:  Verdict
+}
+
+interface Props {
+  rows: Row[]
+}
+
+const { rows } = Astro.props
+
+const verdictColor: Record<Verdict, string> = {
+  'BUY':            'text-ochre',
+  'SKIP':           'text-danger',
+  'NOT YET TESTED': 'text-taupe',
+}
+
+const headers = ['Product', 'Best for', 'Tested', 'Price', 'Verdict']
+---
+
+<div class="relative">
+  <!-- Right-edge scroll hint on mobile -->
+  <div class="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-cream to-transparent pointer-events-none z-10 sm:hidden" aria-hidden="true"></div>
+
+  <div class="overflow-x-auto -mx-6 px-6 sm:mx-0 sm:px-0">
+    <table class="w-full min-w-[560px] border-collapse text-left">
+
+      <thead>
+        <tr class="border-y-2 border-ink">
+          {headers.map((h, i) => (
+            <th scope="col"
+                class={`font-mono text-xs tracking-wider uppercase text-taupe py-3 pr-6 font-normal ${i === 0 ? 'sticky left-0 bg-cream min-w-[160px]' : ''}`}>
+              {h}
+            </th>
+          ))}
+        </tr>
+      </thead>
+
+      <tbody>
+        {rows.map(row => (
+          <tr class="border-b border-line">
+            <td class="sticky left-0 bg-cream font-sans text-sm font-semibold text-ink py-3 pr-6 min-w-[160px]">
+              {row.product}
+            </td>
+            <td class="font-sans text-sm text-ink py-3 pr-6 leading-snug">{row.bestFor}</td>
+            <td class="font-sans text-sm text-taupe py-3 pr-6">{row.tested}</td>
+            <td class="font-mono text-sm text-ink py-3 pr-6 whitespace-nowrap">{row.price}</td>
+            <td class={`font-mono text-xs tracking-wider uppercase font-bold py-3 ${verdictColor[row.verdict]}`}>
+              {row.verdict}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+
+    </table>
+  </div>
+</div>

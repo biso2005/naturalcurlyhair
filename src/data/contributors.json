@@ -1,0 +1,23 @@
+[
+  {
+    "id": "contributor-1",
+    "name": "Yemi Adeyinka",
+    "role": "Trichologist, London",
+    "initials": "YA",
+    "colour": "#9C7494"
+  },
+  {
+    "id": "contributor-2",
+    "name": "Priya Okonkwo",
+    "role": "Natural hair specialist, Birmingham",
+    "initials": "PO",
+    "colour": "#6F8E92"
+  },
+  {
+    "id": "contributor-3",
+    "name": "Sade Mensah",
+    "role": "Curl consultant, Manchester",
+    "initials": "SM",
+    "colour": "#A57256"
+  }
+]

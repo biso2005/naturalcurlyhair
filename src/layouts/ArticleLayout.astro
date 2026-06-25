@@ -1,0 +1,115 @@
+---
+import BaseLayout from './BaseLayout.astro'
+
+interface Props {
+  title:       string
+  hubDot?:     string   // token class e.g. 'bg-hub-2a'
+  hubLabel?:   string   // e.g. '2A'
+  category?:   string   // e.g. 'Routines'
+  published?:  string   // ISO date e.g. '2026-01-15'
+  updated?:    string   // ISO date, optional
+  readTime?:   number   // minutes
+  tocHeadings?: { depth: number; slug: string; text: string }[]
+}
+
+const {
+  title,
+  hubDot,
+  hubLabel,
+  category,
+  published,
+  updated,
+  readTime,
+  tocHeadings = [],
+} = Astro.props
+
+function formatDate(iso: string): string {
+  return new Date(iso).toLocaleDateString('en-GB', {
+    day: 'numeric', month: 'long', year: 'numeric',
+  })
+}
+
+const hasToc = tocHeadings.length > 0
+---
+
+<BaseLayout title={title}>
+  <div class={`max-w-hub mx-auto px-6 py-12 ${hasToc ? 'lg:grid lg:grid-cols-[220px_1fr] lg:gap-16 lg:items-start' : ''}`}>
+
+    <!-- TOC sidebar — lg+ only -->
+    {hasToc && (
+      <aside class="hidden lg:block sticky top-[88px] self-start">
+        <nav aria-label="Table of contents">
+          <p class="font-mono text-xs tracking-wider uppercase text-taupe mb-4">Contents</p>
+          <ul class="list-none m-0 p-0 flex flex-col gap-1">
+            {tocHeadings.map(h => (
+              <li style={h.depth === 3 ? 'padding-left:0.75rem' : ''}>
+                <a href={`#${h.slug}`}
+                   class="font-sans text-sm text-taupe visited:text-taupe hover:text-ink transition-colors duration-150 no-underline block py-0.5 leading-snug">
+                  {h.text}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </aside>
+    )}
+
+    <!-- Article body -->
+    <article class={hasToc ? '' : 'max-w-prose'}>
+
+      <!-- Eyebrow -->
+      {(hubDot || hubLabel || category) && (
+        <div class="flex items-center gap-2 mb-6">
+          {hubDot && hubLabel && (
+            <span class={`block w-2.5 h-2.5 rounded-full flex-shrink-0 ${hubDot}`}></span>
+          )}
+          {hubLabel && (
+            <span class="font-mono text-xs tracking-wider uppercase text-taupe">{hubLabel}</span>
+          )}
+          {hubLabel && category && (
+            <span class="font-mono text-xs text-line-strong" aria-hidden="true">·</span>
+          )}
+          {category && (
+            <span class="font-mono text-xs tracking-wider uppercase text-taupe">{category}</span>
+          )}
+        </div>
+      )}
+
+      <!-- H1 -->
+      <h1 class="font-display-h1 text-ink mb-6">{title}</h1>
+
+      <!-- Meta line -->
+      <div class="flex flex-wrap items-center gap-x-4 gap-y-1 mb-10 font-mono text-xs text-taupe">
+        <span>naturalcurlyhair editorial</span>
+        {published && (
+          <>
+            <span aria-hidden="true">·</span>
+            <time datetime={published}>{formatDate(published)}</time>
+          </>
+        )}
+        {updated && (
+          <>
+            <span aria-hidden="true">·</span>
+            <span>Updated <time datetime={updated}>{formatDate(updated)}</time></span>
+          </>
+        )}
+        {readTime && (
+          <>
+            <span aria-hidden="true">·</span>
+            <span>{readTime} min read</span>
+          </>
+        )}
+      </div>
+
+      <!-- Optional disclosure above body -->
+      <slot name="disclosure" />
+
+      <!-- Body content -->
+      <div class="prose prose-ink max-w-none text-ink">
+        <slot />
+      </div>
+
+    </article>
+
+  </div>
+</BaseLayout>

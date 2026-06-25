@@ -1,0 +1,65 @@
+---
+interface Props {
+  aspectRatio: '4:5' | '1:1' | '3:2'
+  texture?: 'dark-warm' | 'mid-warm' | 'cool' | 'warm-neutral' | 'deep-plum'
+  tag?: string
+  withSpiral?: boolean
+  class?: string
+}
+
+const {
+  aspectRatio,
+  texture = 'mid-warm',
+  tag,
+  withSpiral = false,
+  class: className = '',
+} = Astro.props
+
+const paddingMap: Record<string, string> = {
+  '4:5': '125%',
+  '1:1': '100%',
+  '3:2': '66.667%',
+}
+
+const gradientMap: Record<string, string> = {
+  'dark-warm':   'linear-gradient(160deg, #4A3228 0%, #2C1D17 100%)',
+  'mid-warm':    'linear-gradient(160deg, #8C6A58 0%, #5C3D2E 100%)',
+  'cool':        'linear-gradient(160deg, #4E6B70 0%, #2E4447 100%)',
+  'warm-neutral':'linear-gradient(160deg, #9C8070 0%, #6E5848 100%)',
+  'deep-plum':   'linear-gradient(160deg, #6B3B52 0%, #3E2230 100%)',
+}
+---
+
+<div
+  class={`relative overflow-hidden ${className}`}
+  style={`border-radius:2px;`}
+>
+  <div
+    style={`padding-top:${paddingMap[aspectRatio]};background:${gradientMap[texture]};`}
+    aria-hidden="true"
+  >
+    {tag && (
+      <span
+        class="absolute bottom-3 left-3 font-sans text-cream/80 uppercase"
+        style="font-size:11px;letter-spacing:0.10em;line-height:1;"
+      >
+        {tag}
+      </span>
+    )}
+
+    {withSpiral && (
+      <svg
+        class="absolute top-3 right-3"
+        width="26"
+        height="26"
+        viewBox="0 0 26 26"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+      >
+        <circle cx="13" cy="13" r="12" stroke="white" stroke-width="1" stroke-opacity="0.4" />
+        <circle cx="13" cy="13" r="6"  stroke="white" stroke-width="1" stroke-opacity="0.4" />
+      </svg>
+    )}
+  </div>
+</div>

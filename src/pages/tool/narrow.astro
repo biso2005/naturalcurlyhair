@@ -1,0 +1,112 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import copy from '../../data/diagnostic_copy.json'
+
+// Descriptor options per symptom — keyed by symptom code
+// Each entry: { code: SurfaceDescriptor, copyKey: string }
+const DESCRIPTORS: Record<string, Array<{ code: string; copyKey: string }>> = {
+  'S1-dry': [
+    { code: 'coated',        copyKey: 'S3-DRY-COATED'   },
+    { code: 'rough',         copyKey: 'S3-DRY-ROUGH'    },
+    { code: 'limp',          copyKey: 'S3-DRY-LIMP'     },
+    { code: 'looks_dry',     copyKey: 'S3-DRY-LOOKSDRY' },
+    { code: 'not_near_hair', copyKey: 'S3-DRY-NOTNEAR'  },
+  ],
+  'S2-growth': [
+    { code: 'broken_pieces',         copyKey: 'S3-GROWTH-PIECES'  },
+    { code: 'whole_bulbs',           copyKey: 'S3-GROWTH-BULBS'   },
+    { code: 'hairline_thinning',     copyKey: 'S3-GROWTH-HAIRLINE' },
+    { code: 'wont_grow_past_length', copyKey: 'S3-GROWTH-LENGTH'  },
+    { code: 'chemical_history',      copyKey: 'S3-GROWTH-HISTORY' },
+  ],
+  'S3-products': [
+    { code: 'prod_coated',        copyKey: 'S3-PROD-COATED'   },
+    { code: 'prod_same_routine',  copyKey: 'S3-PROD-SAME'     },
+    { code: 'prod_seasonal',      copyKey: 'S3-PROD-SEASON'   },
+    { code: 'prod_moved',         copyKey: 'S3-PROD-MOVED'    },
+    { code: 'prod_chemical',      copyKey: 'S3-PROD-CHEMICAL' },
+  ],
+  'S4-parent': [
+    { code: 'parent_dry_tangly',     copyKey: 'S3-PARENT-DRY'      },
+    { code: 'parent_wrong_products', copyKey: 'S3-PARENT-PRODUCTS'  },
+    { code: 'parent_crying',         copyKey: 'S3-PARENT-CRY'       },
+    { code: 'parent_patches',        copyKey: 'S3-PARENT-PATCHES'   },
+    { code: 'parent_scalp',          copyKey: 'S3-PARENT-SCALP'     },
+  ],
+  'S5-scalp': [
+    { code: 'scalp_itchy_mild',   copyKey: 'S3-SCALP-ITCHY'  },
+    { code: 'scalp_new_product',  copyKey: 'S3-SCALP-NEW'    },
+    { code: 'scalp_greasy_scales',copyKey: 'S3-SCALP-GREASY' },
+    { code: 'scalp_crown_loss',   copyKey: 'S3-SCALP-CROWN'  },
+    { code: 'scalp_sores',        copyKey: 'S3-SCALP-SORES'  },
+  ],
+}
+
+// Read URL params at build time for Astro SSG
+// (actual symptom used at runtime via JS for URL-state; these are for fallback/SSR)
+const { searchParams } = Astro.url
+const symptomParam = searchParams.get('s') ?? 'S1-dry'
+const postcodeParam = searchParams.get('p') ?? ''
+
+// Determine which descriptors to show — default to S1 if unrecognised
+const descriptors = DESCRIPTORS[symptomParam] ?? DESCRIPTORS['S1-dry']
+---
+
+<BaseLayout title="Narrow it down — Hair diagnostic — NaturalCurly">
+
+  <section class="bg-cream px-6 pt-16 pb-20 md:pt-20 md:pb-28">
+    <div class="max-w-prose mx-auto">
+
+      <p class="font-sans text-xs uppercase tracking-wider text-berry mb-6">
+        Diagnostic · narrowing it down
+      </p>
+
+      <h1 class="mb-3"
+          style="font-family:'Fraunces Variable',Georgia,serif;font-size:clamp(1.75rem,4vw,2.5rem);font-weight:400;letter-spacing:-0.022em;line-height:1.1;font-variation-settings:'opsz' 28,'SOFT' 15;color:#2C1D17;">
+        {copy['S3-HEADER']}
+      </h1>
+
+      <p class="font-sans text-base text-taupe mb-12">
+        {copy['S3-SUBHEAD']}
+      </p>
+
+      <ol id="descriptor-list" class="list-none m-0 p-0" role="list">
+        {descriptors.map((d, i) => (
+          <li class={`border-t border-line${i === descriptors.length - 1 ? ' border-b' : ''}`}
+              data-code={d.code}>
+            <a href={`/tool/result?s=${encodeURIComponent(symptomParam)}&p=${encodeURIComponent(postcodeParam)}&d=${encodeURIComponent(d.code)}`}
+               class="group flex items-baseline justify-between gap-4 py-6 no-underline descriptor-link"
+               data-descriptor={d.code}>
+              <span class="font-sans text-base text-ink group-hover:text-berry transition-colors duration-150">
+                {copy[d.copyKey as keyof typeof copy]}
+              </span>
+              <span class="font-sans text-sm text-taupe group-hover:text-berry transition-colors duration-150 flex-shrink-0">→</span>
+            </a>
+          </li>
+        ))}
+      </ol>
+
+      {symptomParam === 'S1-dry' && (
+        <p class="mt-8 font-sans text-sm text-taupe"
+           style="font-family:'Newsreader',Georgia,serif;font-style:italic;">
+          {copy['S3-NOTNEAR-NOTE']}
+        </p>
+      )}
+
+    </div>
+  </section>
+
+</BaseLayout>
+
+<script>
+  // At runtime, re-read the URL params so the links always carry the live state
+  // (Astro builds the page statically; this script corrects the hrefs if params changed)
+  const params = new URLSearchParams(window.location.search)
+  const symptom = params.get('s') ?? 'S1-dry'
+  const postcode = params.get('p') ?? ''
+
+  document.querySelectorAll<HTMLAnchorElement>('.descriptor-link').forEach(link => {
+    const descriptor = link.dataset.descriptor ?? ''
+    link.href = `/tool/result?s=${encodeURIComponent(symptom)}&p=${encodeURIComponent(postcode)}&d=${encodeURIComponent(descriptor)}`
+  })
+</script>

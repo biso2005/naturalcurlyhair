@@ -1,0 +1,89 @@
+---
+interface Contributor {
+  id: string
+  name: string
+  role: string
+  initials: string
+  colour: string
+}
+
+interface Props {
+  copy: {
+    section_kicker: string
+    sample_label: string
+    sample_text: string
+    contributors_label: string
+    tagline: string
+  }
+  contributors: Contributor[]
+}
+
+const { copy, contributors } = Astro.props
+---
+
+<section class="border-t border-line px-6 pt-12 pb-10" style="background:#F1E8D9;">
+  <div class="max-w-hub mx-auto">
+
+    <p class="font-sans text-taupe uppercase mb-8" style="font-size:11px;letter-spacing:0.10em;">
+      {copy.section_kicker}
+    </p>
+
+    <!-- Desktop: sample left, contributors right; Mobile: stacked -->
+    <div class="flex flex-col md:grid md:grid-cols-[1.4fr_1fr] gap-8 md:gap-12 items-start">
+
+      <!-- Sample paragraph -->
+      <div
+        class="px-6 py-5"
+        style="background:#F8F3EA;border-left:2px solid #3E2230;border-radius:2px;"
+      >
+        <p class="font-sans text-taupe uppercase mb-4" style="font-size:11px;letter-spacing:0.10em;">
+          {copy.sample_label}
+        </p>
+        <p
+          class="text-ink"
+          style="font-family:'Newsreader',Georgia,serif;font-size:15px;line-height:1.7;font-style:italic;"
+        >
+          {copy.sample_text}
+        </p>
+      </div>
+
+      <!-- Contributors -->
+      <div>
+        <p class="font-sans text-taupe uppercase mb-5" style="font-size:11px;letter-spacing:0.10em;">
+          {copy.contributors_label}
+        </p>
+        <ul class="list-none m-0 p-0 flex flex-col gap-4">
+          {contributors.map(c => (
+            <li class="flex items-center gap-3">
+              <!-- Placeholder portrait: gradient circle with initials -->
+              <div
+                class="flex-shrink-0 flex items-center justify-center font-sans font-semibold text-cream"
+                style={`width:40px;height:40px;border-radius:50%;background:${c.colour};font-size:12px;letter-spacing:0.02em;`}
+                aria-hidden="true"
+              >
+                {c.initials}
+              </div>
+              <div>
+                <p
+                  class="text-ink"
+                  style="font-family:'Fraunces Variable',Georgia,serif;font-size:15px;font-weight:400;line-height:1.2;font-variation-settings:'opsz' 16,'SOFT' 10;"
+                >
+                  {c.name}
+                </p>
+                <p class="font-sans text-taupe" style="font-size:12px;">{c.role}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+
+        <p
+          class="text-taupe mt-8"
+          style="font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:15px;line-height:1.4;"
+        >
+          {copy.tagline}
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>

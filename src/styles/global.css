@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .font-display-h1 {
+    font-family: 'Fraunces', ui-serif, serif;
+    font-variation-settings: "opsz" 72, "SOFT" 0;
+    font-weight: 600;
+    letter-spacing: -0.022em;
+    line-height: 1.08;
+  }
+  .font-display-h2 {
+    font-family: 'Fraunces', ui-serif, serif;
+    font-variation-settings: "opsz" 36, "SOFT" 0;
+    font-weight: 600;
+    letter-spacing: -0.018em;
+    line-height: 1.15;
+  }
+  .font-display-h3 {
+    font-family: 'Fraunces', ui-serif, serif;
+    font-variation-settings: "opsz" 24, "SOFT" 20;
+    font-weight: 600;
+    letter-spacing: -0.012em;
+    line-height: 1.2;
+  }
+  .font-display-lead {
+    font-family: 'Fraunces', ui-serif, serif;
+    font-variation-settings: "opsz" 18, "SOFT" 40;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+}
+
+/* Wordmark — two-span NaturalCurly treatment */
+.wordmark {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0;
+}
+
+.wordmark-natural {
+  font-family: 'Fraunces Variable', Georgia, serif;
+  font-size: 1.125rem;
+  font-weight: 400;
+  font-style: normal;
+  color: #2C1D17;
+  letter-spacing: -0.01em;
+  font-variation-settings: 'opsz' 18, 'SOFT' 40;
+}
+
+.wordmark-curly {
+  font-family: 'Fraunces Variable', Georgia, serif;
+  font-size: 1.125rem;
+  font-weight: 400;
+  font-style: italic;
+  color: #A2384B;
+  letter-spacing: -0.01em;
+  font-variation-settings: 'opsz' 18, 'SOFT' 40;
+}
+
+footer .wordmark-natural,
+footer .wordmark-curly {
+  color: #F8F3EA;
+}

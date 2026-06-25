@@ -1,0 +1,100 @@
+---
+// Each curl type drawn in a 60×80 viewBox.
+// Patterns transition from wide sine waves (2A) to dense zig-zags (4C).
+// Stroke: ink at 40% opacity, 2px, round caps, no fill.
+
+const curls = [
+  {
+    id: '2A',
+    // Gentle, wide open sine wave — rolling hills
+    d: 'M4,40 C14,20 26,20 36,40 C46,60 58,60 68,40 C78,20 90,20 100,40',
+  },
+  {
+    id: '2B',
+    // Slightly tighter, more amplitude
+    d: 'M4,42 C12,16 22,16 30,42 C38,68 48,68 56,42 C64,16 74,16 82,42 C90,68 100,68 108,42',
+  },
+  {
+    id: '2C',
+    // Defined wave, beginning to coil — tighter period, more amplitude
+    d: 'M4,44 C10,14 18,14 24,44 C30,74 38,74 44,44 C50,14 58,14 64,44 C70,74 78,74 84,44 C90,14 98,14 104,44',
+  },
+  {
+    id: '3A',
+    // Loose open spiral — offset sinusoid with increasing tightness
+    d: 'M8,20 C20,8 36,8 40,24 C44,40 36,56 24,60 C12,64 4,56 8,44 C12,32 24,28 32,36 C40,44 36,56 28,58',
+  },
+  {
+    id: '3B',
+    // Defined ringlet — tighter coil, marker-pen circumference
+    d: 'M30,10 C50,10 58,24 56,38 C54,52 42,60 30,60 C18,60 10,52 12,40 C14,28 24,22 32,26 C40,30 44,40 40,48 C36,56 28,56 24,50',
+  },
+  {
+    id: '3C',
+    // Tight corkscrew — smaller radius, more turns
+    d: 'M30,8 C44,8 50,18 48,28 C46,38 36,44 28,42 C20,40 16,32 18,24 C20,16 28,12 34,16 C40,20 42,28 38,34 C34,40 28,40 24,36 C20,32 20,26 24,22 C28,18 34,20 36,26',
+  },
+  {
+    id: '4A',
+    // Small springy coil — tight helix-like S-stack
+    d: 'M30,8 C40,8 44,16 40,22 C36,28 26,28 22,22 C18,16 22,8 30,8 M30,22 C40,22 44,30 40,36 C36,42 26,42 22,36 C18,30 22,22 30,22 M30,36 C40,36 44,44 40,50 C36,56 26,56 22,50 C18,44 22,36 30,36 M30,50 C40,50 44,58 40,64 C36,70 26,70 22,64',
+  },
+  {
+    id: '4B',
+    // Tight z-pattern — angular zig-zag
+    d: 'M8,16 L22,16 L10,32 L24,32 L12,48 L26,48 L14,64 L28,64 L16,72',
+  },
+  {
+    id: '4C',
+    // Very tight dense zig-zag — staple shape, maximum density
+    d: 'M8,18 L18,18 L8,28 L18,28 L8,38 L18,38 L8,48 L18,48 L8,58 L18,58 L8,68 L18,68',
+  },
+]
+
+// Cell width 60, gap 16 — but paths use 0-112 x range so we scale via viewBox
+const cellW  = 60
+const cellH  = 80
+const gap    = 12
+const labelH = 18
+const totalW = curls.length * cellW + (curls.length - 1) * gap
+---
+
+<figure aria-label="Curl type spectrum from 2A waves to 4C coils" class="my-10">
+  <svg
+    viewBox={`0 0 ${totalW} ${cellH + labelH}`}
+    width={totalW}
+    height={cellH + labelH}
+    class="w-full max-w-prose mx-auto block"
+    xmlns="http://www.w3.org/2000/svg"
+    role="img"
+    aria-hidden="true"
+  >
+    {curls.map((curl, i) => {
+      const ox = i * (cellW + gap)
+      return (
+        <g transform={`translate(${ox}, 0)`} key={curl.id}>
+          <svg viewBox="0 0 112 80" width={cellW} height={cellH} overflow="visible">
+            <path
+              d={curl.d}
+              stroke="#2C1D17"
+              stroke-opacity="0.4"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              fill="none"
+            />
+          </svg>
+          <text
+            x={cellW / 2}
+            y={cellH + 13}
+            text-anchor="middle"
+            font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
+            font-size="9"
+            letter-spacing="0.08em"
+            fill="#6E6056"
+          >{curl.id}</text>
+        </g>
+      )
+    })}
+  </svg>
+</figure>

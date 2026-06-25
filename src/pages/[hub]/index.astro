@@ -1,0 +1,63 @@
+---
+import { getCollection, render } from 'astro:content'
+import HubLanding from '../../components/HubLanding.astro'
+import SpokeIndex from '../../components/SpokeIndex.astro'
+import ArticleCard from '../../components/ArticleCard.astro'
+
+export async function getStaticPaths() {
+  const allHubs     = await getCollection('hubs')
+  const allArticles = await getCollection('articles')
+
+  return allHubs.map(hub => {
+    const spokes = allArticles.filter(a => a.data.hub === hub.data.hub)
+    return {
+      params: { hub: hub.id },
+      props:  { hub, spokes },
+    }
+  })
+}
+
+const { hub, spokes } = Astro.props
+const { Content } = await render(hub)
+
+// Articles with hero images get card layout; others fall back to list
+const cardArticles = spokes.filter(a => a.data.heroImage)
+const listArticles = spokes.filter(a => !a.data.heroImage)
+
+const spokeItems = listArticles.map(a => ({
+  title: a.data.title,
+  dek:   a.data.dek,
+  hub:   a.data.hub as any,
+  href:  `/${hub.id}/${a.id}`,
+}))
+---
+
+<HubLanding
+  hub={hub.data.hub as any}
+  title={hub.data.title}
+  orientation={hub.data.dek}
+>
+  <Content />
+
+  <div slot="spokes">
+    {cardArticles.length > 0 && (
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+        {cardArticles.map(a => (
+          <ArticleCard
+            image={a.data.heroImage!}
+            imageAlt={a.data.heroImageAlt ?? a.data.title}
+            eyebrow={a.data.category}
+            title={a.data.title}
+            dek={a.data.dek}
+            href={`/${hub.id}/${a.id}`}
+            hub={a.data.hub}
+          />
+        ))}
+      </div>
+    )}
+
+    {listArticles.length > 0 && (
+      <SpokeIndex articles={spokeItems} />
+    )}
+  </div>
+</HubLanding>

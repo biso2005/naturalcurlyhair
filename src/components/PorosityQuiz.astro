@@ -1,0 +1,269 @@
+---
+// No props — self-contained interactive component
+---
+
+<div id="porosity-quiz" class="my-12 border border-line rounded-lg overflow-hidden">
+
+  <!-- Quiz questions panel -->
+  <div id="pq-questions">
+    <div class="bg-cream-2 px-6 py-5 border-b border-line">
+      <p class="font-mono text-xs tracking-wider uppercase text-taupe mb-1">Tool</p>
+      <h2 class="font-display-h3 text-ink">Find your hair porosity</h2>
+      <p class="font-sans text-sm text-taupe mt-1">6 questions · 3 minutes · behaviour-based, not float-test</p>
+    </div>
+
+    <div class="px-6 py-8">
+      <!-- Progress bar -->
+      <div class="mb-8">
+        <div class="flex justify-between font-mono text-xs text-taupe mb-2">
+          <span id="pq-progress-label">Question 1 of 6</span>
+          <span id="pq-score-preview" class="hidden"></span>
+        </div>
+        <div class="h-1 bg-line rounded-full overflow-hidden">
+          <div id="pq-progress-bar" class="h-full bg-berry transition-all duration-300 rounded-full" style="width:0%"></div>
+        </div>
+      </div>
+
+      <!-- Question display -->
+      <div id="pq-question-block">
+        <p id="pq-question-text" class="font-display-h3 text-ink mb-1"></p>
+        <p id="pq-question-sub" class="font-sans text-sm text-taupe mb-6"></p>
+        <ul id="pq-options" class="list-none m-0 p-0 flex flex-col gap-3"></ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Result panel (hidden until complete) -->
+  <div id="pq-result" class="hidden">
+    <div id="pq-result-header" class="px-6 py-5 border-b border-line">
+      <p class="font-mono text-xs tracking-wider uppercase text-taupe mb-2">Your result</p>
+      <span id="pq-result-badge" class="inline-block font-sans text-xs font-semibold px-3 py-1 rounded-full mb-3"></span>
+      <h2 id="pq-result-title" class="font-display-h3 text-ink"></h2>
+    </div>
+
+    <div class="px-6 py-8 flex flex-col gap-8">
+      <p id="pq-result-testnote" class="font-sans text-sm text-taupe italic border-l-2 border-line pl-4"></p>
+      <p id="pq-result-description" class="font-sans text-base text-ink"></p>
+
+      <!-- Traits table -->
+      <div>
+        <p class="font-mono text-xs tracking-wider uppercase text-taupe mb-3">At a glance</p>
+        <dl id="pq-result-traits" class="grid grid-cols-2 gap-x-6 gap-y-2"></dl>
+      </div>
+
+      <!-- What to do -->
+      <div>
+        <p class="font-mono text-xs tracking-wider uppercase text-taupe mb-3">What to do</p>
+        <p id="pq-result-todo" class="font-sans text-sm text-ink"></p>
+      </div>
+
+      <!-- UK conditions -->
+      <div class="bg-cream-2 rounded-md px-5 py-4">
+        <p class="font-mono text-xs tracking-wider uppercase text-taupe mb-2">UK conditions</p>
+        <p id="pq-result-uk" class="font-sans text-sm text-ink"></p>
+      </div>
+
+      <!-- CTAs -->
+      <div class="flex flex-wrap gap-3 pt-2">
+        <button id="pq-retake"
+                class="font-sans text-sm text-ink border border-line rounded-md px-4 py-2 hover:border-berry hover:text-berry transition-colors duration-150">
+          Retake quiz
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const QUESTIONS = [
+    {
+      q: 'When water hits your hair in the shower, what happens first?',
+      sub: 'Before any products — just water on dry hair.',
+      options: [
+        { label: 'Water beads on the surface and takes a few minutes to soak in', note: 'Hair resists absorbing water initially', score: 0 },
+        { label: 'Gradually absorbs over a minute or two', note: 'Normal absorption pace', score: 1 },
+        { label: 'Hair feels saturated almost immediately', note: 'Drinks water up straight away', score: 2 },
+      ],
+    },
+    {
+      q: 'If you wash your hair in the morning and leave it to air dry, where is it by lunchtime?',
+      sub: 'No product, no diffuser — just leaving it.',
+      options: [
+        { label: 'Still quite damp — could stay damp into the afternoon', note: 'Low porosity holds onto moisture as much as it resists absorbing it', score: 0 },
+        { label: 'Mostly dry, maybe slightly damp at the roots', note: 'Normal drying time', score: 1 },
+        { label: 'Completely dry well before lunch', note: 'High porosity releases moisture fast', score: 2 },
+      ],
+    },
+    {
+      q: 'After applying a leave-in conditioner, where does it seem to go?',
+      sub: 'Think about what your hair feels like 20–30 minutes later.',
+      options: [
+        { label: 'Products sit on top — hair looks coated but doesn\'t feel softer', note: 'Product buildup without absorption', score: 0 },
+        { label: 'Absorbs well and hair feels moisturised for a reasonable time', note: 'Normal absorption and retention', score: 1 },
+        { label: 'Absorbs fast but dries out again quickly — nothing seems to last', note: 'High porosity gains and loses moisture fast', score: 2 },
+      ],
+    },
+    {
+      q: 'When you use a diffuser or blow dryer on your hair, how does it behave?',
+      sub: 'On a typical wash day.',
+      options: [
+        { label: 'Takes a long time to dry even with heat — patience required', note: 'Low porosity resists moisture leaving as much as entering', score: 0 },
+        { label: 'Dries at a normal pace and looks fine', note: 'Responds as expected to heat', score: 1 },
+        { label: 'Dries quickly but can feel dry or frizzy straight after', note: 'Fast drying is a high porosity signal', score: 2 },
+      ],
+    },
+    {
+      q: 'What\'s your hair\'s history with chemical treatments or heat?',
+      sub: 'Bleaching, colouring, relaxers, and regular heat straightening all count.',
+      options: [
+        { label: 'Mostly untouched — no chemical treatments, minimal heat', note: 'Chemical and heat damage raises porosity over time', score: 0 },
+        { label: 'Some history — occasional colour or light heat use', note: 'Moderate processing history', score: 1 },
+        { label: 'Regular processing — colour, bleach, relaxer, or frequent heat straightening', note: 'Repeated processing significantly increases porosity', score: 2 },
+      ],
+    },
+    {
+      q: 'What happens to your hair on a damp UK day — drizzle, humidity, that kind of weather?',
+      sub: 'Think about a typical autumn morning or stepping out after rain.',
+      options: [
+        { label: 'Stays pretty much the same — humidity doesn\'t really affect it', note: 'Low porosity cuticles resist atmospheric moisture', score: 0 },
+        { label: 'Gets a bit frizzy but manageable', note: 'Some response to humidity', score: 1 },
+        { label: 'Immediately frizzes, swells, or loses all definition', note: 'High porosity absorbs atmospheric moisture fast', score: 2 },
+      ],
+    },
+  ]
+
+  const RESULTS = {
+    low: {
+      badge: 'Low porosity',
+      badgeBg: '#F8F3EA',
+      badgeText: '#3E2230',
+      title: 'Your hair is low porosity',
+      testnote: 'These results are based on how your hair behaves — more reliable than the float test, which product residue and hard water minerals can skew.',
+      description: 'Your cuticles lie flat and close together. Moisture struggles to get in — which is why products sit on the surface rather than absorbing. Once hydration is in, your hair holds it well.',
+      traits: [
+        ['Wets up', 'Slowly'],
+        ['Dries', 'Slowly'],
+        ['Products', 'Sit on top'],
+        ['Humidity', 'Mostly unaffected'],
+      ],
+      todo: 'Use light, water-based products rather than heavy butters or oils. Heat helps — deep conditioning under a hooded dryer or heat cap opens the cuticle and lets moisture in. Clarify monthly to clear buildup.',
+      uk: 'London and the South East have very hard water (250–350 mg/L). Mineral deposits coat the hair shaft and make it behave even more low-porosity than it naturally is. A chelating shampoo once a month helps strip that buildup.',
+    },
+    medium: {
+      badge: 'Medium porosity',
+      badgeBg: '#E1F5EE',
+      badgeText: '#0F6E56',
+      title: 'Your hair is medium porosity',
+      testnote: 'These results are based on how your hair behaves — more reliable than the float test, which product residue and hard water minerals can skew.',
+      description: 'Your cuticles sit in balance — open enough to absorb moisture, closed enough to hold it. Products absorb and stay put. Medium porosity hair is the easiest starting point for building a routine.',
+      traits: [
+        ['Wets up', 'At a normal pace'],
+        ['Dries', 'In 2–3 hours'],
+        ['Products', 'Absorb and hold'],
+        ['Humidity', 'Some frizz, manageable'],
+      ],
+      todo: 'Protein treatment every 6–8 weeks keeps the cuticle structure solid. Limit chemical processing and heavy heat — both push hair toward high porosity over time. Your main job is maintenance, not correction.',
+      uk: 'Hard water affects medium porosity hair too — mineral buildup dulls curl definition even when moisture levels are otherwise fine. A chelating wash every few weeks keeps your results consistent.',
+    },
+    high: {
+      badge: 'High porosity',
+      badgeBg: '#E6F1FB',
+      badgeText: '#185FA5',
+      title: 'Your hair is high porosity',
+      testnote: 'These results are based on how your hair behaves — more reliable than the float test, which product residue and hard water minerals can skew.',
+      description: 'Your cuticles have gaps or are lifted — often from damage, chemical processing, or genetics. Moisture gets in easily but escapes just as fast. Frizz in humidity, quick drying, and products that seem to disappear are all signs.',
+      traits: [
+        ['Wets up', 'Almost instantly'],
+        ['Dries', 'Quickly'],
+        ['Products', 'Absorb fast, don\'t last'],
+        ['Humidity', 'Frizzes quickly'],
+      ],
+      todo: 'Layer products using the LOC method (Liquid, Oil, Cream) — the oil seals the cuticle and slows moisture loss. Protein treatments help fill gaps in the cuticle. In humid UK weather, swap humectant-heavy products for lighter, film-forming formulas — they hold moisture in without pulling extra water from the air.',
+      uk: 'Hard water is particularly harsh on high porosity hair — minerals bond to open cuticles and worsen frizz and dryness. A chelating shampoo every 2–3 weeks is worth it, not optional.',
+    },
+  }
+
+  let current = 0
+  let scores: number[] = []
+
+  const $ = (id: string) => document.getElementById(id)!
+
+  function renderQuestion(index: number) {
+    const q = QUESTIONS[index]
+    const pct = (index / QUESTIONS.length) * 100
+
+    ;($('pq-progress-label') as HTMLElement).textContent = `Question ${index + 1} of ${QUESTIONS.length}`
+    ;($('pq-progress-bar') as HTMLElement).style.width = `${pct}%`
+    ;($('pq-question-text') as HTMLElement).textContent = q.q
+    ;($('pq-question-sub') as HTMLElement).textContent = q.sub
+
+    const ul = $('pq-options')
+    ul.innerHTML = ''
+    q.options.forEach((opt, i) => {
+      const li = document.createElement('li')
+      li.innerHTML = `
+        <button data-score="${opt.score}"
+                class="pq-option w-full text-left border border-line rounded-md px-4 py-3 hover:border-berry transition-colors duration-150 group">
+          <span class="font-sans text-sm text-ink block">${opt.label}</span>
+          <span class="font-sans text-xs text-taupe block mt-0.5">${opt.note}</span>
+        </button>`
+      ul.appendChild(li)
+    })
+
+    ul.querySelectorAll('.pq-option').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const score = parseInt((btn as HTMLElement).dataset.score ?? '0')
+        scores.push(score)
+        if (current < QUESTIONS.length - 1) {
+          current++
+          renderQuestion(current)
+        } else {
+          showResult()
+        }
+      })
+    })
+  }
+
+  function showResult() {
+    const total = scores.reduce((a, b) => a + b, 0)
+    const key: 'low' | 'medium' | 'high' = total <= 4 ? 'low' : total <= 7 ? 'medium' : 'high'
+    const r = RESULTS[key]
+
+    $('pq-questions').classList.add('hidden')
+    $('pq-result').classList.remove('hidden')
+
+    const badge = $('pq-result-badge') as HTMLElement
+    badge.textContent = r.badge
+    badge.style.backgroundColor = r.badgeBg
+    badge.style.color = r.badgeText
+
+    ;($('pq-result-title') as HTMLElement).textContent = r.title
+    ;($('pq-result-testnote') as HTMLElement).textContent = r.testnote
+    ;($('pq-result-description') as HTMLElement).textContent = r.description
+
+    const dl = $('pq-result-traits')
+    dl.innerHTML = r.traits.map(([label, val]) =>
+      `<dt class="font-sans text-xs text-taupe">${label}</dt>
+       <dd class="font-sans text-xs text-ink font-medium">${val}</dd>`
+    ).join('')
+
+    ;($('pq-result-todo') as HTMLElement).textContent = r.todo
+    ;($('pq-result-uk') as HTMLElement).textContent = r.uk
+
+    $('pq-progress-bar').style.width = '100%'
+    ;($('pq-progress-label') as HTMLElement).textContent = 'Complete'
+  }
+
+  function restart() {
+    current = 0
+    scores = []
+    $('pq-result').classList.add('hidden')
+    $('pq-questions').classList.remove('hidden')
+    renderQuestion(0)
+  }
+
+  $('pq-retake').addEventListener('click', restart)
+
+  // Init
+  renderQuestion(0)
+</script>

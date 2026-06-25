@@ -1,0 +1,181 @@
+---
+interface Heading {
+  id: string
+  text: string
+  level: 2 | 3
+}
+
+interface Props {
+  headings: Heading[]
+}
+
+const { headings } = Astro.props
+---
+
+<div class="max-w-2xl mx-auto px-5 md:px-6">
+
+  <!-- Mobile: horizontal jump-to-section pill row -->
+  <div class="md:hidden overflow-x-auto pb-2 mb-6 border-b border-line -mx-5 px-5">
+    <div class="flex gap-2 w-max">
+      <span class="font-sans text-[10px] tracking-widest uppercase text-taupe self-center flex-shrink-0 pr-1">
+        Jump to
+      </span>
+      {headings.filter(h => h.level === 2).map(h => (
+        <a href={`#${h.id}`}
+           class="font-sans text-[11px] text-taupe border border-line-strong rounded-full px-3 py-1 whitespace-nowrap no-underline hover:text-ink hover:border-ink transition-colors duration-150 flex-shrink-0">
+          {h.text}
+        </a>
+      ))}
+    </div>
+  </div>
+
+  <!-- Desktop: two-column grid with sticky TOC sidebar -->
+  <div class="md:grid md:gap-10" style="grid-template-columns:180px 1fr;">
+
+    <!-- TOC sidebar (desktop only) -->
+    <aside class="hidden md:block">
+      <div class="sticky top-8 border-r border-line pr-5">
+        <p class="font-sans text-[10px] tracking-widest uppercase text-taupe mb-3">
+          Contents
+        </p>
+        <nav aria-label="Article contents">
+          <ul class="list-none m-0 p-0 flex flex-col gap-0.5" id="toc-list">
+            {headings.map(h => (
+              <li>
+                <a href={`#${h.id}`}
+                   data-toc-id={h.id}
+                   class={`toc-link block text-xs text-taupe leading-relaxed border-l-2 border-transparent -ml-px no-underline hover:text-ink transition-colors duration-100${h.level === 3 ? ' pl-5 text-[11px]' : ' pl-2'}`}>
+                  {h.text}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+    </aside>
+
+    <!-- Article slot -->
+    <div class="article-body min-w-0">
+      <slot />
+    </div>
+
+  </div>
+</div>
+
+<style>
+  /* Prose styles for article body content */
+  .article-body :global(h2) {
+    font-family: 'Fraunces Variable', Georgia, serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+    font-variation-settings: 'opsz' 20, 'SOFT' 10;
+    color: #2C1D17;
+    border-bottom: 1px solid rgba(44, 29, 23, 0.14);
+    padding-bottom: 0.5rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .article-body :global(h3) {
+    font-family: 'Fraunces Variable', Georgia, serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    font-variation-settings: 'opsz' 18, 'SOFT' 10;
+    color: #2C1D17;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .article-body :global(p) {
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: 1rem;
+    color: #2C1D17;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+
+  .article-body :global(a) {
+    color: #A2384B;
+    text-decoration: underline;
+  }
+
+  .article-body :global(a:visited) {
+    color: #2C1D17;
+  }
+
+  .article-body :global(strong) {
+    font-weight: 500;
+  }
+
+  /* Inline figure */
+  .article-body :global(figure) {
+    border: 1px solid rgba(44, 29, 23, 0.28);
+    border-radius: 0.25rem;
+    overflow: hidden;
+    margin: 1.5rem 0;
+  }
+
+  .article-body :global(figure img) {
+    width: 100%;
+    max-height: 16rem;
+    object-fit: cover;
+    display: block;
+  }
+
+  .article-body :global(figcaption) {
+    background: #F1E8D9;
+    border-top: 1px solid rgba(44, 29, 23, 0.14);
+    padding: 0.5rem 0.75rem;
+    font-size: 11px;
+    color: #6E6056;
+    font-style: italic;
+    font-family: 'Newsreader', Georgia, serif;
+  }
+
+  /* Pull quote */
+  .article-body :global(blockquote) {
+    border-left: 3px solid #B97A2B;
+    padding-left: 1rem;
+    margin: 1.5rem 0;
+    font-family: 'Fraunces Variable', Georgia, serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: #2C1D17;
+    line-height: 1.6;
+    font-variation-settings: 'opsz' 16, 'SOFT' 10;
+  }
+
+  /* TOC active state */
+  .toc-link.active {
+    color: #A2384B;
+    border-left-color: #A2384B;
+  }
+</style>
+
+<script>
+  const tocLinks = document.querySelectorAll<HTMLAnchorElement>('.toc-link')
+
+  if (tocLinks.length > 0) {
+    const headingEls = Array.from(tocLinks).map(link => {
+      const id = link.dataset.tocId ?? ''
+      return document.getElementById(id)
+    }).filter((el): el is HTMLElement => el !== null)
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          const id = entry.target.id
+          const link = document.querySelector<HTMLAnchorElement>(`.toc-link[data-toc-id="${id}"]`)
+          if (!link) return
+          if (entry.isIntersecting) {
+            tocLinks.forEach(l => l.classList.remove('active'))
+            link.classList.add('active')
+          }
+        })
+      },
+      { rootMargin: '-10% 0px -80% 0px', threshold: 0 }
+    )
+
+    headingEls.forEach(el => observer.observe(el))
+  }
+</script>

@@ -1,0 +1,63 @@
+---
+import ImagePlaceholder from './ImagePlaceholder.astro'
+
+interface Card {
+  kicker: string
+  title: string
+  href: string
+}
+
+interface Props {
+  copy: {
+    section_kicker: string
+    section_title: string
+    cards: Card[]
+  }
+}
+
+const { copy } = Astro.props
+
+const textures = ['dark-warm', 'mid-warm', 'cool', 'warm-neutral'] as const
+---
+
+<section class="bg-cream border-t border-line px-6 pt-12 pb-10">
+  <div class="max-w-hub mx-auto">
+
+    <div class="flex items-baseline gap-4 mb-8">
+      <p class="font-sans text-berry uppercase" style="font-size:11px;letter-spacing:0.10em;">
+        {copy.section_kicker}
+      </p>
+      <h2
+        class="text-ink"
+        style="font-family:'Fraunces Variable',Georgia,serif;font-size:17px;font-weight:400;letter-spacing:-0.012em;line-height:1.2;font-variation-settings:'opsz' 18,'SOFT' 10;"
+      >
+        {copy.section_title}
+      </h2>
+    </div>
+
+    <!-- Desktop: 4-column row / Mobile: 2×2 grid -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-[14px] md:gap-5">
+      {copy.cards.map((card, i) => (
+        <a href={card.href} class="no-underline group">
+          <ImagePlaceholder
+            aspectRatio="1:1"
+            texture={textures[i % textures.length]}
+            tag={card.kicker}
+            withSpiral={false}
+            class="mb-3"
+          />
+          <p class="font-sans text-berry uppercase mb-1" style="font-size:11px;letter-spacing:0.10em;">
+            {card.kicker}
+          </p>
+          <h3
+            class="text-ink group-hover:text-berry transition-colors duration-150"
+            style="font-family:'Fraunces Variable',Georgia,serif;font-size:17px;font-weight:400;letter-spacing:-0.012em;line-height:1.2;font-variation-settings:'opsz' 18,'SOFT' 10;"
+          >
+            {card.title}
+          </h3>
+        </a>
+      ))}
+    </div>
+
+  </div>
+</section>

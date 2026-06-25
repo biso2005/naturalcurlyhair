@@ -1,0 +1,151 @@
+---
+type Verdict = 'pick' | 'skip' | 'budget'
+
+interface Props {
+  verdict: Verdict
+  label: string
+  image: string
+  imageAlt: string
+  name: string
+  price: string
+  retailer: string
+  pros: string[]
+  cons: string[]
+  curlTypes: string[]
+  allCurlTypes?: string[]
+  buyUrl: string
+  buyLabel: string
+  budgetAlt?: string
+}
+
+const {
+  verdict,
+  label,
+  image,
+  imageAlt,
+  name,
+  price,
+  retailer,
+  pros,
+  cons,
+  curlTypes,
+  allCurlTypes = ['2a','2b','2c','3a','3b','3c','4a','4b','4c'],
+  buyUrl,
+  buyLabel,
+  budgetAlt,
+} = Astro.props
+
+const headerConfig = {
+  pick:   { bg: 'bg-plum',  badgeBg: 'bg-berry',  badgeText: 'Our pick' },
+  skip:   { bg: 'bg-taupe', badgeBg: 'bg-ink',    badgeText: 'Skip this' },
+  budget: { bg: 'bg-ink',   badgeBg: 'bg-ochre',  badgeText: 'Budget pick' },
+}
+
+const { bg, badgeBg, badgeText } = headerConfig[verdict]
+---
+
+<div class="border border-line-strong rounded overflow-hidden">
+
+  <!-- Header -->
+  <div class={`${bg} px-3.5 py-2.5 flex items-center justify-between gap-3`}>
+    <p class="font-sans text-[10px] tracking-wide uppercase leading-snug"
+       style="color:rgba(248,243,234,0.6);">
+      {label}
+    </p>
+    <span class={`${badgeBg} font-sans text-xs font-medium text-cream px-2 py-0.5 rounded-sm flex-shrink-0`}>
+      {badgeText}
+    </span>
+  </div>
+
+  <!-- Body -->
+  <div class="p-3.5">
+    <div class="flex gap-3.5 sm:gap-4">
+
+      <!-- Product image -->
+      <div class="flex-shrink-0 w-24 h-28 rounded border border-line overflow-hidden">
+        <img
+          src={image}
+          alt={imageAlt}
+          width="96"
+          height="112"
+          loading="lazy"
+          decoding="async"
+          class="w-full h-full object-cover"
+        />
+      </div>
+
+      <!-- Details -->
+      <div class="flex-1 min-w-0">
+        <p class="mb-1 leading-snug"
+           style="font-family:'Fraunces Variable',Georgia,serif;font-size:1rem;font-weight:400;font-variation-settings:'opsz' 16,'SOFT' 10;color:#2C1D17;">
+          {name}
+        </p>
+        <p class="font-sans text-xs text-taupe mb-3">
+          {price} · {retailer}
+        </p>
+
+        <!-- Pros / cons -->
+        <div class="grid grid-cols-2 gap-x-3 gap-y-0 mb-2">
+          <div>
+            <p class="font-sans text-[10px] tracking-wide uppercase mb-1.5 text-green-700">
+              Works for
+            </p>
+            <ul class="list-none m-0 p-0 flex flex-col gap-1">
+              {pros.slice(0, 3).map(pro => (
+                <li class="font-sans text-xs text-ink leading-relaxed pl-3 relative">
+                  <span class="absolute left-0 top-[7px] w-1 h-1 rounded-full bg-green-700" aria-hidden="true"></span>
+                  {pro}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <p class="font-sans text-[10px] tracking-wide uppercase mb-1.5 text-berry">
+              Watch out for
+            </p>
+            <ul class="list-none m-0 p-0 flex flex-col gap-1">
+              {cons.slice(0, 3).map(con => (
+                <li class="font-sans text-xs text-ink leading-relaxed pl-3 relative">
+                  <span class="absolute left-0 top-[7px] w-1 h-1 rounded-full bg-berry" aria-hidden="true"></span>
+                  {con}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <!-- Curl type tags -->
+        <div class="flex flex-wrap gap-1 mt-2">
+          {allCurlTypes.map(ct => {
+            const active = curlTypes.includes(ct)
+            return (
+              <span class={`font-sans text-[10px] px-1.5 py-0.5 rounded-sm border ${
+                active
+                  ? 'bg-plum text-cream border-plum'
+                  : 'bg-cream-2 text-taupe border-line-strong'
+              }`}>
+                {ct.toUpperCase()}
+              </span>
+            )
+          })}
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="border-t border-line px-3.5 py-2.5 flex items-center justify-between gap-3">
+    <a href={buyUrl}
+       rel="nofollow sponsored"
+       class="font-sans text-xs font-medium text-cream bg-berry hover:bg-berry-dark transition-colors duration-150 px-3.5 py-1.5 rounded-sm no-underline flex-shrink-0">
+      {buyLabel}
+    </a>
+    {budgetAlt && (
+      <p class="font-sans text-[11px] text-taupe italic leading-snug">
+        {budgetAlt}
+      </p>
+    )}
+  </div>
+
+</div>

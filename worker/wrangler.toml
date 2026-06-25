@@ -1,0 +1,11 @@
+name = "naturalcurlyhair-oauth"
+main = "oauth.js"
+compatibility_date = "2024-01-01"
+
+[vars]
+# Secrets are set via: wrangler secret put GITHUB_CLIENT_ID
+# Never commit secrets here.
+
+[[routes]]
+pattern = "oauth.naturalcurlyhair.co.uk/*"
+zone_name = "naturalcurlyhair.co.uk"

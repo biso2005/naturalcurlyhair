@@ -1,0 +1,81 @@
+---
+import type { ArticleSummary } from '../../lib/latestArticles'
+
+interface Props {
+  copy: {
+    kicker: string
+    headline: string
+    meta: string
+    all_articles_cta: string
+  }
+  articles: ArticleSummary[]
+}
+
+const { copy, articles } = Astro.props
+
+function formatDate(iso: string): string {
+  const d = new Date(iso)
+  return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })
+}
+---
+
+<section class="bg-cream-2 border-t border-line px-6 pt-12 pb-10">
+  <div class="max-w-hub mx-auto">
+
+    <p class="font-sans text-berry uppercase mb-2" style="font-size:11px;letter-spacing:0.10em;">
+      {copy.kicker}
+    </p>
+    <h2
+      class="text-ink mb-1"
+      style="font-family:'Fraunces Variable',Georgia,serif;font-size:24px;font-weight:400;letter-spacing:-0.018em;line-height:1.15;font-variation-settings:'opsz' 24,'SOFT' 10;"
+    >
+      {copy.headline}
+    </h2>
+    <p class="font-sans text-taupe mb-8" style="font-size:12px;">
+      {copy.meta}
+    </p>
+
+    <ol class="list-none m-0 p-0">
+      {articles.map(article => (
+        <li class="border-t border-line py-5">
+          <a href={article.href} class="no-underline group flex items-baseline justify-between gap-4">
+            <div class="flex items-baseline gap-3 min-w-0">
+              <span class="font-sans text-taupe flex-shrink-0" style="font-size:12px;">
+                {formatDate(article.published)}
+              </span>
+              <span
+                class="font-sans text-berry uppercase flex-shrink-0"
+                style="font-size:11px;letter-spacing:0.10em;"
+              >
+                {article.hub.toUpperCase()}
+              </span>
+              <span
+                class="text-ink group-hover:text-berry transition-colors duration-150 truncate"
+                style="font-family:'Fraunces Variable',Georgia,serif;font-size:17px;font-weight:400;letter-spacing:-0.012em;line-height:1.2;font-variation-settings:'opsz' 18,'SOFT' 10;"
+              >
+                {article.title}
+              </span>
+            </div>
+            <div class="flex items-baseline gap-3 flex-shrink-0">
+              <span class="font-sans text-taupe hidden md:inline" style="font-size:12px;">
+                {article.readTime}
+              </span>
+              <span class="font-sans text-berry" style="font-size:12px;" aria-hidden="true">→</span>
+            </div>
+          </a>
+        </li>
+      ))}
+    </ol>
+
+    <div class="border-t border-line pt-6 mt-2">
+      <a
+        href="/articles/"
+        class="font-sans text-berry visited:text-berry hover:text-berry-dark transition-colors duration-150 no-underline"
+        style="font-size:12px;"
+      >
+        {copy.all_articles_cta}
+      </a>
+    </div>
+
+  </div>
+</section>

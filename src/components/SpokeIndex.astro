@@ -1,0 +1,45 @@
+---
+type HubId = '2a' | '2b' | '2c' | '3a' | '3b' | '3c' | '4a' | '4b' | '4c' | 'hair-care' | 'products' | 'parents'
+
+interface Article {
+  title: string
+  dek?:  string
+  hub:   HubId
+  href:  string
+}
+
+interface Props {
+  articles: Article[]
+}
+
+const { articles } = Astro.props
+
+const hubDot: Record<HubId, string> = {
+  '2a': 'bg-hub-2a', '2b': 'bg-hub-2b', '2c': 'bg-hub-2c',
+  '3a': 'bg-hub-3a', '3b': 'bg-hub-3b', '3c': 'bg-hub-3c',
+  '4a': 'bg-hub-4a', '4b': 'bg-hub-4b', '4c': 'bg-hub-4c',
+  'hair-care': 'bg-hub-hair-care',
+  'products':  'bg-hub-products',
+  'parents':   'bg-hub-parents',
+}
+---
+
+<ul class="list-none m-0 p-0 divide-y divide-line">
+  {articles.map(article => (
+    <li>
+      <a href={article.href}
+         class="block py-6 no-underline group">
+        <div class="flex items-center gap-2 mb-2">
+          <span class={`block w-2 h-2 rounded-full flex-shrink-0 ${hubDot[article.hub]}`}></span>
+          <span class="font-mono text-xs tracking-wider uppercase text-taupe">{article.hub.toUpperCase()}</span>
+        </div>
+        <p class="font-display-h3 text-ink group-hover:text-berry transition-colors duration-150 mb-1">
+          {article.title}
+        </p>
+        {article.dek && (
+          <p class="font-prose text-sm text-taupe line-clamp-2">{article.dek}</p>
+        )}
+      </a>
+    </li>
+  ))}
+</ul>

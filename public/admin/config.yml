@@ -1,0 +1,237 @@
+backend:
+  name: github
+  repo: GITHUB_USERNAME/naturalcurlyhair
+  branch: main
+  base_url: https://oauth.naturalcurlyhair.co.uk
+
+publish_mode: editorial_workflow
+
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+site_url: https://naturalcurlyhair.co.uk
+
+collections:
+  # ── Articles ────────────────────────────────────────────────────────────────
+  - name: articles
+    label: Articles
+    label_singular: Article
+    folder: src/content/articles
+    create: true
+    extension: mdx
+    format: frontmatter
+    slug: "{{slug}}"
+    preview_path: "/{{slug}}"
+    fields:
+      - label: Title
+        name: title
+        widget: string
+        required: true
+
+      - label: Hub
+        name: hub
+        widget: select
+        required: true
+        options:
+          - { label: "Waves — 2a", value: "2a" }
+          - { label: "Waves — 2b", value: "2b" }
+          - { label: "Waves — 2c", value: "2c" }
+          - { label: "Curls — 3a", value: "3a" }
+          - { label: "Curls — 3b", value: "3b" }
+          - { label: "Curls — 3c", value: "3c" }
+          - { label: "Coils — 4a", value: "4a" }
+          - { label: "Coils — 4b", value: "4b" }
+          - { label: "Coils — 4c", value: "4c" }
+          - { label: "Hair Care", value: "hair-care" }
+          - { label: "Products", value: "products" }
+          - { label: "Parents", value: "parents" }
+
+      - label: Category
+        name: category
+        widget: string
+        required: true
+        hint: "e.g. FAQ, Routine, Diagnostic, Review"
+
+      - label: Dek (standfirst / article summary)
+        name: dek
+        widget: string
+        required: true
+        hint: "One sentence. Appears under the title. Max ~160 characters."
+
+      - label: Published date
+        name: published
+        widget: datetime
+        required: true
+        date_format: "YYYY-MM-DD"
+        time_format: false
+        format: "YYYY-MM-DD"
+        default: ""
+
+      - label: Updated date
+        name: updated
+        widget: datetime
+        required: false
+        date_format: "YYYY-MM-DD"
+        time_format: false
+        format: "YYYY-MM-DD"
+
+      - label: Read time
+        name: readTime
+        widget: string
+        required: false
+        hint: "e.g. '6 min read'. Leave blank to calculate from word count."
+
+      - label: Featured
+        name: featured
+        widget: boolean
+        default: false
+        required: false
+
+      - label: Tested
+        name: tested
+        widget: boolean
+        default: false
+        required: false
+
+      - label: Draft
+        name: draft
+        widget: boolean
+        default: true
+        hint: "True = hidden from the live site. Set to false only when ready to publish."
+
+      - label: Confidence grade
+        name: confidence_grade
+        widget: select
+        required: false
+        hint: "Required for diagnostic articles."
+        options:
+          - { label: "High — strong evidence base", value: "high" }
+          - { label: "Medium — reasonable consensus", value: "medium" }
+          - { label: "Low — limited evidence, community observation", value: "low" }
+
+      - label: Contributor ID
+        name: contributor_id
+        widget: relation
+        required: false
+        collection: contributors_data
+        search_fields: ["contributors.*.name"]
+        value_field: "contributors.*.id"
+        display_fields: ["contributors.*.name"]
+        hint: "Select the contributor who wrote or verified this article."
+
+      # ── Hero fields (optional) ──────────────────────────────────────────────
+      - label: Hero image
+        name: heroImage
+        widget: image
+        required: false
+        hint: "Upload to /uploads/. Alt text is required when an image is set."
+
+      - label: Hero image alt text
+        name: heroImageAlt
+        widget: string
+        required: false
+        hint: "Describe the image for screen readers. Required if hero image is set."
+
+      - label: Hero image credit
+        name: heroImageCredit
+        widget: string
+        required: false
+        hint: "Photographer / source credit shown beneath the image."
+
+      - label: Standfirst
+        name: standfirst
+        widget: text
+        required: false
+        hint: "Longer intro shown in the hero section. 1–2 sentences."
+
+      - label: Short answer (featured snippet)
+        name: shortAnswer
+        widget: text
+        required: false
+        hint: "40–60 word direct answer used for featured snippet markup."
+
+      # ── Body ───────────────────────────────────────────────────────────────
+      - label: Body
+        name: body
+        widget: markdown
+        required: true
+
+      # ── Products (optional list) ────────────────────────────────────────────
+      - label: Products
+        name: products
+        widget: list
+        required: false
+        collapsed: true
+        summary: "{{fields.brand}} — {{fields.name}}"
+        fields:
+          - { label: Name, name: name, widget: string }
+          - { label: Brand, name: brand, widget: string }
+          - label: Verdict
+            name: verdict
+            widget: select
+            options:
+              - { label: "Buy", value: "buy" }
+              - { label: "Skip", value: "skip" }
+              - { label: "Not yet tested", value: "not-yet-tested" }
+          - { label: Price, name: price, widget: string, required: false }
+          - { label: Buy URL, name: buyUrl, widget: string, required: false, hint: "Full URL including https://" }
+          - label: Claims (max 3)
+            name: claims
+            widget: list
+            required: false
+            field: { label: Claim, name: claim, widget: string }
+
+  # ── Contributors (files collection writing to src/data/contributors.json) ──
+  - name: contributors_data
+    label: Contributors
+    files:
+      - label: All Contributors
+        name: contributors
+        file: src/data/contributors.json
+        fields:
+          - label: Contributors
+            name: contributors
+            widget: list
+            summary: "{{fields.name}} — {{fields.role}}"
+            fields:
+              - label: ID
+                name: id
+                widget: string
+                required: true
+                hint: "Slug format, e.g. 'amara-osei'. Used by articles to reference this contributor."
+
+              - label: Name
+                name: name
+                widget: string
+                required: true
+
+              - label: Role
+                name: role
+                widget: string
+                required: true
+                hint: "e.g. 'Trichologist, Birmingham' or 'Community contributor, Manchester'"
+
+              - label: Bio
+                name: bio
+                widget: text
+                required: true
+                hint: "Max 300 characters. Plain text, no markdown."
+
+              - label: Portrait
+                name: portrait
+                widget: image
+                required: false
+                hint: "Square crop preferred. Upload to /uploads/."
+
+              - label: Credentials
+                name: credentials
+                widget: list
+                required: false
+                hint: "e.g. 'FITric', 'IOT member'"
+                field: { label: Credential, name: credential, widget: string }
+
+              - label: Active
+                name: active
+                widget: boolean
+                default: true
+                hint: "Inactive contributors are hidden from article bylines."

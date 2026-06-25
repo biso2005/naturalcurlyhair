@@ -1,0 +1,43 @@
+---
+interface Props {
+  image: string
+  imageAlt: string
+  eyebrow: string
+  title: string
+  dek: string
+  href: string
+  hub: string
+}
+
+const { image, imageAlt, eyebrow, title, dek, href } = Astro.props
+---
+
+<a href={href}
+   class="block bg-white border border-line-strong rounded overflow-hidden no-underline hover:border-berry transition-colors duration-150">
+
+  <div class="aspect-[16/9] overflow-hidden">
+    <img
+      src={image}
+      alt={imageAlt}
+      width="640"
+      height="360"
+      loading="lazy"
+      decoding="async"
+      class="w-full h-full object-cover"
+    />
+  </div>
+
+  <div class="px-3.5 pt-3 pb-4">
+    <p class="font-sans text-[10px] tracking-widest uppercase text-berry mb-1.5">
+      {eyebrow}
+    </p>
+    <p class="mb-2 leading-snug visited:text-ink"
+       style="font-family:'Fraunces Variable',Georgia,serif;font-size:clamp(0.875rem,2vw,1rem);font-weight:400;font-variation-settings:'opsz' 16,'SOFT' 10;color:#2C1D17;">
+      {title}
+    </p>
+    <p class="font-sans text-xs text-taupe leading-relaxed">
+      {dek}
+    </p>
+  </div>
+
+</a>

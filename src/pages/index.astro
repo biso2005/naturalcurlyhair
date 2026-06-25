@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import HeroBlock from '../components/homepage/HeroBlock.astro'
+import DynamicPanel from '../components/homepage/DynamicPanel.astro'
+import SymptomDocRow from '../components/homepage/SymptomDocRow.astro'
+import FeaturedEditorial from '../components/homepage/FeaturedEditorial.astro'
+import LatestArticles from '../components/homepage/LatestArticles.astro'
+import EditorialSignature from '../components/homepage/EditorialSignature.astro'
+import { getLatestArticles } from '../lib/latestArticles'
+import { getPanelState } from '../lib/dynamicPanel'
+import copy from '../data/homepage_copy.json'
+import contributors from '../data/contributors.json'
+
+const latestArticles = await getLatestArticles(5)
+const panel = getPanelState()
+---
+
+<BaseLayout title="NaturalCurly — Curl care for natural and Afro hair in the UK">
+
+  <HeroBlock copy={copy.hero} />
+
+  <DynamicPanel copy={copy.dynamic_panel} panel={panel} />
+
+  <SymptomDocRow copy={copy.symptom_doc} />
+
+  <FeaturedEditorial copy={copy.featured_editorial} />
+
+  <LatestArticles copy={copy.latest_articles} articles={latestArticles} />
+
+  <EditorialSignature copy={copy.editorial_signature} contributors={contributors} />
+
+</BaseLayout>

@@ -1,0 +1,251 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import copy from '../../data/diagnostic_copy.json'
+
+// URL params available at request time for Astro SSR / SSG
+// The actual resolver runs client-side so the page is always fresh from bookmarks
+const { searchParams } = Astro.url
+const symptomParam  = searchParams.get('s') ?? ''
+const postcodeParam = searchParams.get('p') ?? ''
+const descriptorParam = searchParams.get('d') ?? ''
+---
+
+<BaseLayout title="Your starting point — Hair diagnostic — NaturalCurly">
+
+  <!-- Medical exit ramp — rendered by JS when medical_exit_fires: true -->
+  <div id="medical-exit" class="hidden px-6 py-10" style="background:#3E2230;" role="alert" aria-live="polite">
+    <div class="max-w-prose mx-auto">
+      <p class="font-sans text-xs uppercase tracking-wider mb-4" style="color:rgba(248,243,234,0.6);">
+        {copy['EXIT-HEADER']}
+      </p>
+      <p id="exit-intro" class="mb-5 leading-snug"
+         style="font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:clamp(1.1rem,2vw,1.375rem);color:#F8F3EA;line-height:1.45;">
+      </p>
+      <p class="font-sans text-sm mb-4" style="color:rgba(248,243,234,0.85);">
+        {copy['EXIT-NEXT-STEP']}
+      </p>
+      <p class="font-sans text-sm mb-5" style="color:rgba(248,243,234,0.7);font-style:italic;">
+        {copy['EXIT-PARALLEL']}
+      </p>
+      <p class="font-sans text-sm mb-1" style="color:rgba(248,243,234,0.85);">
+        {copy['EXIT-DUAL-TRACK']}
+      </p>
+      <p class="mt-4">
+        <a href="https://www.trichologists.org.uk/qualified-trichologists-united-kingdom/"
+           rel="noopener noreferrer"
+           target="_blank"
+           class="font-sans text-sm no-underline"
+           style="color:#A2384B;">
+          {copy['EXIT-DIRECTORY-LINK']}
+        </a>
+      </p>
+    </div>
+  </div>
+
+  <!-- Main recommendation section -->
+  <section class="bg-cream px-6 pt-16 pb-8 md:pt-20 md:pb-10">
+    <div class="max-w-prose mx-auto">
+
+      <p class="font-sans text-xs uppercase tracking-wider text-berry mb-6">
+        Diagnostic · your starting point
+      </p>
+
+      <h1 class="mb-10"
+          style="font-family:'Fraunces Variable',Georgia,serif;font-size:clamp(1.75rem,4vw,2.5rem);font-weight:400;letter-spacing:-0.022em;line-height:1.1;font-variation-settings:'opsz' 28,'SOFT' 15;color:#2C1D17;">
+        {copy['S4-HEADER']}
+      </h1>
+
+      <!-- Cause statement (plum box) -->
+      <div id="cause-box" class="rounded-sm p-6 mb-8" style="background:#3E2230;">
+        <p id="cause-copy" class="leading-snug"
+           style="font-family:'Fraunces Variable',Georgia,serif;font-size:clamp(1.1rem,2vw,1.375rem);font-weight:400;font-variation-settings:'opsz' 24,'SOFT' 10;color:#F8F3EA;line-height:1.4;">
+        </p>
+      </div>
+
+      <!-- Confidence line — always present, never silently dropped -->
+      <p id="confidence-line" class="font-sans text-sm mb-10"
+         style="color:#6E6056;font-style:italic;">
+      </p>
+
+      <!-- Recommendation card (cream-2 with berry left border) -->
+      <div id="rec-box" class="rounded-sm p-6 mb-10"
+           style="background:#F1E8D9;border-left:3px solid #A2384B;">
+        <div id="rec-copy" class="font-sans text-base text-ink leading-relaxed space-y-4">
+        </div>
+      </div>
+
+      <!-- Next branch — if the first thing didn't work -->
+      <div id="branch-box" class="hidden border-t border-line pt-8 mb-10">
+        <p class="font-sans text-xs uppercase tracking-wider text-taupe mb-3">
+          {copy['BRANCH-INTRO']}
+        </p>
+        <p id="branch-copy" class="font-sans text-base text-ink leading-relaxed">
+        </p>
+      </div>
+
+      <!-- Silent carry-on: back to the tool start -->
+      <p class="font-sans text-sm text-taupe mt-8">
+        <a href="/tool/" class="text-taupe visited:text-taupe hover:text-ink transition-colors duration-150 no-underline">
+          Start again with a different symptom →
+        </a>
+      </p>
+
+    </div>
+  </section>
+
+  <!-- Profile save -->
+  <section class="bg-cream-2 border-t border-line px-6 py-14 md:py-16">
+    <div class="max-w-prose mx-auto">
+
+      <p class="font-sans text-xs uppercase tracking-wider text-taupe mb-6">
+        {copy['PROFILE-HEADER']}
+      </p>
+
+      <ul class="list-none m-0 p-0 mb-8">
+        <li class="font-sans text-sm text-ink mb-2">{copy['PROFILE-BENEFIT-1']}</li>
+        <li class="font-sans text-sm text-ink mb-2">{copy['PROFILE-BENEFIT-2']}</li>
+        <li class="font-sans text-sm text-ink">{copy['PROFILE-BENEFIT-3']}</li>
+      </ul>
+
+      <form id="profile-form" class="flex flex-col sm:flex-row gap-3" novalidate>
+        <input
+          type="email"
+          name="email"
+          placeholder={copy['PROFILE-INPUT-PLACEHOLDER']}
+          required
+          class="font-sans text-sm text-ink bg-cream border border-line-strong rounded-sm px-4 py-3 flex-1 placeholder:text-taupe focus:outline-none focus:ring-2 focus:ring-berry"
+          style="font-size:16px;"
+          aria-label="Your email address"
+        />
+        <button
+          type="submit"
+          class="font-sans text-sm font-medium bg-berry text-cream px-6 py-3 rounded-sm hover:bg-berry-dark transition-colors duration-150 whitespace-nowrap">
+          {copy['PROFILE-CTA']}
+        </button>
+      </form>
+
+      <p class="font-sans text-xs text-taupe mt-4"
+         style="font-family:'Newsreader',Georgia,serif;font-style:italic;">
+        {copy['PROFILE-FOOTNOTE']}
+      </p>
+
+      <p class="font-sans text-xs mt-8" style="color:rgba(44,29,23,0.4);">
+        Postcode data last updated: June 2026 · <a href="/tool/methodology" class="underline hover:text-taupe visited:text-taupe transition-colors duration-150">How this works</a>
+      </p>
+
+    </div>
+  </section>
+
+</BaseLayout>
+
+<script>
+  import { resolve, type SymptomCode, type SurfaceDescriptor, type PostcodeProfile } from '../../lib/diagnostic'
+  import profileData from '../../data/diagnostic_copy.json'
+  import postcodeJson from '../../data/uk_postcode_profile.json'
+
+  type DiagnosticCopy = Record<string, string>
+  const copy = profileData as DiagnosticCopy
+
+  interface UkPostcodeData {
+    _schema: unknown
+    _fallback: PostcodeProfile
+    districts: Record<string, PostcodeProfile>
+  }
+
+  const BRANCH_CODES: Record<string, string> = {
+    'BRANCH-from-hard-water': copy['BRANCH-from-hard-water'],
+    'BRANCH-from-protein':    copy['BRANCH-from-protein'],
+    'BRANCH-from-mechanical': copy['BRANCH-from-mechanical'],
+  }
+
+  const EXIT_CODES: Record<string, string> = {
+    'EXIT-INTRO-shedding': copy['EXIT-INTRO-shedding'],
+    'EXIT-INTRO-traction': copy['EXIT-INTRO-traction'],
+    'EXIT-INTRO-ccca':     copy['EXIT-INTRO-ccca'],
+    'EXIT-INTRO-seb-derm': copy['EXIT-INTRO-seb-derm'],
+    'EXIT-INTRO-infection':copy['EXIT-INTRO-infection'],
+    'EXIT-INTRO-patches':  copy['EXIT-INTRO-patches'] ?? copy['EXIT-INTRO-infection'],
+  }
+
+  const postcodeData = postcodeJson as unknown as UkPostcodeData
+
+  function lookupProfile(district: string): PostcodeProfile {
+    const districts = postcodeData.districts as Record<string, PostcodeProfile>
+    if (districts[district]) return districts[district]
+    const area = district.replace(/\d.*$/, '')
+    if (area && districts[area]) return districts[area]
+    return { ...postcodeData._fallback, _is_fallback: true }
+  }
+
+  const params = new URLSearchParams(window.location.search)
+  const symptomCode   = (params.get('s') ?? 'S1-dry') as SymptomCode
+  const postcodeParam = params.get('p') ?? ''
+  const descriptorParam = (params.get('d') ?? 'not_near_hair') as SurfaceDescriptor
+
+  const medicalExitEl  = document.getElementById('medical-exit') as HTMLElement
+  const exitIntroEl    = document.getElementById('exit-intro') as HTMLElement
+  const causeCopyEl    = document.getElementById('cause-copy') as HTMLElement
+  const confidenceEl   = document.getElementById('confidence-line') as HTMLElement
+  const recCopyEl      = document.getElementById('rec-copy') as HTMLElement
+  const branchBoxEl    = document.getElementById('branch-box') as HTMLElement
+  const branchCopyEl   = document.getElementById('branch-copy') as HTMLElement
+
+  ;(() => {
+    const profile = lookupProfile(postcodeParam.toUpperCase())
+
+    const resolution = resolve(symptomCode, profile, descriptorParam)
+
+    // Cause copy (always shown)
+    const causeKey = `CAUSE-${resolution.most_likely_cause}`
+    causeCopyEl.textContent = copy[causeKey] ?? resolution.most_likely_cause
+
+    // Confidence line (always shown — structural requirement)
+    const confKey = `CONF-${resolution.confidence.toUpperCase()}`
+    confidenceEl.textContent = copy[confKey] ?? `Confidence: ${resolution.confidence}. ${resolution.confidence_reason}`
+
+    // Recommendation — parse em-dash-separated action/success-marker/next-branch into three lines
+    const rawRec = copy[resolution.recommendation_code] ?? resolution.recommendation_code
+    const segments = rawRec.split(/\s*—\s*/)
+    recCopyEl.innerHTML = ''
+    segments.forEach(seg => {
+      const p = document.createElement('p')
+      // Bold the label before the colon (e.g. "This weekend:", "How you'll know:")
+      const colonIdx = seg.indexOf(':')
+      if (colonIdx > -1 && colonIdx < 30) {
+        const label = document.createElement('strong')
+        label.textContent = seg.slice(0, colonIdx + 1)
+        p.appendChild(label)
+        p.appendChild(document.createTextNode(seg.slice(colonIdx + 1)))
+      } else {
+        p.textContent = seg
+      }
+      recCopyEl.appendChild(p)
+    })
+
+    // Next branch (if available)
+    const branchText = BRANCH_CODES[resolution.next_branch_code]
+    if (branchText) {
+      branchCopyEl.textContent = branchText
+      branchBoxEl.classList.remove('hidden')
+    }
+
+    // Medical exit — renders IN ADDITION TO the hair-track recommendation, not instead of it
+    if (resolution.medical_exit_fires && resolution.medical_exit_code) {
+      const exitText = EXIT_CODES[resolution.medical_exit_code]
+      if (exitText) {
+        exitIntroEl.textContent = exitText
+        medicalExitEl.classList.remove('hidden')
+      }
+    }
+  })()
+
+  // Profile form — placeholder handler (Phase C will wire this to email service)
+  const profileForm = document.getElementById('profile-form') as HTMLFormElement
+  profileForm.addEventListener('submit', (e) => {
+    e.preventDefault()
+    // Phase C: wire to email capture endpoint with symptom/cause/postcode metadata
+    const btn = profileForm.querySelector('button[type="submit"]') as HTMLButtonElement
+    btn.textContent = 'Saved.'
+    btn.disabled = true
+  })
+</script>

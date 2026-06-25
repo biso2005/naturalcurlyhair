@@ -1,0 +1,89 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import copy from '../../data/diagnostic_copy.json'
+---
+
+<BaseLayout title="Hair diagnostic — NaturalCurly">
+
+  <section class="bg-cream px-6 pt-16 pb-20 md:pt-20 md:pb-28">
+    <div class="max-w-prose mx-auto">
+
+      <p class="font-sans text-xs uppercase tracking-wider text-berry mb-6">
+        Diagnostic
+      </p>
+
+      <h1 class="mb-3"
+          style="font-family:'Fraunces Variable',Georgia,serif;font-size:clamp(2rem,5vw,3rem);font-weight:400;letter-spacing:-0.022em;line-height:1.1;font-variation-settings:'opsz' 36,'SOFT' 20;color:#2C1D17;">
+        {copy['S1-HEADER']}
+      </h1>
+
+      <p class="font-sans text-base text-taupe mb-12">
+        {copy['S1-SUBHEAD']}
+      </p>
+
+      <ol class="list-none m-0 p-0" role="list">
+
+        <li class="border-t border-line">
+          <a href={`/tool/postcode?s=S1-dry`}
+             class="group flex items-baseline justify-between gap-4 py-6 no-underline"
+             aria-label={copy['S1-PICK-DRY']}>
+            <span class="font-sans text-base text-ink group-hover:text-berry transition-colors duration-150">
+              {copy['S1-PICK-DRY']}
+            </span>
+            <span class="font-sans text-sm text-taupe group-hover:text-berry transition-colors duration-150 flex-shrink-0">→</span>
+          </a>
+        </li>
+
+        <li class="border-t border-line">
+          <a href={`/tool/postcode?s=S2-growth`}
+             class="group flex items-baseline justify-between gap-4 py-6 no-underline">
+            <span class="font-sans text-base text-ink group-hover:text-berry transition-colors duration-150">
+              {copy['S1-PICK-GROWTH']}
+            </span>
+            <span class="font-sans text-sm text-taupe group-hover:text-berry transition-colors duration-150 flex-shrink-0">→</span>
+          </a>
+        </li>
+
+        <li class="border-t border-line">
+          <a href={`/tool/postcode?s=S3-products`}
+             class="group flex items-baseline justify-between gap-4 py-6 no-underline">
+            <span class="font-sans text-base text-ink group-hover:text-berry transition-colors duration-150">
+              {copy['S1-PICK-PRODUCTS']}
+            </span>
+            <span class="font-sans text-sm text-taupe group-hover:text-berry transition-colors duration-150 flex-shrink-0">→</span>
+          </a>
+        </li>
+
+        <li class="border-t border-line">
+          <a href={`/tool/postcode?s=S4-parent`}
+             class="group flex items-baseline justify-between gap-4 py-6 no-underline">
+            <span class="font-sans text-base text-ink group-hover:text-berry transition-colors duration-150">
+              {copy['S1-PICK-PARENT']}
+            </span>
+            <span class="font-sans text-sm text-taupe group-hover:text-berry transition-colors duration-150 flex-shrink-0">→</span>
+          </a>
+        </li>
+
+        <li class="border-t border-line border-b border-line">
+          <a href={`/tool/postcode?s=S5-scalp`}
+             class="group flex items-baseline justify-between gap-4 py-6 no-underline">
+            <span class="font-sans text-base text-ink group-hover:text-berry transition-colors duration-150">
+              {copy['S1-PICK-SCALP']}
+            </span>
+            <span class="font-sans text-sm text-taupe group-hover:text-berry transition-colors duration-150 flex-shrink-0">→</span>
+          </a>
+        </li>
+
+      </ol>
+
+      <p class="mt-8 font-sans text-sm text-taupe">
+        <a href="/tool/postcode?s=S1-dry"
+           class="text-taupe visited:text-taupe hover:text-ink transition-colors duration-150 no-underline">
+          {copy['S1-NOT-SURE']}
+        </a>
+      </p>
+
+    </div>
+  </section>
+
+</BaseLayout>

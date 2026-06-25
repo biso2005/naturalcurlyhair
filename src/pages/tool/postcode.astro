@@ -1,0 +1,239 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import copy from '../../data/diagnostic_copy.json'
+
+---
+
+<BaseLayout title="Your postcode — Hair diagnostic — NaturalCurly">
+
+  <section class="bg-cream px-6 pt-16 pb-20 md:pt-20 md:pb-28">
+    <div class="max-w-prose mx-auto">
+
+      <p class="font-sans text-xs uppercase tracking-wider text-berry mb-6">
+        Diagnostic · your postcode
+      </p>
+
+      <h1 class="mb-3"
+          style="font-family:'Fraunces Variable',Georgia,serif;font-size:clamp(1.75rem,4vw,2.5rem);font-weight:400;letter-spacing:-0.022em;line-height:1.1;font-variation-settings:'opsz' 28,'SOFT' 15;color:#2C1D17;">
+        {copy['S2-HEADER']}
+      </h1>
+
+      <p class="font-sans text-base text-taupe mb-10">
+        {copy['S2-SUBHEAD']}
+      </p>
+
+      <!-- Postcode form — vanilla JS handles submission -->
+      <form id="postcode-form" novalidate autocomplete="off">
+        <div class="flex flex-col sm:flex-row gap-3 mb-4">
+          <input
+            id="postcode-input"
+            type="text"
+            name="postcode"
+            placeholder={copy['S2-INPUT-PLACEHOLDER']}
+            maxlength="8"
+            autocomplete="postal-code"
+            spellcheck="false"
+            inputmode="text"
+            class="font-sans text-base text-ink bg-white border border-line-strong rounded-sm px-4 py-3 flex-1 placeholder:text-taupe focus:outline-none focus:ring-2 focus:ring-berry uppercase"
+            style="font-size:16px;"
+            aria-label="Your postcode"
+            aria-describedby="postcode-error"
+          />
+          <button
+            type="submit"
+            class="font-sans text-sm font-medium bg-berry text-cream px-6 py-3 rounded-sm hover:bg-berry-dark transition-colors duration-150 whitespace-nowrap">
+            Check →
+          </button>
+        </div>
+        <p id="postcode-error" class="font-sans text-sm text-danger hidden" role="alert"></p>
+      </form>
+
+      <!-- Result block — rendered by JS after lookup -->
+      <div id="postcode-result" class="hidden mt-10" aria-live="polite">
+
+        <!-- Water band context box (plum) -->
+        <div id="result-box" class="rounded-sm p-6 mb-6" style="background:#3E2230;">
+          <p class="font-sans text-xs uppercase tracking-wider mb-3" style="color:rgba(248,243,234,0.6);">
+            {copy['S2-RESULT-HEADER']}
+          </p>
+          <p id="result-water-copy" class="mb-4 leading-snug"
+             style="font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:clamp(1.1rem,2vw,1.375rem);color:#F8F3EA;line-height:1.4;">
+          </p>
+          <p id="result-fallback-note" class="font-sans text-sm mb-4 hidden"
+             style="color:rgba(248,243,234,0.6);">
+            {copy['S2-FALLBACK-NOTE']}
+          </p>
+          <p id="result-confidence" class="font-sans text-sm"
+             style="color:rgba(248,243,234,0.7);font-style:italic;">
+          </p>
+        </div>
+
+        <!-- Silent carry-on affordance -->
+        <p class="font-sans text-sm text-taupe mb-6">{copy['S2-CARRY-ON']}</p>
+
+        <a id="carry-on-link" href="#"
+           class="font-sans text-sm text-berry visited:text-berry hover:text-berry-dark transition-colors duration-150 no-underline">
+          {copy['S2-CARRY-ON-LINK']}
+        </a>
+
+      </div>
+
+    </div>
+  </section>
+
+</BaseLayout>
+
+<script>
+  import profileData from '../../data/uk_postcode_profile.json'
+  import copyData from '../../data/diagnostic_copy.json'
+
+  type WaterBand = 'soft' | 'moderate' | 'hard' | 'very_hard' | 'extreme'
+  type DiagnosticCopy = Record<string, string>
+  const copy = copyData as DiagnosticCopy
+
+  interface PostcodeEntry {
+    district: string
+    water_hardness_mgl: number
+    water_band: WaterBand
+    water_uk_percentile: number
+    humidity_avg: number
+    humidity_band: string
+    chlorine_level: string
+    region: string
+    salon_density: string
+    _is_fallback?: boolean
+  }
+
+  interface ProfileData {
+    _schema: unknown
+    _fallback: PostcodeEntry
+    districts: Record<string, PostcodeEntry>
+  }
+
+  const WATER_COPY: Record<WaterBand, string> = {
+    extreme:   'S2-WATER-EXTREME',
+    very_hard: 'S2-WATER-VERY-HARD',
+    hard:      'S2-WATER-HARD',
+    moderate:  'S2-WATER-MODERATE',
+    soft:      'S2-WATER-SOFT',
+  }
+
+  const CONF_COPY: Record<WaterBand, string> = {
+    extreme:   'S2-CONF-HIGH',
+    very_hard: 'S2-CONF-HIGH',
+    hard:      'S2-CONF-MED',
+    moderate:  'S2-CONF-MED',
+    soft:      'S2-CONF-MED',
+  }
+
+  const SYMPTOM_SUMMARIES: Record<string, string> = {
+    'S1-dry':      'hair that feels dry',
+    'S2-growth':   'hair that isn\'t growing',
+    'S3-products': 'products that have stopped working',
+    'S4-parent':   'your child\'s curls',
+    'S5-scalp':    'a scalp issue',
+  }
+
+  function extractDistrict(raw: string): string {
+    const cleaned = raw.trim().toUpperCase().replace(/\s+/g, '')
+    // Full postcode e.g. SE184AB → take district SE18
+    const full = cleaned.match(/^([A-Z]{1,2}\d{1,2}[A-Z]?)\d[A-Z]{2}$/)
+    if (full) return full[1]
+    // District-only e.g. SE18
+    const dist = cleaned.match(/^([A-Z]{1,2}\d{1,2}[A-Z]?)$/)
+    if (dist) return dist[1]
+    return ''
+  }
+
+  function lookupProfile(district: string): PostcodeEntry {
+    const data = profileData as unknown as ProfileData
+    const districts = data.districts as Record<string, PostcodeEntry>
+    // 1. Exact district match (e.g. SE18)
+    if (districts[district]) return districts[district]
+    // 2. Area-level match — strip trailing digits/letters to get the area prefix (e.g. SE18 → SE)
+    const area = district.replace(/\d.*$/, '')
+    if (area && districts[area]) return districts[area]
+    // 3. National average fallback
+    return { ...data._fallback, _is_fallback: true }
+  }
+
+  function fillTemplate(template: string, vars: Record<string, string>): string {
+    return template.replace(/\{(\w+)\}/g, (_, key) => vars[key] ?? `{${key}}`)
+  }
+
+  function isValidPostcodeInput(raw: string): boolean {
+    const cleaned = raw.trim().toUpperCase().replace(/\s+/g, '')
+    return /^[A-Z]{1,2}\d{1,2}[A-Z]?\d?[A-Z]{0,2}$/.test(cleaned) && cleaned.length >= 2
+  }
+
+  const params = new URLSearchParams(window.location.search)
+  const symptomCode = params.get('s') ?? 'S1-dry'
+
+  const form = document.getElementById('postcode-form') as HTMLFormElement
+  const input = document.getElementById('postcode-input') as HTMLInputElement
+  const errorEl = document.getElementById('postcode-error') as HTMLElement
+  const resultEl = document.getElementById('postcode-result') as HTMLElement
+  const waterCopyEl = document.getElementById('result-water-copy') as HTMLElement
+  const fallbackNoteEl = document.getElementById('result-fallback-note') as HTMLElement
+  const confidenceEl = document.getElementById('result-confidence') as HTMLElement
+  const carryOnLink = document.getElementById('carry-on-link') as HTMLAnchorElement
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault()
+    errorEl.textContent = ''
+    errorEl.classList.add('hidden')
+
+    const raw = input.value
+    if (!isValidPostcodeInput(raw)) {
+      errorEl.textContent = 'Enter a valid UK postcode or postcode district — for example, SE18 or SE18 4AB.'
+      errorEl.classList.remove('hidden')
+      input.focus()
+      return
+    }
+
+    const district = extractDistrict(raw)
+    if (!district) {
+      errorEl.textContent = 'Enter a valid UK postcode or postcode district — for example, SE18 or SE18 4AB.'
+      errorEl.classList.remove('hidden')
+      input.focus()
+      return
+    }
+
+    const profile = lookupProfile(district)
+    const symptomSummary = SYMPTOM_SUMMARIES[symptomCode] ?? 'your complaint'
+
+    const waterCopyKey = WATER_COPY[profile.water_band as WaterBand]
+    const confCopyKey = CONF_COPY[profile.water_band as WaterBand]
+
+    const waterText = fillTemplate(copy[waterCopyKey] ?? waterCopyKey, {
+      value: String(profile.water_hardness_mgl),
+      percentile: String(profile.water_uk_percentile),
+      symptom_summary: symptomSummary,
+    })
+
+    waterCopyEl.textContent = waterText
+    confidenceEl.textContent = copy[confCopyKey] ?? confCopyKey
+
+    if (profile._is_fallback) {
+      fallbackNoteEl.classList.remove('hidden')
+    } else {
+      fallbackNoteEl.classList.add('hidden')
+    }
+
+    carryOnLink.href = `/tool/narrow?s=${encodeURIComponent(symptomCode)}&p=${encodeURIComponent(district)}`
+
+    resultEl.classList.remove('hidden')
+    resultEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+
+    // Update URL so this state is bookmarkable
+    const newUrl = `/tool/postcode?s=${encodeURIComponent(symptomCode)}&p=${encodeURIComponent(district)}`
+    history.replaceState(null, '', newUrl)
+  })
+
+  // If postcode is already in the URL (returning user), pre-run the lookup
+  const existingPostcode = params.get('p')
+  if (existingPostcode && isValidPostcodeInput(existingPostcode)) {
+    input.value = existingPostcode
+    form.dispatchEvent(new Event('submit'))
+  }
+</script>

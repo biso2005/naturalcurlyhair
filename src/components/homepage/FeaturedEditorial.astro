@@ -1,0 +1,144 @@
+---
+import ImagePlaceholder from './ImagePlaceholder.astro'
+
+interface FeaturedArticle {
+  tag: string
+  tag_colour: 'skip' | 'method' | 'uk'
+  title: string
+  snip: string
+  href: string
+  size: 'lead' | 'flank'
+}
+
+interface Props {
+  copy: {
+    section_kicker: string
+    section_title: string
+    articles: FeaturedArticle[]
+  }
+}
+
+const { copy } = Astro.props
+
+const tagColours: Record<string, string> = {
+  skip:   '#791F1F',
+  method: '#A2384B',
+  uk:     '#B97A2B',
+}
+
+const lead   = copy.articles.find(a => a.size === 'lead')
+const flanks = copy.articles.filter(a => a.size === 'flank')
+---
+
+<section class="bg-cream border-t border-line px-6 pt-12 pb-10">
+  <div class="max-w-hub mx-auto">
+
+    <div class="flex items-baseline gap-4 mb-8">
+      <p class="font-sans text-berry uppercase" style="font-size:11px;letter-spacing:0.10em;">
+        {copy.section_kicker}
+      </p>
+      <p
+        class="text-ink"
+        style="font-family:'Fraunces Variable',Georgia,serif;font-size:17px;font-weight:400;letter-spacing:-0.012em;line-height:1.2;font-variation-settings:'opsz' 18,'SOFT' 10;"
+      >
+        {copy.section_title}
+      </p>
+    </div>
+
+    <!-- Desktop: 1fr / 1.5fr / 1fr; Mobile: stacked, SKIP-VERDICT lead first -->
+    <div class="flex flex-col md:grid md:grid-cols-[1fr_1.5fr_1fr] gap-5">
+
+      <!-- Mobile: lead card first; flanks render after on mobile -->
+      <!-- Flank 1 (mobile: second) -->
+      {flanks[0] && (
+        <a href={flanks[0].href} class="no-underline group order-2 md:order-1">
+          <ImagePlaceholder
+            aspectRatio="4:5"
+            texture="cool"
+            withSpiral={false}
+            class="mb-3"
+          />
+          <p
+            class="font-sans uppercase mb-2"
+            style={`font-size:11px;letter-spacing:0.10em;color:${tagColours[flanks[0].tag_colour]};`}
+          >
+            {flanks[0].tag}
+          </p>
+          <h3
+            class="text-ink group-hover:text-berry transition-colors duration-150 mb-2"
+            style="font-family:'Fraunces Variable',Georgia,serif;font-size:17px;font-weight:400;letter-spacing:-0.012em;line-height:1.2;font-variation-settings:'opsz' 18,'SOFT' 10;"
+          >
+            {flanks[0].title}
+          </h3>
+          <p
+            class="text-taupe"
+            style="font-family:'Newsreader',Georgia,serif;font-size:15px;line-height:1.5;"
+          >
+            {flanks[0].snip}
+          </p>
+        </a>
+      )}
+
+      <!-- Lead card (mobile: first) -->
+      {lead && (
+        <a href={lead.href} class="no-underline group order-1 md:order-2">
+          <ImagePlaceholder
+            aspectRatio="4:5"
+            texture="dark-warm"
+            withSpiral={false}
+            class="mb-3"
+          />
+          <p
+            class="font-sans uppercase mb-2"
+            style={`font-size:11px;letter-spacing:0.10em;color:${tagColours[lead.tag_colour]};`}
+          >
+            {lead.tag}
+          </p>
+          <h2
+            class="text-ink group-hover:text-berry transition-colors duration-150 mb-2"
+            style="font-family:'Fraunces Variable',Georgia,serif;font-size:24px;font-weight:400;letter-spacing:-0.018em;line-height:1.15;font-variation-settings:'opsz' 24,'SOFT' 10;"
+          >
+            {lead.title}
+          </h2>
+          <p
+            class="text-taupe"
+            style="font-family:'Newsreader',Georgia,serif;font-size:15px;line-height:1.5;"
+          >
+            {lead.snip}
+          </p>
+        </a>
+      )}
+
+      <!-- Flank 2 (mobile: third) -->
+      {flanks[1] && (
+        <a href={flanks[1].href} class="no-underline group order-3">
+          <ImagePlaceholder
+            aspectRatio="4:5"
+            texture="warm-neutral"
+            withSpiral={false}
+            class="mb-3"
+          />
+          <p
+            class="font-sans uppercase mb-2"
+            style={`font-size:11px;letter-spacing:0.10em;color:${tagColours[flanks[1].tag_colour]};`}
+          >
+            {flanks[1].tag}
+          </p>
+          <h3
+            class="text-ink group-hover:text-berry transition-colors duration-150 mb-2"
+            style="font-family:'Fraunces Variable',Georgia,serif;font-size:17px;font-weight:400;letter-spacing:-0.012em;line-height:1.2;font-variation-settings:'opsz' 18,'SOFT' 10;"
+          >
+            {flanks[1].title}
+          </h3>
+          <p
+            class="text-taupe"
+            style="font-family:'Newsreader',Georgia,serif;font-size:15px;line-height:1.5;"
+          >
+            {flanks[1].snip}
+          </p>
+        </a>
+      )}
+
+    </div>
+  </div>
+</section>

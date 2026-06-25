@@ -1,0 +1,190 @@
+---
+title: ""
+# Required. The H1. Verdict-first: lead with what the article concludes,
+# not the question it asks. "Best Leave-In for 3B Curls" not
+# "What Is the Best Leave-In for 3B Curls?"
+
+hub: "3b"
+# Required. Must be one of:
+# 2a | 2b | 2c | 3a | 3b | 3c | 4a | 4b | 4c
+# routines | products | problem-solving | parents
+
+category: ""
+# Required. Plain label shown in the eyebrow.
+# Use: Products | Routines | Problem Solving | Parents | Identification
+
+dek: ""
+# Required. One sentence. Max 20 words.
+# This is the summary shown in article cards and search snippets.
+# Write it last — it should distil what the article actually argues,
+# not describe what it covers.
+
+published: ""
+# Required. Format: YYYY-MM-DD. Set on the day you publish.
+# Do not pre-date or post-date.
+
+updated: ""
+# Optional. Format: YYYY-MM-DD. Only add this after a material update
+# (new product tested, guidance changed, key section rewritten).
+# Do not add for typo fixes or minor edits.
+
+readTime: ""
+# Optional. Estimate: ~200 words per minute. "8 min" for 1,600 words.
+# Round to nearest minute.
+
+tested: false
+# Required. Boolean. Defaults to false.
+# Flip to true ONLY when physical testing is complete and the
+# "How we tested" section is written. Never write past-tense
+# testing prose when this is false.
+
+products:
+# Optional. Omit the entire block for routine and problem articles.
+# Include for any product review or comparison.
+  - name: ""
+    brand: ""
+    verdict: "buy"
+    # Must be exactly: buy | skip | not-yet-tested
+    price: ""
+    # Format: "£14.99" — always include the £ symbol
+    buyUrl: ""
+    # Full URL including https://. Must be a valid URL or build fails.
+    claims:
+    # Max 3 bullets. Max 15 words each. Plain language, no hype.
+      - ""
+      - ""
+      - ""
+---
+
+<!-- ============================================================
+  AFFILIATE DISCLOSURE
+  Do not add this manually — AffiliateDisclosure renders
+  automatically in ArticleLayout. Do not duplicate it.
+  ============================================================ -->
+
+<!-- ============================================================
+  LEAD PARAGRAPH
+  - State the problem and your verdict in the first 60 words
+  - This is what Google shows as the featured snippet
+  - Do not start with "In this article..." or a definition
+  - Start with the reader's situation or a concrete number
+  ============================================================ -->
+
+[Lead paragraph — 40–80 words. Verdict-first. British English.]
+
+
+<!-- ============================================================
+  QUICK ANSWER / COMPARISON TABLE
+  Include for product comparison articles (3+ products).
+  Omit for routine, problem-solving, and identification articles.
+  The ComparisonTable component reads from the products frontmatter
+  array — no need to duplicate data here.
+  ============================================================ -->
+
+
+<!-- ============================================================
+  BODY SECTIONS
+  Use H2 for each major section. Target one H2 per 300–400 words.
+  H2 text should match real search sub-queries, not internal labels.
+  Wrong: "Background"  Right: "Why hard water damages curly hair"
+  Wrong: "Our method"  Right: "How we tested over 12 wash days"
+  ============================================================ -->
+
+## [H2 — state the problem or answer a sub-question]
+
+[Body prose in Newsreader. Plain. Direct. No padding.
+"Never drag from root to tip in one motion" is the register.
+One idea per sentence where possible. UK spellings throughout.]
+
+
+<!-- ============================================================
+  VERDICT CALLOUT
+  Use inline with the product it's verdicting.
+  Four variants: positive | negative | conditional | untested
+
+  positive  — border-left berry.  Eyebrow: "Our pick"
+  negative  — border-left danger. Eyebrow: "Skip this"
+  conditional — border-left taupe. Eyebrow: "Best if..."
+  untested  — border-left line.   Eyebrow: "Not yet tested"
+
+  Body: Fraunces lead size. Product name bolded inline.
+  No em-dash between product name and verdict text.
+  New sentence after the product name.
+  ============================================================ -->
+
+<VerdictCallout variant="positive" product="Product name here">
+  Product name here. [One or two sentences. The verdict, plainly stated.
+  What it does well, and the one honest limitation if relevant.]
+</VerdictCallout>
+
+
+<!-- ============================================================
+  PRODUCT CARD
+  Use immediately after the verdict callout for the featured product.
+  Reads from the products frontmatter array — pass the index (0-based).
+  ProductCard renders: brand, name, claims bullets, price, buy button.
+  Do not duplicate product data in the prose.
+  ============================================================ -->
+
+
+## [H2 — next section]
+
+[Continue prose.]
+
+
+<!-- ============================================================
+  HOW WE TESTED
+  Leave this section empty (the stub below) until tested: true.
+  When tested: true — write the methodology in plain prose:
+  - How many wash days
+  - Hair type and porosity of the tester
+  - Water hardness of the location
+  - What you were measuring and how
+  Never write past-tense testing prose when tested: false.
+  ============================================================ -->
+
+## How we tested
+
+<!-- TODO: add testing notes when tested: true. Do not publish
+     past-tense testing prose with tested: false in the frontmatter. -->
+
+
+## People also ask
+
+<!-- 3–5 questions. Use real search query language, not editorial language.
+     Wrong: "What are the considerations for glycerin use?"
+     Right: "Does glycerin make curly hair frizzy in summer?"
+     Answers: 2–4 sentences. Direct. No hedging. -->
+
+**[Question in plain language?]**
+
+[Answer. 2–4 sentences. If the answer is "it depends" — say what it
+depends on and give the rule. Do not both-sides a question that has
+a real answer.]
+
+**[Question?]**
+
+[Answer.]
+
+**[Question?]**
+
+[Answer.]
+
+
+<!-- ============================================================
+  CONTINUE READING
+  3–4 internal links. Hub dot + hub label + title.
+  Only link to articles that exist. No aspirational links.
+  Use the TODO pattern for planned articles.
+  ============================================================ -->
+
+<!-- TODO: add internal links once related articles are published -->
+
+
+<!-- ============================================================
+  LAST VERIFIED
+  Update this date whenever you re-check product availability,
+  prices, and guidance. Quarterly minimum for money pages.
+  ============================================================ -->
+
+<!-- Last verified: YYYY-MM-DD -->

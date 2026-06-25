@@ -1,0 +1,98 @@
+---
+import { getCollection, render } from 'astro:content'
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import ArticleLayout from '../../layouts/ArticleLayout.astro'
+import ArticleHero from '../../components/ArticleHero.astro'
+import ArticleBody from '../../components/ArticleBody.astro'
+import AffiliateDisclosure from '../../components/AffiliateDisclosure.astro'
+import ComparisonTable from '../../components/ComparisonTable.astro'
+import VerdictCallout from '../../components/VerdictCallout.astro'
+import ProductCard from '../../components/ProductCard.astro'
+
+export async function getStaticPaths() {
+  const allArticles = await getCollection('articles')
+  return allArticles.map(article => ({
+    params: { hub: article.data.hub, slug: article.id },
+    props:  { article },
+  }))
+}
+
+const { article } = Astro.props
+const { Content, headings } = await render(article)
+
+const tocHeadings = headings
+  .filter(h => h.depth === 2 || h.depth === 3)
+  .map(h => ({ depth: h.depth, slug: h.slug, text: h.text }))
+
+const fm = article.data
+const useHeroLayout = !!(fm.heroImage && fm.heroImageAlt && fm.standfirst && fm.shortAnswer)
+
+const hubDotMap: Record<string, string> = {
+  '2a': 'bg-hub-2a', '2b': 'bg-hub-2b', '2c': 'bg-hub-2c',
+  '3a': 'bg-hub-3a', '3b': 'bg-hub-3b', '3c': 'bg-hub-3c',
+  '4a': 'bg-hub-4a', '4b': 'bg-hub-4b', '4c': 'bg-hub-4c',
+}
+
+const tableRows = fm.products?.map(p => ({
+  product: p.name,
+  bestFor: p.claims?.[0] ?? '',
+  tested:  fm.tested ? fm.published : '—',
+  price:   p.price ?? '—',
+  verdict: p.verdict === 'buy' ? 'BUY' : p.verdict === 'skip' ? 'SKIP' : 'NOT YET TESTED',
+})) as any[] | undefined
+
+// ArticleBody headings format
+const bodyHeadings = tocHeadings.map(h => ({
+  id: h.slug,
+  text: h.text,
+  level: h.depth as 2 | 3,
+}))
+---
+
+{useHeroLayout ? (
+  <BaseLayout title={fm.title}>
+    <ArticleHero
+      image={fm.heroImage!}
+      imageAlt={fm.heroImageAlt!}
+      imageCredit={fm.heroImageCredit}
+      eyebrow={`${fm.hub.toUpperCase()} · ${fm.category}`}
+      title={fm.title}
+      standfirst={fm.standfirst!}
+      author="naturalcurlyhair editorial"
+      lastTested={new Date(fm.published).toLocaleDateString('en-GB', { month: 'long', year: 'numeric' })}
+      readTime={fm.readTime ?? ''}
+      shortAnswer={fm.shortAnswer!}
+    />
+    <div class="bg-cream pt-10 pb-20">
+      <ArticleBody headings={bodyHeadings}>
+        {tableRows && tableRows.length > 0 && (
+          <div class="mb-10">
+            <ComparisonTable rows={tableRows} />
+          </div>
+        )}
+        <Content components={{ VerdictCallout, ProductCard }} />
+      </ArticleBody>
+    </div>
+  </BaseLayout>
+) : (
+  <ArticleLayout
+    title={fm.title}
+    hubDot={hubDotMap[fm.hub]}
+    hubLabel={fm.hub.toUpperCase()}
+    category={fm.category}
+    published={fm.published}
+    updated={fm.updated}
+    readTime={fm.readTime ? parseInt(fm.readTime) : undefined}
+    tocHeadings={tocHeadings}
+  >
+    <AffiliateDisclosure slot="disclosure" />
+
+    {tableRows && tableRows.length > 0 && (
+      <div class="mb-10 not-prose">
+        <ComparisonTable rows={tableRows} />
+      </div>
+    )}
+
+    <Content components={{ VerdictCallout }} />
+  </ArticleLayout>
+)}
