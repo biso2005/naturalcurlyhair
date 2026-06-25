@@ -28,7 +28,7 @@ Phase 1 was completed on 2026-06-25. The following was validated:
 
 Two files change. Nothing else:
 
-### 1. `public/admin/config.yml` — backend section
+### 1. `public/admin/config.yml` — backend section and editorial workflow
 
 **Phase 1 (current):**
 ```yaml
@@ -36,16 +36,22 @@ backend:
   name: proxy
   proxy_url: http://localhost:8081/api/v1
   branch: main
+
+# publish_mode: editorial_workflow — commented out in Phase 1.
+# The proxy backend does not support unpublishedEntries, causing
+# API_ERROR: Unknown action unpublishedEntries on every collection load.
 ```
 
-**Phase 2 (replace with):**
+**Phase 2 (replace backend block and uncomment editorial workflow):**
 ```yaml
 backend:
   name: git-gateway
   branch: main
+
+publish_mode: editorial_workflow
 ```
 
-Remove the `proxy_url` line. Remove the `local_backend: true` line if present. Everything else in `config.yml` stays unchanged.
+Remove the `proxy_url` line. Uncomment `publish_mode: editorial_workflow`. Everything else in `config.yml` stays unchanged.
 
 ### 2. `public/admin/index.html` — add Netlify Identity widget
 
