@@ -19,5 +19,13 @@
     "role": "Curl consultant, Manchester",
     "initials": "SM",
     "colour": "#A57256"
+  },
+  {
+    "id": "darren",
+    "name": "Darren",
+    "role": "Editor",
+    "initials": "DC",
+    "bio": "Editor of NaturalCurly. Started the site because too many people — including parents of mixed-race children — were getting steered toward products by people with something to sell. The editorial gate, and the person who decides when a verdict says skip this.",
+    "active": true
   }
 ]
