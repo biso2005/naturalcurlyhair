@@ -1,188 +1,222 @@
-# Contributor guide — NaturalCurly CMS
+# CMS contributor guide
 
-This guide is for contributors who write or review articles on naturalcurlyhair.co.uk. You do not need to know how to code. Everything happens through a form-based editor at `/admin/`.
-
----
-
-## Before you start
-
-You need a GitHub account. If you do not have one, create one free at [github.com](https://github.com). Once you have an account, ask the site admin to give your GitHub username access to the repo.
+This guide is for contributors who write or review articles on naturalcurlyhair.co.uk. You do not need a GitHub account or any technical knowledge. Everything happens through a form-based editor at `/admin/`.
 
 ---
 
-## Logging in
+## Before you start: your invite email
 
-1. Go to **https://naturalcurlyhair.co.uk/admin/**
-2. Click **Login with GitHub**
-3. A GitHub popup will open. Authorise the NaturalCurly app when prompted.
-4. You will land on the CMS dashboard showing the Articles and Contributors collections.
+The admin sends you an invite to the email address you provided. The email comes from Netlify and has a subject line like *"You've been invited to join naturalcurlyhair.co.uk"*.
 
-If the popup is blocked, allow popups for `naturalcurlyhair.co.uk` in your browser settings and try again.
+Click **Accept the invite** in the email. You will be taken to a page where you set a password. Save it somewhere secure — you will use it every time you log in.
 
----
-
-## Writing a new article
-
-### 1. Open the Articles collection
-
-Click **Articles** in the left-hand sidebar. You will see all existing articles listed.
-
-Click **New Article** (top right).
-
-### 2. Fill in the fields
-
-Every field has a label and a hint. Here is what each one means:
-
-| Field | What to put here |
-|---|---|
-| **Title** | The article headline. Write it for a reader, not for Google. |
-| **Hub** | Which curl-type or topic section this article belongs to (e.g. `hair-care`, `4c`). |
-| **Category** | A short descriptor: `FAQ`, `Routine`, `Diagnostic`, `Review`. |
-| **Dek** | One sentence that summarises what the article does for the reader. Max ~160 characters. This appears under the title on the article page. |
-| **Published date** | The date the article should show as published. Click the field and pick a date. |
-| **Updated date** | Leave blank unless you are updating an existing article. |
-| **Read time** | Leave blank. The site calculates this automatically from word count. |
-| **Featured** | Leave this off unless the admin has asked you to feature the article on the homepage. |
-| **Tested** | Tick this only if you have personally tested every product mentioned. |
-| **Draft** | This is **on by default**. It means the article will not appear on the live site yet. The admin turns it off when the article is approved. |
-| **Confidence grade** | For diagnostic articles only (e.g. porosity guides, hair type explainers). Pick `High`, `Medium`, or `Low` based on how strong the evidence is. Leave blank for other article types. |
-| **Contributor ID** | Select your name from the dropdown. If your name is not there, ask the admin to add you to the Contributors list first. |
-| **Hero image** | Optional. Upload a photo that represents the article. See image guidance below. |
-| **Hero image alt text** | Required if you upload a hero image. Describe the image in plain English for screen readers. E.g. `Close-up of 4C coils after a wash day, showing shrinkage.` |
-| **Hero image credit** | Photographer name or source. E.g. `Photo: Amara Osei`. |
-| **Standfirst** | Optional. A 1–2 sentence intro that appears in the hero section, above the body. |
-| **Short answer** | Optional but recommended for diagnostic and FAQ articles. Write a 40–60 word direct answer to the article's core question. This is used for featured snippet markup in search results. |
-| **Body** | The article text. Use the toolbar for headings, bold, links, and lists. See writing guidance below. |
-| **Products** | Only fill this in if the article reviews specific products. Click **Add Products** to add one at a time. Each product needs a name, brand, verdict (buy / skip / not yet tested), and a buy URL if you have one. |
-
-### 3. Writing the body
-
-The body editor works like a simple word processor.
-
-- **H2 headings** (the `##` button) for main sections
-- **H3 headings** for sub-sections within a section
-- **Bold** for verdicts, key terms, product names on first mention
-- **Links** for any product you mention that has a buy URL — paste the URL when prompted
-- **Bullet lists** for ingredient lists, step-by-step routines, and quick-reference summaries
-
-Do not use H1. The article title is already the H1.
-
-Write as if you are talking to someone in a WhatsApp group who asked you a genuine question. You know your stuff — say it plainly. No padding, no throat-clearing, no phrases like "In today's world..." or "Great question!".
-
-Start with the most useful thing. Answer the core question in the first paragraph, then explain the detail.
-
-### 4. Saving a draft
-
-Click **Save** at the top of the page. This creates a draft branch in GitHub and opens a pull request. You will see a confirmation message.
-
-The article is now in **Draft** state. It is not live on the site.
+You will not receive a second invite if you lose access. Contact the admin to reset your password.
 
 ---
 
-## Submitting for review
+## How to log in
 
-When your article is ready for the admin to review:
+1. Go to [naturalcurlyhair.co.uk/admin/](https://naturalcurlyhair.co.uk/admin/)
+2. A login prompt appears — click **Log in with Netlify Identity**
+3. Enter the email address the invite was sent to and the password you set
+4. You will be taken to the CMS dashboard
 
-1. Find the article in the Articles list. It will have a **Draft** label.
-2. Click the article to open it.
-3. At the top of the page, change the status from **Draft** to **In Review** using the status dropdown.
-4. Click **Save**.
-
-The admin will receive a notification that the article is ready. They will either:
-- Merge it (article goes live within ~2 minutes), or
-- Leave comments on the GitHub pull request for you to address.
-
-If there are comments to address, make your edits in the CMS and save again. The pull request updates automatically.
+If the login prompt does not appear, try a hard refresh (Ctrl+Shift+R on Windows/Linux, Cmd+Shift+R on Mac). If it still does not appear, contact the admin.
 
 ---
 
-## What happens after it goes live
+## How to write a new article
 
-Once the admin merges the pull request:
+From the dashboard, click **Articles** in the left sidebar, then click **New Article** in the top right.
 
-1. Cloudflare Pages detects the change and rebuilds the site.
-2. The article appears on the live site within **2–3 minutes**.
-3. The CMS article status changes to **Published**.
+You will see a form on the left and a preview pane on the right. Fill in each field:
+
+### Title
+The article headline. Sentence case. No banned words (see [Voice rules](#voice-rules)).
+
+### Hub
+Which section of the site this article belongs to. Choose from the dropdown. Most articles will be **Hair Care**, or a specific curl type (e.g. **Coils — 4c**).
+
+### Category
+A short descriptor for the type of piece. Use one of: `Method`, `Diagnostic`, `Verdict`, `UK context`, `FAQ`. Do not invent new categories without checking with the admin.
+
+### Dek (article summary)
+One sentence that appears beneath the title in article lists. Max 160 characters. This is the list-view hook — not the standfirst.
+
+### Published date
+The date the article goes live. Set to today if you are publishing now.
+
+### Updated date
+Leave blank for new articles. Update this when you make a significant change to a published article.
+
+### Read time
+Optional. Write e.g. `7 min` if you want to set it manually. Leave blank otherwise.
+
+### Featured
+Leave as **false** unless the admin has asked you to feature this on the homepage.
+
+### Tested
+Tick this only if you have personally tested every product mentioned.
+
+### Draft
+Leave as **true**. The editorial workflow controls visibility — this is an extra safeguard. Set to **false** only when the admin confirms the article is ready.
+
+### Confidence grade
+How strong is the evidence behind this piece?
+- **High** — peer-reviewed research or strong professional consensus
+- **Medium** — reasonable agreement among practitioners, plausible but limited evidence
+- **Low** — community observation, anecdote, or early-stage evidence
+
+If you are not sure, choose **Medium** and note the uncertainty in the article body.
+
+### Contributor
+Select your name from the dropdown. This links the article to your byline. If your name does not appear, contact the admin — your contributor record may not be set up yet.
+
+### Hero image
+Upload an image for the top of the article. See [Image guidelines](#image-guidelines) below.
+
+### Hero image alt text
+Required if you upload a hero image. Describe what the image literally shows — not what it means. Good: `Close-up of 4c coils with visible shrinkage, natural light.` Bad: `Beautiful natural hair.`
+
+### Hero image credit
+If the image is not your own, credit the photographer or source: `Photo: Unsplash / Ime Nse`.
+
+### Standfirst
+A longer opening paragraph shown beneath the title on the article page. 1–2 sentences. Set up the reader experience before the article begins.
+
+### Short answer
+A 40–60 word direct answer to the article's main question. Shown in a highlighted box at the top of the article. Write this as if answering someone who Googled the question and wants the short version before deciding whether to read on.
+
+### Body
+The article itself, written in Markdown. See [Writing in Markdown](#writing-in-markdown) below.
+
+### Products
+Optional. Only fill this in if the article includes product verdicts. Add one entry per product with name, brand, verdict (buy / skip / not yet tested), price, and buy URL.
 
 ---
 
-## Uploading images
+## Image guidelines
 
-When you add a hero image or a product image:
-
-1. Click the image field.
-2. Click **Choose an image** → **Upload**.
-3. Select the file from your computer.
-4. The image uploads to `/uploads/` in the repo.
-5. The file path is filled in automatically.
-
-**Image guidelines:**
-
-- File format: JPEG or WebP preferred. PNG is fine for graphics.
-- Max file size: 1 MB. Compress large photos at [squoosh.app](https://squoosh.app) before uploading.
-- Hero images: landscape crop, at least 1200 × 675 px.
-- Portraits (Contributors): square crop, at least 400 × 400 px.
-- Alt text is **required** on every image. Describe what is in the photo. Bad: `image1.jpg`. Good: `3C curls styled in a wash-and-go, showing defined ringlets at the crown.`
+- Maximum file size: 500 KB. Compress large photos at [squoosh.app](https://squoosh.app) before uploading.
+- Preferred formats: JPEG or WebP. Avoid PNG for photographs.
+- Preferred dimensions: at least 1200 px on the longest side.
+- All images land in `/uploads/` on the site. Do not delete uploaded images — they may be in use elsewhere.
+- Alt text is required on every image. Screen readers and search engines depend on it.
 
 ---
 
-## Editing the Contributors list
+## Writing in Markdown
 
-The Contributors list stores the bylines that appear on articles.
+The body field uses Markdown. The basics:
 
-1. Click **Contributors** in the left sidebar.
-2. Click **All Contributors**.
-3. To add yourself: click **Add Contributors** at the bottom of the list.
-4. Fill in: ID (slug format, no spaces, e.g. `amara-osei`), Name, Role, Bio (max 300 characters), Portrait (optional), Credentials (optional).
-5. Click **Save**.
+```
+## Section heading
 
-The admin will merge the change before your name appears in the Contributor ID dropdown on articles.
+### Sub-heading
+
+**Bold text**
+
+*Italic text*
+
+- Bullet point
+- Another bullet
+
+1. Numbered list
+2. Second item
+
+[Link text](https://example.com)
+
+> Block quote
+```
+
+Do not use `#` (H1) headings in the body — the article title is the H1. Start body sections with `##`.
 
 ---
 
 ## Voice rules
 
-These are the house rules for how we write. They apply to every article.
+Write for a real person who is frustrated with their hair and wants a straight answer.
 
 **Do:**
-- Open with something concrete — a real scenario, a number, a specific problem.
-- Answer the question directly in the first paragraph.
-- Use the words readers actually use. If they say "shrinkage", we say "shrinkage".
-- Declare every affiliate link. Use the phrase "affiliate link" — never disguise it.
-- Say "save your money" when a product does not earn a recommendation.
-- Use UK spelling, UK product availability, UK prices.
-- Name sources. Attribute claims.
+- Open with something concrete — a real scenario, a number, a specific problem
+- Answer the question directly in the first paragraph
+- Use the words readers actually use — if they say "shrinkage", write "shrinkage"
+- Name sources and attribute claims
+- Say "save your money" when a product does not earn a recommendation
+- Use UK spelling, UK product availability, UK prices
+
+**Banned words** — do not use these in headings, deks, standfirsts, or highlighted callouts:
+
+| Banned | Reason |
+|---|---|
+| honest / honestly | Fine in body prose; banned in labels |
+| trusted | |
+| ultimate | |
+| comprehensive | |
+| definitive | |
+| expert (as a self-label) | Fine when referencing a named third party |
+| genuine | |
+| transparent | |
+| unbiased | |
+| authentic | |
 
 **Do not:**
-- Use "honest", "trusted", "independent", "authentic", "ultimate", "definitive" in UI copy or article titles.
-- Write throat-clearing openers ("In today's world…", "If you're reading this…").
-- Use AI slop phrases: "dive in", "game-changer", "let's explore", "it's important to note".
-- Write enthusiasm padding: "This is such a great question!"
-- Both-sides an issue that has a clear answer.
-- Invent sources. If you do not have a source, flag it with `[TODO: source needed]` — do not make one up.
+- Write throat-clearing openers ("In today's world…", "If you're reading this…")
+- Use AI-generated filler phrases: "dive in", "game-changer", "let's explore", "it's important to note"
+- Both-sides an issue that has a clear answer
+- Invent sources — flag gaps with `[TODO: source needed]` instead
+
+Write in British English: `moisturiser` not `moisturizer`, `colour` not `color`.
+
+---
+
+## How drafts work
+
+When you click **Save**, the article is saved as a draft. It is not live on the site. In the workflow view (the column panel on the dashboard), the article appears under **Drafts**.
+
+States:
+1. **Drafts** — you are still working on it
+2. **In review** — you have finished writing; admin should check it
+3. **Ready** — admin has approved it and it is ready to publish
+
+Move articles between states by dragging the card in the workflow view, or by opening the article and changing the status in the top bar.
+
+---
+
+## What happens after you move an article to Ready
+
+1. The admin sees the article in the **Ready** column
+2. Admin opens the pull request in GitHub and reads the article
+3. **If approved:** admin merges → Cloudflare Pages rebuilds → article is live within ~2 minutes
+4. **If changes needed:** admin closes the PR and contacts you → move the article back to **Drafts**, make changes, move to **In Review** again
+
+You will not receive an automatic notification when your article goes live. Check the site or ask the admin.
 
 ---
 
 ## Common gotchas
 
-**My article saved but I cannot find it in the CMS.**
-It is probably on a draft branch. Check the Articles list and look for items with a Draft label.
+**My article is not appearing on the site.**
+If the article is in Ready state, the admin may not have merged the PR yet. If the admin has merged, wait 3 minutes and check again. If it is still not live, contact the admin — the Cloudflare Pages build may have failed.
 
-**The image I uploaded looks blurry.**
-The file was probably too small. Aim for at least 1200 px wide for hero images.
+**I uploaded an image but it is not showing.**
+Check the hero image alt text field — it is required. Also check the image file size is under 500 KB.
 
-**I used markdown in the Body but it is showing as plain text.**
-Make sure you are using the Body field, not the Dek or Standfirst field. Those fields do not render markdown.
+**The Markdown in my article is not rendering correctly.**
+Open the preview pane (the right side of the editor). Common mistakes: missing a blank line before a heading, using `#` instead of `##`, or unclosed `**` for bold.
 
-**The Contributor ID dropdown shows no results.**
-Your contributor entry has not been added yet, or the admin has not merged it. Ask the admin to add and merge your contributor entry first.
+**I cannot log in.**
+Check you are using the email address the invite was sent to. If you have forgotten your password, contact the admin — they can trigger a password reset from the Netlify Identity dashboard. You cannot reset your own password from the login screen.
 
-**I saved my article but it is live on the site — I did not want that.**
-Check the **Draft** toggle. If Draft is off and the pull request was merged, the article is live. To hide it, open the article in the CMS, turn Draft on, save, and ask the admin to merge that change.
+**The Contributor dropdown shows no results.**
+Your contributor record has not been added yet, or the admin has not merged it. Contact the admin.
 
-**MDX vs markdown — what is the difference?**
-For most contributors, there is no practical difference. Write in the Body editor and use the toolbar. MDX allows custom components (like the porosity quiz) to be embedded, but that is done by the admin, not in the article body.
+**The CMS is loading slowly or showing errors.**
+Try a hard refresh. If the problem persists, the Netlify Identity service may be temporarily unavailable. This does not affect the live site — readers are unaffected. Contact the admin.
+
+**MDX vs Markdown — what is the difference?**
+For most contributors, no practical difference. Write in the Body editor and use the toolbar. Custom components (like quizzes) are added by the admin, not in the article body itself.
 
 ---
 
-*Questions? Contact the site admin at dgcoker2@gmail.com.*
+*Questions? Contact the site admin.*

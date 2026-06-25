@@ -1,8 +1,6 @@
 backend:
-  name: github
-  repo: GITHUB_USERNAME/naturalcurlyhair
+  name: git-gateway
   branch: main
-  base_url: https://oauth.naturalcurlyhair.co.uk
 
 publish_mode: editorial_workflow
 
@@ -21,7 +19,7 @@ collections:
     extension: mdx
     format: frontmatter
     slug: "{{slug}}"
-    preview_path: "/{{slug}}"
+    preview_path: "/hair-care/{{slug}}/"
     fields:
       - label: Title
         name: title
@@ -50,13 +48,13 @@ collections:
         name: category
         widget: string
         required: true
-        hint: "e.g. FAQ, Routine, Diagnostic, Review"
+        hint: "e.g. Method, Diagnostic, Verdict, UK context"
 
-      - label: Dek (standfirst / article summary)
+      - label: Dek (article summary shown in lists)
         name: dek
         widget: string
         required: true
-        hint: "One sentence. Appears under the title. Max ~160 characters."
+        hint: "One sentence. Appears under the title in article lists. Max ~160 characters."
 
       - label: Published date
         name: published
@@ -79,7 +77,7 @@ collections:
         name: readTime
         widget: string
         required: false
-        hint: "e.g. '6 min read'. Leave blank to calculate from word count."
+        hint: "e.g. '6 min'. Leave blank to use site default."
 
       - label: Featured
         name: featured
@@ -97,19 +95,19 @@ collections:
         name: draft
         widget: boolean
         default: true
-        hint: "True = hidden from the live site. Set to false only when ready to publish."
+        hint: "Leave as true until the article is ready to publish. The editorial workflow controls visibility — this is an additional safeguard."
 
       - label: Confidence grade
         name: confidence_grade
         widget: select
         required: false
-        hint: "Required for diagnostic articles."
+        hint: "How strong is the evidence behind this piece?"
         options:
           - { label: "High — strong evidence base", value: "high" }
           - { label: "Medium — reasonable consensus", value: "medium" }
           - { label: "Low — limited evidence, community observation", value: "low" }
 
-      - label: Contributor ID
+      - label: Contributor
         name: contributor_id
         widget: relation
         required: false
@@ -124,31 +122,31 @@ collections:
         name: heroImage
         widget: image
         required: false
-        hint: "Upload to /uploads/. Alt text is required when an image is set."
+        hint: "Alt text is required when an image is set."
 
       - label: Hero image alt text
         name: heroImageAlt
         widget: string
         required: false
-        hint: "Describe the image for screen readers. Required if hero image is set."
+        hint: "Describe the image for screen readers."
 
       - label: Hero image credit
         name: heroImageCredit
         widget: string
         required: false
-        hint: "Photographer / source credit shown beneath the image."
+        hint: "Photographer or source credit shown beneath the image."
 
       - label: Standfirst
         name: standfirst
         widget: text
         required: false
-        hint: "Longer intro shown in the hero section. 1–2 sentences."
+        hint: "Longer intro shown beneath the title. 1–2 sentences."
 
-      - label: Short answer (featured snippet)
+      - label: Short answer
         name: shortAnswer
         widget: text
         required: false
-        hint: "40–60 word direct answer used for featured snippet markup."
+        hint: "40–60 word direct answer, shown in the highlighted box at the top of the article."
 
       # ── Body ───────────────────────────────────────────────────────────────
       - label: Body
@@ -181,11 +179,15 @@ collections:
             required: false
             field: { label: Claim, name: claim, widget: string }
 
-  # ── Contributors (files collection writing to src/data/contributors.json) ──
+  # ── Contributors ────────────────────────────────────────────────────────────
+  # Writes to src/data/contributors.json as a files collection.
+  # Shape matches the existing file: id, name, role, initials, colour are the
+  # committed fields. bio, portrait, credentials, active are additive — new
+  # entries should fill them; existing placeholders may leave them blank.
   - name: contributors_data
     label: Contributors
     files:
-      - label: All Contributors
+      - label: All contributors
         name: contributors
         file: src/data/contributors.json
         fields:
@@ -198,7 +200,7 @@ collections:
                 name: id
                 widget: string
                 required: true
-                hint: "Slug format, e.g. 'amara-osei'. Used by articles to reference this contributor."
+                hint: "Slug format, e.g. 'amara-osei'. Used by articles to reference this contributor. Cannot be changed once articles reference it."
 
               - label: Name
                 name: name
@@ -209,19 +211,31 @@ collections:
                 name: role
                 widget: string
                 required: true
-                hint: "e.g. 'Trichologist, Birmingham' or 'Community contributor, Manchester'"
+                hint: "e.g. 'Trichologist, Birmingham'"
+
+              - label: Initials
+                name: initials
+                widget: string
+                required: false
+                hint: "Two letters used in the avatar circle, e.g. 'YA'. Auto-generated from name if blank."
+
+              - label: Colour
+                name: colour
+                widget: string
+                required: false
+                hint: "Hex colour for the avatar circle, e.g. '#9C7494'. Leave blank to use default."
 
               - label: Bio
                 name: bio
                 widget: text
-                required: true
+                required: false
                 hint: "Max 300 characters. Plain text, no markdown."
 
               - label: Portrait
                 name: portrait
                 widget: image
                 required: false
-                hint: "Square crop preferred. Upload to /uploads/."
+                hint: "Square crop preferred. Used in article bylines."
 
               - label: Credentials
                 name: credentials
@@ -234,4 +248,4 @@ collections:
                 name: active
                 widget: boolean
                 default: true
-                hint: "Inactive contributors are hidden from article bylines."
+                hint: "Set to false to hide this contributor from article bylines without deleting their record."
