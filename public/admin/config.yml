@@ -3,8 +3,7 @@ backend:
   proxy_url: http://localhost:8081/api/v1
   branch: main
 
-# publish_mode: editorial_workflow — Phase 2 only. Requires git-gateway backend.
-# Enabling this with the proxy backend causes API_ERROR: Unknown action unpublishedEntries on every load.
+publish_mode: editorial_workflow
 
 media_folder: "public/uploads"
 public_folder: "/uploads"
