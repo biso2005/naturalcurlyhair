@@ -1,0 +1,15 @@
+{
+  "_note": "Entries displaced from homepage_copy.json featured_editorial slot. Restore when the article is written.",
+  "archived_featured_articles": [
+    {
+      "tag": "SKIP-VERDICT",
+      "tag_colour": "skip",
+      "title": "The chelating shampoo you do not need to buy",
+      "snip": "There are two that work. One costs £6. We tell you which, and why the brand charging £28 cannot justify the gap.",
+      "href": "/hair-care/",
+      "size": "lead",
+      "_archived": "2026-06-25",
+      "_reason": "Article not yet written. Placeholder displaced by porosity-test-debunk-uk which is live."
+    }
+  ]
+}

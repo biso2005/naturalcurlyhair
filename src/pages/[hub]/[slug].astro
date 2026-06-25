@@ -87,6 +87,21 @@ const bodyHeadings = tocHeadings.map(h => ({
   >
     <AffiliateDisclosure slot="disclosure" />
 
+    {fm.standfirst && (
+      <p class="not-prose mb-6 text-taupe" style="font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:17px;line-height:1.6;">
+        {fm.standfirst}
+      </p>
+    )}
+
+    {fm.shortAnswer && (
+      <div class="not-prose mb-8 px-5 py-5" style="background:#F8F3EA;border-left:2px solid #3E2230;border-radius:2px;">
+        <p class="font-sans text-berry uppercase mb-2" style="font-size:11px;letter-spacing:0.10em;">The short answer</p>
+        <p class="text-ink" style="font-family:'Newsreader',Georgia,serif;font-size:15px;line-height:1.65;">
+          {fm.shortAnswer}
+        </p>
+      </div>
+    )}
+
     {tableRows && tableRows.length > 0 && (
       <div class="mb-10 not-prose">
         <ComparisonTable rows={tableRows} />

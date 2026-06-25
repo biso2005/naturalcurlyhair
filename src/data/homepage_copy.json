@@ -47,18 +47,18 @@
     "section_title": "Worth reading",
     "articles": [
       {
-        "tag": "SKIP-VERDICT",
-        "tag_colour": "skip",
-        "title": "The chelating shampoo you do not need to buy",
-        "snip": "There are two that work. One costs £6. We tell you which, and why the brand charging £28 cannot justify the gap.",
-        "href": "/hair-care/",
+        "tag": "METHOD",
+        "tag_colour": "method",
+        "title": "The porosity test is broken — here's what actually matters",
+        "snip": "The float test measures surface damage, not how your hair absorbs moisture. UK chemists say skip it. Here is the 30-second behaviour check that actually tells you something.",
+        "href": "/hair-care/porosity-test-debunk-uk/",
         "size": "lead"
       },
       {
         "tag": "METHOD",
         "tag_colour": "method",
-        "title": "How to do a real porosity test — not the float test",
-        "snip": "The float test measures surface damage, not porosity. Here is what actually tells you something.",
+        "title": "How to read your hair porosity: the full guide",
+        "snip": "What low, medium, and high porosity actually mean for natural and Afro hair in the UK — and how to adjust your routine accordingly.",
         "href": "/hair-care/hair-porosity-test-natural-hair-uk/",
         "size": "flank"
       },
