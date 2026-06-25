@@ -111,13 +111,14 @@ collections:
 
       - label: Contributor
         name: contributor_id
-        widget: relation
+        widget: select
         required: false
-        collection: contributors_data
-        search_fields: ["contributors.*.name"]
-        value_field: "contributors.*.id"
-        display_fields: ["contributors.*.name"]
-        hint: "Select the contributor who wrote or verified this article."
+        hint: "Select the contributor who wrote or verified this article. Add new contributors to contributors.json first, then update this list."
+        options:
+          - { label: "Yemi Adeyinka", value: "contributor-1" }
+          - { label: "Priya Okonkwo", value: "contributor-2" }
+          - { label: "Sade Mensah", value: "contributor-3" }
+          - { label: "Darren", value: "darren" }
 
       # ── Hero fields (optional) ──────────────────────────────────────────────
       - label: Hero image
