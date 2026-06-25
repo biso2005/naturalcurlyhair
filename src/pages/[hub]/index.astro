@@ -6,7 +6,9 @@ import ArticleCard from '../../components/ArticleCard.astro'
 
 export async function getStaticPaths() {
   const allHubs     = await getCollection('hubs')
-  const allArticles = await getCollection('articles')
+  const allArticles = await getCollection('articles', ({ data }) =>
+    import.meta.env.PROD ? data.draft !== true : true
+  )
 
   return allHubs.map(hub => {
     const spokes = allArticles.filter(a => a.data.hub === hub.data.hub)

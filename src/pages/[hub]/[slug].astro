@@ -10,7 +10,9 @@ import VerdictCallout from '../../components/VerdictCallout.astro'
 import ProductCard from '../../components/ProductCard.astro'
 
 export async function getStaticPaths() {
-  const allArticles = await getCollection('articles')
+  const allArticles = await getCollection('articles', ({ data }) =>
+    import.meta.env.PROD ? data.draft !== true : true
+  )
   return allArticles.map(article => ({
     params: { hub: article.data.hub, slug: article.id },
     props:  { article },

@@ -36,13 +36,11 @@ backend:
   name: proxy
   proxy_url: http://localhost:8081/api/v1
   branch: main
-
-# publish_mode: editorial_workflow — commented out in Phase 1.
-# The proxy backend does not support unpublishedEntries, causing
-# API_ERROR: Unknown action unpublishedEntries on every collection load.
 ```
 
-**Phase 2 (replace backend block and uncomment editorial workflow):**
+`publish_mode: editorial_workflow` is absent from Phase 1. See "Editorial workflow UI — Phase 2 activation" below for why.
+
+**Phase 2 (replace backend block and add editorial workflow):**
 ```yaml
 backend:
   name: git-gateway
@@ -51,7 +49,7 @@ backend:
 publish_mode: editorial_workflow
 ```
 
-Remove the `proxy_url` line. Uncomment `publish_mode: editorial_workflow`. Everything else in `config.yml` stays unchanged.
+Remove the `proxy_url` line. Add `publish_mode: editorial_workflow`. Everything else in `config.yml` stays unchanged.
 
 ### 2. `public/admin/index.html` — add Netlify Identity widget
 
@@ -128,6 +126,18 @@ Option B — Use a Decap folder collection: each contributor is a separate `src/
 Option C — Leave contributors as manual-only and remove the Decap collection stub: accept that contributors are git-managed, not CMS-managed. Works fine until contributor count makes git editing friction.
 
 The acceptance gate line "Contributors collection edits write correctly to `src/data/contributors.json`" cannot be checked green until one of these options is implemented.
+
+---
+
+## Editorial workflow UI — Phase 2 activation
+
+Decap's editorial workflow UI (the Draft / In Review / Ready status control) requires git branch state management: saving an article in "Draft" state creates a `cms/articles/{slug}` branch in the git repository; moving it to "Ready" updates that branch; publishing merges it to `main`.
+
+The local proxy backend (`decap-server`) operates against the working tree directly — it does not create git branches. Running `publish_mode: editorial_workflow` against the proxy produces undefined behaviour: either API errors on collection load, or partial UI degradation (Save button with no status control visible). This was confirmed during Phase 1 testing.
+
+**Phase 1 draft control:** The `draft: true/false` field in every article's frontmatter is the Phase 1 workflow control. Articles with `draft: true` are excluded from the production build by the Astro collection filter in `[hub]/index.astro` and `[hub]/[slug].astro`. The Decap article form shows this field with a clear hint; the operator sets it to `false` when the article is ready to publish.
+
+**Phase 2:** Adding `publish_mode: editorial_workflow` alongside the `git-gateway` backend switch activates the full CMS workflow UI automatically. No schema change is needed. The `draft` frontmatter field remains in the schema as a fallback; articles in the `git-gateway` editorial workflow are additionally controlled by CMS branch state.
 
 ---
 

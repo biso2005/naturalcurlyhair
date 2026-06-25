@@ -3,8 +3,6 @@ backend:
   proxy_url: http://localhost:8081/api/v1
   branch: main
 
-publish_mode: editorial_workflow
-
 media_folder: "public/uploads"
 public_folder: "/uploads"
 
@@ -96,7 +94,7 @@ collections:
         name: draft
         widget: boolean
         default: true
-        hint: "Leave as true until the article is ready to publish."
+        hint: "Set to false when this article is ready to publish. While true, the article is excluded from the public site."
 
       - label: Confidence grade
         name: confidence_grade
