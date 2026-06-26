@@ -2,7 +2,7 @@
   "hair_problems": {
     "hero": {
       "kicker": "Hair problems",
-      "title": "Five things that go wrong with natural and Afro hair",
+      "title": "What goes wrong with natural and Afro hair",
       "standfirst": "What each one looks like, what usually causes it, and the latest pieces on each."
     },
     "sections": [
@@ -73,8 +73,8 @@
       }
     ],
     "catchall": {
-      "kicker": "Not one of these five?",
-      "body": "These are the most common problems but they aren't the only ones. Browse the full hair-care library to find what you're looking for.",
+      "kicker": "Not seeing your problem?",
+      "body": "These are the most common ones, but they aren't the only ones. Browse the full hair-care library to find what you're looking for.",
       "cta": "Browse all articles →",
       "cta_href": "/hair-care/"
     }
