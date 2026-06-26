@@ -8,21 +8,13 @@ interface Props {
 }
 const { title } = Astro.props
 
+const curlFamilies = [
+  { label: 'Waves', types: [{ label: '2A', href: '/2a/' }, { label: '2B', href: '/2b/' }, { label: '2C', href: '/2c/' }] },
+  { label: 'Curls', types: [{ label: '3A', href: '/3a/' }, { label: '3B', href: '/3b/' }, { label: '3C', href: '/3c/' }] },
+  { label: 'Coils', types: [{ label: '4A', href: '/4a/' }, { label: '4B', href: '/4b/' }, { label: '4C', href: '/4c/' }] },
+]
+
 const footerColumns = [
-  {
-    heading: 'By curl type',
-    links: [
-      { label: '2A', href: '/2a/' },
-      { label: '2B', href: '/2b/' },
-      { label: '2C', href: '/2c/' },
-      { label: '3A', href: '/3a/' },
-      { label: '3B', href: '/3b/' },
-      { label: '3C', href: '/3c/' },
-      { label: '4A', href: '/4a/' },
-      { label: '4B', href: '/4b/' },
-      { label: '4C', href: '/4c/' },
-    ],
-  },
   {
     heading: 'Explore',
     links: [
@@ -78,6 +70,35 @@ const footerColumns = [
       </a>
 
       <div class="grid grid-cols-2 md:grid-cols-4 gap-10 mb-16">
+
+        <!-- By curl type — grouped by family -->
+        <div>
+          <p class="font-mono text-xs tracking-wider uppercase text-cream/45 mb-4">
+            By curl type
+          </p>
+          <div class="flex flex-col" style="gap:10px;">
+            {curlFamilies.map(family => (
+              <div>
+                <p class="font-sans mb-1" style="font-size:10px;color:#6E6056;">{family.label}</p>
+                <p class="font-sans" style="font-size:0.875rem;">
+                  {family.types.map((t, i) => (
+                    <>
+                      <a
+                        href={t.href}
+                        class="text-cream/75 visited:text-cream/75 hover:text-cream transition-colors duration-150 no-underline"
+                      >{t.label}</a>
+                      {i < family.types.length - 1 && (
+                        <span class="text-cream/30" style="margin:0 5px;">·</span>
+                      )}
+                    </>
+                  ))}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Remaining columns — generic -->
         {footerColumns.map(col => (
           <div>
             <p class="font-mono text-xs tracking-wider uppercase text-cream/45 mb-4">
@@ -95,6 +116,7 @@ const footerColumns = [
             </ul>
           </div>
         ))}
+
       </div>
 
       <p class="font-sans text-xs text-cream/45 border-t border-cream/10 pt-8">
