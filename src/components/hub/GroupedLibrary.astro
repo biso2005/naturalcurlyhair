@@ -30,27 +30,28 @@ for (const a of articles) {
 // Determine render order from group_labels key order, excluding _default
 const labelMap: Record<string, string> = copy.group_labels[groupBy] ?? {}
 const orderedKeys = Object.keys(labelMap).filter(k => k !== '_default' && grouped.has(k))
-// Append _default if present
 if (grouped.has('_default')) orderedKeys.push('_default')
 
 // Build group metadata for nav
 const groupMeta = orderedKeys.map(key => {
   const label = key === '_default'
-    ? (labelMap['_default'] ?? copy.empty_states.all_uncategorised)
+    ? (copy.empty_states.all_uncategorised)
     : (labelMap[key] ?? key)
   return { id: `group-${key}`, label }
 })
 
 const groupCount = orderedKeys.length
 const groupsLabel = copy.groups_label.replace('{n}', String(groupCount))
+
+function groupLabel(key: string): string {
+  if (key === '_default') return copy.empty_states.all_uncategorised
+  return labelMap[key] ?? key
+}
 ---
 
 <!-- Article count strip -->
-<div
-  class="border-b py-3 px-6 max-w-hub mx-auto"
-  style="border-color:rgba(44,29,23,0.14);"
->
-  <span class="font-sans" style="font-size:11px;color:#A2384B;">
+<div class="border-b py-3 px-6 max-w-hub mx-auto" style="border-color:rgba(44,29,23,0.14);">
+  <span class="font-sans uppercase" style="font-size:11px;color:#A2384B;">
     {articles.length} {copy.article_count_suffix}
   </span>
   {groupCount > 1 && (
@@ -60,36 +61,28 @@ const groupsLabel = copy.groups_label.replace('{n}', String(groupCount))
   )}
 </div>
 
-<!-- Mobile sticky group navigation -->
 {groupMeta.length > 1 && <StickyGroupNav groups={groupMeta} />}
 
-<!-- Article groups -->
-<div class="max-w-hub mx-auto">
+<div class="max-w-hub mx-auto" id="grouped-library">
   {orderedKeys.map(key => {
     const groupArticles = grouped.get(key) ?? []
     if (groupArticles.length === 0) return null
-    const label = key === '_default'
-      ? (labelMap['_default'] ?? copy.empty_states.all_uncategorised)
-      : (labelMap[key] ?? key)
+    const label = groupLabel(key)
     const groupId = `group-${key}`
     const previewArticles = groupArticles.slice(0, 3)
     const hasMore = groupArticles.length > 3
+    const allGroupArticles = groupArticles
     return (
-      <section
-        id={groupId}
-        class="border-t px-6 py-10"
-        style="border-color:rgba(44,29,23,0.14);"
-      >
+      <section id={groupId} class="border-t px-6 py-10" style="border-color:rgba(44,29,23,0.14);">
         <div class="flex items-baseline justify-between mb-6">
-          <h2
-            style="font-family:'Fraunces Variable',Georgia,serif;font-size:clamp(1.125rem,2vw,1.25rem);font-weight:400;font-variation-settings:'opsz' 20,'SOFT' 10;color:#2C1D17;"
-          >{label}</h2>
-          <span class="font-sans" style="font-size:11px;color:#6E6056;">
-            {groupArticles.length}
-          </span>
+          <h2 style="font-family:'Fraunces Variable',Georgia,serif;font-size:clamp(1.125rem,2vw,1.25rem);font-weight:400;font-variation-settings:'opsz' 20,'SOFT' 10;color:#2C1D17;">
+            {label}
+          </h2>
+          <span class="font-sans" style="font-size:11px;color:#6E6056;">{groupArticles.length}</span>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- Preview: first 3 -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" data-group-preview={groupId}>
           {previewArticles.map(a => (
             <ArticleCard
               title={a.data.title}
@@ -104,18 +97,53 @@ const groupsLabel = copy.groups_label.replace('{n}', String(groupCount))
           ))}
         </div>
 
+        <!-- Overflow: articles 4+ hidden until expanded -->
+        {hasMore && (
+          <div
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4"
+            data-group-overflow={groupId}
+            style="display:none;"
+          >
+            {allGroupArticles.slice(3).map(a => (
+              <ArticleCard
+                title={a.data.title}
+                dek={a.data.dek}
+                href={`/${hubId}/${a.id}`}
+                tag={a.data.category}
+                readTime={a.data.readTime}
+                heroImage={a.data.heroImage}
+                hubId={hubId}
+                variant="grid"
+              />
+            ))}
+          </div>
+        )}
+
         {hasMore && (
           <p class="mt-5">
-            <a
-              href={`#${groupId}`}
-              class="font-sans visited:text-berry"
+            <button
+              class="font-sans bg-transparent border-none p-0 cursor-pointer"
               style="font-size:11px;color:#A2384B;text-decoration:none;"
+              data-expand-btn={groupId}
             >
-              {copy.see_all_prefix} {groupArticles.length} {label.toLowerCase()} {copy.see_all_suffix}
-            </a>
+              {copy.see_all_prefix} {groupArticles.length} {copy.see_all_suffix}
+            </button>
           </p>
         )}
       </section>
     )
   })}
 </div>
+
+<script>
+  // Expand group inline on click — shows overflow cards, hides the button
+  document.querySelectorAll('[data-expand-btn]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const groupId = btn.getAttribute('data-expand-btn')
+      const overflow = document.querySelector(`[data-group-overflow="${groupId}"]`) as HTMLElement | null
+      if (overflow) overflow.style.display = 'grid'
+      const btnEl = btn as HTMLElement
+      btnEl.style.display = 'none'
+    })
+  })
+</script>
