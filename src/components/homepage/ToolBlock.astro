@@ -1,0 +1,97 @@
+---
+interface Props {
+  copy: {
+    heading: string
+    body: string
+    tool_label: string
+    input_placeholder: string
+    cta_primary: string
+    cta_alt: string
+    cta_alt_href: string
+  }
+}
+
+const { copy } = Astro.props
+---
+
+<section class="px-6 py-8" style="background:#F1E8D9;">
+  <div class="max-w-hub mx-auto">
+
+    <!-- Desktop: 2-column / Mobile: stacked, image first -->
+    <div class="flex flex-col md:grid md:grid-cols-2 gap-6 md:items-center">
+
+      <!-- Image column -->
+      <div
+        class="relative overflow-hidden order-1"
+        style="border-radius:2px;padding-top:80%;background:#6E6056;"
+      >
+        <img
+          src="/images/placeholders/tool-section.webp"
+          alt=""
+          aria-hidden="true"
+          class="absolute inset-0 w-full h-full object-cover"
+          loading="lazy"
+          decoding="async"
+          onerror="this.style.display='none'"
+        />
+        <!-- Spiral mark top-right -->
+        <svg
+          class="absolute top-3 right-3"
+          width="22" height="22" viewBox="0 0 22 22"
+          fill="none" aria-hidden="true"
+        >
+          <circle cx="11" cy="11" r="10" stroke="white" stroke-width="1" stroke-opacity="0.4" />
+          <circle cx="11" cy="11" r="5"  stroke="white" stroke-width="1" stroke-opacity="0.4" />
+        </svg>
+      </div>
+
+      <!-- Text + tool card column -->
+      <div class="order-2 flex flex-col justify-center">
+        <h2
+          class="text-ink mb-3"
+          style="font-family:'Fraunces Variable',Georgia,serif;font-size:20px;font-weight:400;letter-spacing:-0.018em;line-height:1.2;font-variation-settings:'opsz' 20,'SOFT' 10;"
+        >
+          {copy.heading}
+        </h2>
+        <p
+          class="text-taupe mb-6"
+          style="font-family:'Newsreader',Georgia,serif;font-size:13px;line-height:1.6;"
+        >
+          {copy.body}
+        </p>
+
+        <!-- Tool card -->
+        <div class="px-4 py-4" style="background:#3E2230;border-radius:2px;">
+          <p class="font-sans uppercase mb-2" style="font-size:11px;letter-spacing:0.10em;color:rgba(248,243,234,0.60);">
+            {copy.tool_label}
+          </p>
+          <form action="/tool/postcode" method="get" class="flex flex-col gap-3">
+            <input
+              type="text"
+              name="p"
+              placeholder={copy.input_placeholder}
+              class="font-sans text-ink bg-cream px-4 py-3 w-full focus:outline-none focus:ring-2 focus:ring-berry placeholder:text-taupe"
+              style="font-size:15px;border-radius:2px;"
+              aria-label="Postcode"
+            />
+            <button
+              type="submit"
+              class="font-sans font-medium text-ink bg-cream px-5 py-3 w-full hover:bg-cream-2 transition-colors duration-150"
+              style="font-size:15px;border-radius:2px;"
+            >
+              {copy.cta_primary}
+            </button>
+          </form>
+          <a
+            href={copy.cta_alt_href}
+            class="font-sans hover:text-cream transition-colors duration-150 no-underline block mt-2"
+            style="font-size:12px;color:rgba(248,243,234,0.60);"
+          >
+            {copy.cta_alt}
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

@@ -1,37 +1,13 @@
 ---
 const navLinks = [
-  { label: 'Curl types',      href: '/curl-types', dropdown: true },
-  { label: 'Hair Care',       href: '/hair-care' },
-  { label: 'Products',        href: '/products' },
-  { label: 'Parents',         href: '/parents' },
+  { label: 'Hair problems',   href: '/hair-problems/' },
+  { label: 'Hair care',       href: '/hair-care/' },
+  { label: 'Reviews',         href: '/reviews/' },
+  { label: 'Parents',         href: '/parents/' },
+  { label: 'About',           href: '/faqs/' },
 ]
 
-const curlGroups = [
-  {
-    label: 'Waves',
-    hubs: [
-      { id: '2A', desc: 'Loose waves',       href: '/2a', dot: 'bg-hub-2a' },
-      { id: '2B', desc: 'Defined waves',      href: '/2b', dot: 'bg-hub-2b' },
-      { id: '2C', desc: 'Wavy-curly',         href: '/2c', dot: 'bg-hub-2c' },
-    ],
-  },
-  {
-    label: 'Curls',
-    hubs: [
-      { id: '3A', desc: 'Loose curls',        href: '/3a', dot: 'bg-hub-3a' },
-      { id: '3B', desc: 'Springy ringlets',   href: '/3b', dot: 'bg-hub-3b' },
-      { id: '3C', desc: 'Tight corkscrews',   href: '/3c', dot: 'bg-hub-3c' },
-    ],
-  },
-  {
-    label: 'Coils',
-    hubs: [
-      { id: '4A', desc: 'Soft coils',         href: '/4a', dot: 'bg-hub-4a' },
-      { id: '4B', desc: 'Z-pattern coils',    href: '/4b', dot: 'bg-hub-4b' },
-      { id: '4C', desc: 'Tight coils',        href: '/4c', dot: 'bg-hub-4c' },
-    ],
-  },
-]
+
 ---
 
 <header class="bg-cream border-b border-line sticky top-0 z-40">
@@ -45,40 +21,11 @@ const curlGroups = [
     <!-- Desktop links -->
     <ul class="hidden md:flex items-center gap-8 list-none m-0 p-0">
       {navLinks.map(link => (
-        <li class={link.dropdown ? 'relative' : ''}>
+        <li>
           <a href={link.href}
-             class="font-sans text-sm text-ink visited:text-ink hover:text-berry transition-colors duration-150 no-underline inline-flex items-center gap-1"
-             aria-haspopup={link.dropdown ? 'true' : undefined}
-             aria-expanded={link.dropdown ? 'false' : undefined}
-             data-dropdown-trigger={link.dropdown ? 'true' : undefined}>
-            {link.label}{link.dropdown && <span aria-hidden="true">▾</span>}
+             class="font-sans text-sm text-ink visited:text-ink hover:text-berry transition-colors duration-150 no-underline">
+            {link.label}
           </a>
-
-          {link.dropdown && (
-            <div id="curl-types-dropdown"
-                 role="region"
-                 aria-label="Curl types"
-                 class="hidden absolute top-full left-0 mt-2 bg-paper border border-line rounded-lg shadow-md p-5 w-64">
-              {curlGroups.map((group, gi) => (
-                <div>
-                  {gi > 0 && <hr class="border-0 border-t border-line my-4" />}
-                  <p class="font-sans text-[10px] font-bold tracking-wider uppercase text-taupe mb-3">{group.label}</p>
-                  <ul class="list-none m-0 p-0 flex flex-col gap-1.5">
-                    {group.hubs.map(hub => (
-                      <li>
-                        <a href={hub.href}
-                           class="font-sans text-sm text-ink visited:text-ink hover:text-berry transition-colors duration-150 no-underline flex items-center gap-2">
-                          <span class={`block w-2.5 h-2.5 rounded-full flex-shrink-0 ${hub.dot}`}></span>
-                          <span class="font-medium">{hub.id}</span>
-                          <span class="text-taupe font-normal">— {hub.desc}</span>
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          )}
         </li>
       ))}
     </ul>
@@ -122,7 +69,7 @@ const curlGroups = [
 
   <nav class="flex-1 overflow-y-auto px-6 py-8" aria-label="Mobile navigation">
     <ul class="list-none m-0 p-0 flex flex-col gap-1">
-      {navLinks.filter(l => !l.dropdown).map(link => (
+      {navLinks.map(link => (
         <li>
           <a href={link.href}
              class="font-sans text-lg text-ink visited:text-ink hover:text-berry transition-colors duration-150 no-underline block py-3 border-b border-line">
@@ -131,33 +78,6 @@ const curlGroups = [
         </li>
       ))}
     </ul>
-
-    <div class="mt-6">
-      <p class="font-sans text-lg text-ink block py-3 border-b border-line">Curl types</p>
-      {curlGroups.map(group => (
-        <div class="mt-5">
-          <p class="font-mono text-xs tracking-wider uppercase text-taupe mb-3">{group.label}</p>
-          <ul class="list-none m-0 p-0 flex flex-col gap-1">
-            {group.hubs.map(hub => (
-              <li>
-                <a href={hub.href}
-                   class={`font-sans text-base text-ink visited:text-ink hover:text-berry transition-colors duration-150 no-underline flex items-center gap-3 py-2.5 border-b border-line`}>
-                  <span class={`block w-2.5 h-2.5 rounded-full flex-shrink-0 ${hub.dot}`}></span>
-                  {hub.id}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
-    </div>
-
-    <div class="mt-6 pt-2 border-t border-line">
-      <a href="/parents"
-         class="font-sans text-lg text-ink visited:text-ink hover:text-berry transition-colors duration-150 no-underline block py-3 border-b border-line">
-        For parents
-      </a>
-    </div>
   </nav>
 </div>
 

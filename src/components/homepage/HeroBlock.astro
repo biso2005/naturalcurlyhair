@@ -4,28 +4,18 @@ interface Props {
     kicker: string
     headline: string
     tagline: string
-    tool: {
-      label: string
-      title: string
-      input_placeholder: string
-      cta_primary: string
-      cta_alt: string
-    }
   }
 }
 
 const { copy } = Astro.props
-
-const heroSrc = '/images/placeholders/hero.webp'
 ---
 
 <!-- Full-bleed hero: image fills width, text overlaid -->
 <section class="relative w-full overflow-hidden" style="background:#2C1D17;">
 
-  <!-- Image + overlay layer -->
   <div class="relative w-full" style="min-height:480px;">
     <img
-      src={heroSrc}
+      src="/images/placeholders/hero.webp"
       alt=""
       aria-hidden="true"
       class="absolute inset-0 w-full h-full object-cover"
@@ -58,10 +48,10 @@ const heroSrc = '/images/placeholders/hero.webp'
       <circle cx="14" cy="14" r="6"  stroke="white" stroke-width="1" stroke-opacity="0.4" />
     </svg>
 
-    <!-- Desktop: text + tool, left-anchored, vertically centred -->
+    <!-- Desktop: text, left-anchored, vertically centred -->
     <div
       class="hidden md:flex flex-col justify-center absolute inset-y-0 left-0 px-10 lg:px-16"
-      style="max-width:500px;min-height:600px;"
+      style="max-width:440px;min-height:600px;"
     >
       <p class="font-sans uppercase mb-4" style="font-size:11px;letter-spacing:0.10em;color:rgba(248,243,234,0.70);">
         {copy.kicker}
@@ -73,44 +63,10 @@ const heroSrc = '/images/placeholders/hero.webp'
         {copy.headline}
       </h1>
       <p
-        class="mb-8"
         style="font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:17px;line-height:1.45;color:rgba(248,243,234,0.85);"
       >
         {copy.tagline}
       </p>
-
-      <div class="flex flex-col gap-4 px-5 py-6" style="background:#3E2230;border-radius:2px;max-width:360px;">
-        <p class="font-sans uppercase" style="font-size:11px;letter-spacing:0.10em;color:rgba(248,243,234,0.60);">
-          {copy.tool.label}
-        </p>
-        <p style="font-family:'Fraunces Variable',Georgia,serif;font-size:17px;font-weight:400;line-height:1.25;font-variation-settings:'opsz' 18,'SOFT' 10;color:#F8F3EA;">
-          {copy.tool.title}
-        </p>
-        <form action="/tool/postcode" method="get" class="flex flex-col gap-3">
-          <input
-            type="text"
-            name="p"
-            placeholder={copy.tool.input_placeholder}
-            class="font-sans text-ink bg-cream px-4 py-3 w-full focus:outline-none focus:ring-2 focus:ring-berry placeholder:text-taupe"
-            style="font-size:15px;border-radius:2px;"
-            aria-label="Postcode"
-          />
-          <button
-            type="submit"
-            class="font-sans font-medium text-ink bg-cream px-5 py-3 hover:bg-cream-2 transition-colors duration-150"
-            style="font-size:15px;border-radius:2px;"
-          >
-            {copy.tool.cta_primary}
-          </button>
-        </form>
-        <a
-          href="/tool/"
-          class="font-sans hover:text-cream transition-colors duration-150 no-underline"
-          style="font-size:12px;color:rgba(248,243,234,0.60);"
-        >
-          {copy.tool.cta_alt}
-        </a>
-      </div>
     </div>
 
     <!-- Mobile: text anchored to bottom of image -->
@@ -128,40 +84,6 @@ const heroSrc = '/images/placeholders/hero.webp'
         {copy.tagline}
       </p>
     </div>
-  </div>
-
-  <!-- Mobile: tool card below image -->
-  <div class="md:hidden px-5 py-6" style="background:#3E2230;">
-    <p class="font-sans uppercase mb-3" style="font-size:11px;letter-spacing:0.10em;color:rgba(248,243,234,0.60);">
-      {copy.tool.label}
-    </p>
-    <p class="mb-4" style="font-family:'Fraunces Variable',Georgia,serif;font-size:17px;font-weight:400;line-height:1.25;font-variation-settings:'opsz' 18,'SOFT' 10;color:#F8F3EA;">
-      {copy.tool.title}
-    </p>
-    <form action="/tool/postcode" method="get" class="flex flex-col gap-3">
-      <input
-        type="text"
-        name="p"
-        placeholder={copy.tool.input_placeholder}
-        class="font-sans text-ink bg-cream px-4 py-3 w-full focus:outline-none focus:ring-2 focus:ring-berry placeholder:text-taupe"
-        style="font-size:15px;border-radius:2px;"
-        aria-label="Postcode"
-      />
-      <button
-        type="submit"
-        class="font-sans font-medium text-ink bg-cream px-5 py-3 hover:bg-cream-2 transition-colors duration-150"
-        style="font-size:15px;border-radius:2px;"
-      >
-        {copy.tool.cta_primary}
-      </button>
-    </form>
-    <a
-      href="/tool/"
-      class="font-sans hover:text-cream transition-colors duration-150 no-underline block mt-3"
-      style="font-size:12px;color:rgba(248,243,234,0.60);"
-    >
-      {copy.tool.cta_alt}
-    </a>
   </div>
 
 </section>

@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import copy from '../data/footer_pages_copy.json'
+
+const page = copy['faqs']
+---
+
+<BaseLayout title="FAQs — naturalcurlyhair">
+  <div style="background:#F8F3EA;min-height:100vh;">
+    <div class="mx-auto px-6 py-16" style="max-width:680px;">
+
+      <h1
+        class="text-ink mb-5"
+        style="font-family:'Fraunces Variable',Georgia,serif;font-size:34px;font-weight:400;line-height:1.15;font-variation-settings:'opsz' 36,'SOFT' 10;"
+      >
+        {page.title}
+      </h1>
+
+      <p
+        class="text-taupe mb-12"
+        style="font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:17px;line-height:1.55;"
+      >
+        {page.standfirst}
+      </p>
+
+      {page.sections.map(section => (
+        <section id={section.id} class="pt-8 pb-6" style="border-top:1px solid rgba(44,29,23,0.14);">
+          <h2
+            class="text-ink mb-4"
+            style="font-family:'Fraunces Variable',Georgia,serif;font-size:20px;font-weight:400;line-height:1.25;font-variation-settings:'opsz' 20,'SOFT' 10;"
+          >
+            {section.question}
+          </h2>
+          {section.answer.split('\n\n').map(para => (
+            <p
+              class="text-ink mb-4"
+              style="font-family:'Newsreader',Georgia,serif;font-size:15px;line-height:1.7;"
+            >
+              {para}
+            </p>
+          ))}
+        </section>
+      ))}
+
+    </div>
+  </div>
+</BaseLayout>

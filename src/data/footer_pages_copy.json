@@ -1,4 +1,71 @@
 {
+  "faqs": {
+    "title": "FAQs",
+    "standfirst": "Questions about how the site works, how we test, and how we make money.",
+    "sections": [
+      {
+        "id": "who-runs-this",
+        "question": "Who runs this site?",
+        "answer": "NaturalCurly is a small independent editorial site. It's run by a single editor, based in London. There is no team, no investor, no brand parent. The editorial decisions — what to test, what verdict to give, what to say when the evidence is thin — are made by one person who has natural Afro-textured hair, no product to sell, and a specific frustration with how unreliable most natural-hair advice is for the UK context."
+      },
+      {
+        "id": "how-we-make-money",
+        "question": "How do you make money?",
+        "answer": "Affiliate links, declared on every page where they appear. When you buy a product through a link on this site, we may earn a small commission from the retailer at no extra cost to you. Retailers include Amazon UK, Boots, LookFantastic, Cult Beauty, and others via the Awin network. The price you pay is the same as if you'd visited the retailer directly.\n\nThat is the only commercial model on this site. No sponsored posts, no paid placements, no gifted products, no brand partnerships, no own-brand products, no subscription box."
+      },
+      {
+        "id": "how-we-review",
+        "question": "Why should I trust your verdicts?",
+        "answer": "The verdict on any product is decided editorially, before affiliate links are added, by the editor who has not seen the commission rates for the products being reviewed. That's the rule that protects everything. We tilt no verdict toward a payout. The day we did would be the day we started spending the trust we're monetising. There is no version of the site where that's a worthwhile trade.\n\nWhat that looks like in practice: we buy what we test. Products are bought through normal retail channels; PR samples are declined. No sponsored content, ever. No gifted reviews — if we recommend a product, we paid for it. The credibility of the recommendations depends on having nothing to sell.\n\nWe also don't use AI-generated content for articles, tool outputs, or any reader-facing copy. We use AI tools in the production process the same way a writer might use an editor — the reader never sees that, and the reader never sees AI-written prose."
+      },
+      {
+        "id": "how-we-test",
+        "question": "How do you test products?",
+        "answer": "Eight weeks minimum, in London, in the operator's home. Hard water area — Thames Water, calcium carbonate around 280 mg/L, comfortably in the 'very hard' band by UK water company classification. This matters because most product reviews online were done in soft-water environments where the same product behaves differently. A leave-in that performs well in Manchester (around 60 mg/L) may flake within hours in London.\n\nTest window: eight weeks minimum. Most product issues emerge between weeks three and six — initial use often goes well, then buildup, dryness, or reversion sets in. We don't publish first impressions.\n\nWe don't extrapolate from one hair type to another. If we tested a product on 4B hair, the verdict is for 4B hair."
+      },
+      {
+        "id": "free-products",
+        "question": "Do you accept free products from brands?",
+        "answer": "No. We buy what we test through normal retail channels. PR samples and gifted products are declined. The reason isn't virtue signalling — it's that accepting free products from brands creates a structural conflict that's very difficult to think around, even with the best intentions. We remove the conflict at the source."
+      },
+      {
+        "id": "sponsored-content",
+        "question": "Do you run sponsored content?",
+        "answer": "No, ever. No sponsored posts, no paid placements, no paid features, no paid partnerships of any kind. The affiliate model is the only commercial model on the site, and it's declared on every page where it applies."
+      },
+      {
+        "id": "disagreement",
+        "question": "What if I disagree with a verdict?",
+        "answer": "Good. Tell us. If a verdict is wrong, or a piece of advice doesn't match your experience, the Contact page is the right place to say so. Include the article URL and the specific thing you'd like us to look at. We read every correction. If we agree, we update the piece and note what changed at the bottom of the article."
+      },
+      {
+        "id": "medical",
+        "question": "Do you diagnose hair conditions?",
+        "answer": "No. We don't diagnose, prescribe, or replace a clinician. Where symptoms suggest a medical issue — scalp conditions, hair loss patterns, infection — we route you to a GP, trichologist, or dermatologist. The hair advice and the medical advice run in parallel; the hair advice never replaces the medical advice."
+      },
+      {
+        "id": "contact",
+        "question": "How do I get in touch?",
+        "answer": "The Contact page has everything. We read everything; we don't reply to everything. If you don't hear back within two weeks, assume we read it and didn't have anything useful to add."
+      },
+      {
+        "id": "newsletter",
+        "question": "Why don't you have a newsletter?",
+        "answer": "We don't have a newsletter in the conventional sense — weekly roundups, new-article emails, or promotional sends. If you save a diagnostic profile, you may receive one follow-up email at 14 days asking whether the recommendation helped. That's it. We don't think most people want more email; we think they want the right answer for their specific situation."
+      },
+      {
+        "id": "audience",
+        "question": "Is this site for me?",
+        "answer": "If you have UK natural curly or Afro-textured hair — anywhere from 2C to 4C — and you're trying to work out why your routine isn't working, then yes. The site is built around UK conditions: hard water, the indoor heating season, the specific product landscape available here. It is not a generic curly-hair site and it is not aimed at the US market. If you have wavy hair below 2C, the information may not be relevant to your situation."
+      },
+      {
+        "id": "confidence-grading",
+        "question": "What does 'confidence-graded' mean?",
+        "answer": "Every claim on the site signals how sure we are. Some things are well-established — hard water deposits minerals that block moisture absorption. Some things are described, not claimed — the standard first move most curl specialists recommend. Some things are contested — the float test, for example, which is widely repeated but not supported by the chemists or trichologists we trust. Some things we don't know, and we say so.\n\nWhen you see 'confidence: high' next to a piece, the evidence is strong and the position is conservative. When you see 'confidence: low' or no confidence claim at all, we're working with thin data and we want you to know that before you act on the advice."
+      }
+    ]
+  },
+
   "how-we-review": {
     "kicker": "EDITORIAL PROCESS",
     "title": "How we review",

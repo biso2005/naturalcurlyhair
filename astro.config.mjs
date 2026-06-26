@@ -7,6 +7,10 @@ import tailwind from '@astrojs/tailwind';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://naturalcurlyhair.co.uk',
+  redirects: {
+    '/how-we-review/': '/faqs/#how-we-review',
+    '/how-we-test/':   '/faqs/#how-we-test',
+  },
   integrations: [
     tailwind({ configFile: './tailwind.config.cjs' }),
     mdx(),

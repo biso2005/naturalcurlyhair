@@ -3,13 +3,9 @@ interface Props {
   copy: {
     eyebrow: string
     timestamp: string
-    cta_label: string
   }
   panel: {
     humidity: number
-    proseBefore: string
-    proseAfter: string
-    ctaHref: string
   }
 }
 
@@ -31,44 +27,28 @@ const { copy, panel } = Astro.props
   style="background:#F1E8D9;"
 >
   <div class="max-w-hub mx-auto">
-    <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-5">
 
-      <!-- Left: label + prose -->
-      <div class="flex-1">
-        <div class="flex items-center gap-2 mb-1">
-          <span
-            class="pulse-dot inline-block flex-shrink-0"
-            style="width:7px;height:7px;background:#A2384B;border-radius:50%;"
-            aria-hidden="true"
-          ></span>
-          <p class="font-sans text-ink uppercase" style="font-size:11px;letter-spacing:0.10em;">
-            {copy.eyebrow}
-          </p>
-        </div>
-        <p class="font-sans text-taupe mb-3" style="font-size:12px;">
-          {copy.timestamp}
-        </p>
-        <p
-          class="text-ink max-w-prose"
-          style="font-family:'Newsreader',Georgia,serif;font-size:15px;line-height:1.6;"
-        >
-          {panel.proseBefore}{' '}
-          <strong style="font-size:22px;font-style:italic;">{panel.humidity}%</strong>
-          {' '}{panel.proseAfter}
-        </p>
-      </div>
-
-      <!-- Right: CTA -->
-      <div class="flex-shrink-0 md:pt-8">
-        <a
-          href={panel.ctaHref}
-          class="font-sans text-berry visited:text-berry hover:text-berry-dark transition-colors duration-150 no-underline"
-          style="font-size:12px;"
-        >
-          {copy.cta_label}
-        </a>
-      </div>
-
+    <div class="flex items-center gap-2 mb-1">
+      <span
+        class="pulse-dot inline-block flex-shrink-0"
+        style="width:7px;height:7px;background:#A2384B;border-radius:50%;"
+        aria-hidden="true"
+      ></span>
+      <p class="font-sans text-ink uppercase" style="font-size:11px;letter-spacing:0.10em;">
+        {copy.eyebrow}
+      </p>
     </div>
+    <p class="font-sans text-taupe mb-3" style="font-size:12px;">
+      {copy.timestamp}
+    </p>
+    <p
+      class="text-ink max-w-prose"
+      style="font-family:'Newsreader',Georgia,serif;font-size:15px;line-height:1.6;"
+    >
+      Indoor relative humidity across the UK is sitting around{' '}
+      <strong style="font-size:18px;font-style:italic;">{panel.humidity}%</strong>
+      {' '}right now — well below the threshold where glycerin-based products start working with your hair instead of against it. If your wash-and-go has been reverting faster than usual, or your ends feel papery by day two, this is probably why.
+    </p>
+
   </div>
 </section>

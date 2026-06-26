@@ -1,56 +1,55 @@
 {
   "hero": {
-    "kicker": "UK NATURAL HAIR — NO SALES PITCH",
-    "headline": "Hair like yours, figured out by where you actually live.",
-    "tagline": "We'll even tell you to save your money.",
-    "tool": {
-      "label": "FIND YOUR CURL PROFILE",
-      "title": "What's your postcode?",
-      "input_placeholder": "e.g. SW1A 1AA",
-      "cta_primary": "Check my area",
-      "cta_alt": "Tell us what's bothering you instead"
-    }
+    "kicker": "UK natural and Afro hair editorial",
+    "headline": "What's actually going on with your hair?",
+    "tagline": "Answers on products, water, and what's gone wrong. UK only."
   },
   "dynamic_panel": {
     "eyebrow": "RIGHT NOW IN THE UK",
-    "timestamp": "Updated daily from Met Office data",
-    "cta_label": "Why it matters for your hair →"
+    "timestamp": "Updated daily from Met Office data"
   },
   "symptom_doc": {
-    "section_kicker": "SEE IT FIRST",
-    "section_title": "What does it look like?",
+    "section_title": "What does it look like on hair like yours?",
     "cards": [
       {
-        "kicker": "HARD WATER",
-        "title": "Hard-water coating, 4B",
-        "href": "/hair-care/"
+        "img_kicker": "4B · LONDON",
+        "img_description": "Products sitting on top instead of soaking in",
+        "href": "/hair-problems/"
       },
       {
-        "kicker": "PROTEIN OVERLOAD",
-        "title": "Protein overload, 3C",
-        "href": "/hair-care/"
+        "img_kicker": "3C · MANCHESTER",
+        "img_description": "Hair snapping instead of stretching",
+        "href": "/hair-problems/"
       },
       {
-        "kicker": "LOW POROSITY",
-        "title": "Low porosity, 2C",
-        "href": "/hair-care/"
+        "img_kicker": "2C · GLASGOW",
+        "img_description": "Water beading up instead of soaking in",
+        "href": "/hair-problems/"
       },
       {
-        "kicker": "UK WINTER",
-        "title": "UK winter dryness, 4A",
-        "href": "/hair-care/"
+        "img_kicker": "4A · BIRMINGHAM",
+        "img_description": "Ends papery by day two",
+        "href": "/hair-problems/"
       }
     ]
   },
-  "featured_editorial": {
-    "section_kicker": "FROM THE DIAGNOSTIC",
-    "section_title": "Worth reading",
+  "tool_block": {
+    "heading": "Enter your postcode. Find what's actually wrong.",
+    "body": "Your water hardness, indoor humidity, and the most common cause for your symptom in your area — in 90 seconds.",
+    "tool_label": "FIND YOUR CURL PROFILE",
+    "input_placeholder": "e.g. SW1A 1AA",
+    "cta_primary": "Check my area",
+    "cta_alt": "No postcode? Start with the symptom →",
+    "cta_alt_href": "/tool/"
+  },
+  "recent_verdicts": {
+    "section_title": "Recent verdicts",
     "articles": [
       {
         "tag": "METHOD",
         "tag_colour": "method",
         "title": "The porosity test is broken — here's what actually matters",
-        "snip": "The float test measures surface damage, not how your hair absorbs moisture. UK chemists say skip it. Here is the 30-second behaviour check that actually tells you something.",
+        "dek": "The float test measures surface damage, not absorption. UK chemists say skip it.",
         "href": "/hair-care/porosity-test-debunk-uk/",
         "size": "lead"
       },
@@ -58,7 +57,7 @@
         "tag": "METHOD",
         "tag_colour": "method",
         "title": "How to read your hair porosity: the full guide",
-        "snip": "What low, medium, and high porosity actually mean for natural and Afro hair in the UK — and how to adjust your routine accordingly.",
+        "dek": "What low, medium, and high porosity mean for natural and Afro hair in the UK.",
         "href": "/hair-care/hair-porosity-test-natural-hair-uk/",
         "size": "flank"
       },
@@ -66,23 +65,30 @@
         "tag": "UK",
         "tag_colour": "uk",
         "title": "Why your products stopped working in autumn",
-        "snip": "UK indoor heating drops humidity to 30–40%. Your glycerin-heavy products are working against you.",
+        "dek": "UK indoor heating drops humidity to 30–40%. Your glycerin-heavy products are working against you.",
         "href": "/hair-care/",
         "size": "flank"
       }
     ]
   },
-  "latest_articles": {
-    "kicker": "RECENTLY ADDED TO THE DIAGNOSTIC",
-    "headline": "The body of work, growing",
-    "meta": "Five most recent. Sorted by date added.",
-    "all_articles_cta": "All articles, sorted by topic →"
-  },
-  "editorial_signature": {
-    "section_kicker": "HOW WE WORK",
-    "sample_label": "A sample paragraph, from the archive",
-    "sample_text": "Hard water leaves mineral build-up that blocks moisture absorption — it is not your products failing, it is your water. The standard first move is a chelating shampoo once a month. You will know it has worked when your hair stops feeling coated within a day of washing. If it does not, the next thing to look at is protein overload, which feels almost identical.",
-    "contributors_label": "Written by",
-    "tagline": "Hair advice with nothing to sell you."
+  "how_we_work": {
+    "section_title": "How we work",
+    "cards": [
+      {
+        "title": "We buy what we test",
+        "body": "No brand pays us. Products are tested for eight weeks in London hard water before any verdict.",
+        "faq_href": "/faqs/#how-we-test"
+      },
+      {
+        "title": "Verdicts are decided first",
+        "body": "The editor sees no commission rates before the recommendation. We'll tell you to skip products we link to.",
+        "faq_href": "/faqs/#how-we-review"
+      },
+      {
+        "title": "We say what we don't know",
+        "body": "Every claim is confidence-graded. When the evidence is thin, we say so.",
+        "faq_href": "/faqs/#confidence-grading"
+      }
+    ]
   }
 }

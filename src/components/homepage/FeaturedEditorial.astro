@@ -1,18 +1,17 @@
 ---
-interface FeaturedArticle {
+interface Article {
   tag: string
-  tag_colour: 'skip' | 'method' | 'uk'
+  tag_colour: 'skip' | 'method' | 'uk' | 'buy'
   title: string
-  snip: string
+  dek: string
   href: string
   size: 'lead' | 'flank'
 }
 
 interface Props {
   copy: {
-    section_kicker: string
     section_title: string
-    articles: FeaturedArticle[]
+    articles: Article[]
   }
 }
 
@@ -22,6 +21,7 @@ const tagColours: Record<string, string> = {
   skip:   '#791F1F',
   method: '#A2384B',
   uk:     '#B97A2B',
+  buy:    '#4E6B70',
 }
 
 const imageSrcs = {
@@ -43,17 +43,12 @@ const flanks = copy.articles.filter(a => a.size === 'flank')
 <section class="bg-cream border-t border-line px-6 pt-12 pb-10">
   <div class="max-w-hub mx-auto">
 
-    <div class="flex items-baseline gap-4 mb-8">
-      <p class="font-sans text-berry uppercase" style="font-size:11px;letter-spacing:0.10em;">
-        {copy.section_kicker}
-      </p>
-      <p
-        class="text-ink"
-        style="font-family:'Fraunces Variable',Georgia,serif;font-size:17px;font-weight:400;letter-spacing:-0.012em;line-height:1.2;font-variation-settings:'opsz' 18,'SOFT' 10;"
-      >
-        {copy.section_title}
-      </p>
-    </div>
+    <h2
+      class="text-ink mb-8"
+      style="font-family:'Fraunces Variable',Georgia,serif;font-size:18px;font-weight:400;letter-spacing:-0.012em;line-height:1.2;font-variation-settings:'opsz' 18,'SOFT' 10;"
+    >
+      {copy.section_title}
+    </h2>
 
     <!-- Desktop: 1fr / 1.5fr / 1fr; Mobile: stacked, lead first -->
     <div class="flex flex-col md:grid md:grid-cols-[1fr_1.5fr_1fr] gap-5">
@@ -61,8 +56,7 @@ const flanks = copy.articles.filter(a => a.size === 'flank')
       <!-- Flank 1 (mobile: second) -->
       {flanks[0] && (
         <a href={flanks[0].href} class="no-underline group order-2 md:order-1">
-          <!-- Image region: 70% of card -->
-          <div class="relative overflow-hidden mb-3" style="border-radius:2px;padding-top:125%;background:linear-gradient(160deg, #4E6B70 0%, #2E4447 100%);">
+          <div class="relative overflow-hidden mb-3" style={`border-radius:2px;padding-top:125%;background:${fallbackGradients.flank0};`}>
             <img
               src={imageSrcs.flank0}
               alt=""
@@ -72,16 +66,12 @@ const flanks = copy.articles.filter(a => a.size === 'flank')
               decoding="async"
               onerror="this.style.display='none'"
             />
-            <!-- Spiral mark -->
             <svg class="absolute top-3 right-3" width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
               <circle cx="11" cy="11" r="10" stroke="white" stroke-width="1" stroke-opacity="0.4" />
               <circle cx="11" cy="11" r="5"  stroke="white" stroke-width="1" stroke-opacity="0.4" />
             </svg>
           </div>
-          <p
-            class="font-sans uppercase mb-2"
-            style={`font-size:11px;letter-spacing:0.10em;color:${tagColours[flanks[0].tag_colour]};`}
-          >
+          <p class="font-sans uppercase mb-2" style={`font-size:11px;letter-spacing:0.10em;color:${tagColours[flanks[0].tag_colour]};`}>
             {flanks[0].tag}
           </p>
           <h3
@@ -90,8 +80,8 @@ const flanks = copy.articles.filter(a => a.size === 'flank')
           >
             {flanks[0].title}
           </h3>
-          <p class="text-taupe" style="font-family:'Newsreader',Georgia,serif;font-size:15px;line-height:1.5;">
-            {flanks[0].snip}
+          <p class="text-taupe" style="font-family:'Newsreader',Georgia,serif;font-size:11px;line-height:1.5;">
+            {flanks[0].dek}
           </p>
         </a>
       )}
@@ -99,7 +89,7 @@ const flanks = copy.articles.filter(a => a.size === 'flank')
       <!-- Lead card (mobile: first) -->
       {lead && (
         <a href={lead.href} class="no-underline group order-1 md:order-2">
-          <div class="relative overflow-hidden mb-3" style="border-radius:2px;padding-top:125%;background:linear-gradient(160deg, #4A3228 0%, #2C1D17 100%);">
+          <div class="relative overflow-hidden mb-3" style={`border-radius:2px;padding-top:125%;background:${fallbackGradients.lead};`}>
             <img
               src={imageSrcs.lead}
               alt=""
@@ -114,20 +104,17 @@ const flanks = copy.articles.filter(a => a.size === 'flank')
               <circle cx="11" cy="11" r="5"  stroke="white" stroke-width="1" stroke-opacity="0.4" />
             </svg>
           </div>
-          <p
-            class="font-sans uppercase mb-2"
-            style={`font-size:11px;letter-spacing:0.10em;color:${tagColours[lead.tag_colour]};`}
-          >
+          <p class="font-sans uppercase mb-2" style={`font-size:11px;letter-spacing:0.10em;color:${tagColours[lead.tag_colour]};`}>
             {lead.tag}
           </p>
           <h2
             class="text-ink group-hover:text-berry transition-colors duration-150 mb-2"
-            style="font-family:'Fraunces Variable',Georgia,serif;font-size:24px;font-weight:400;letter-spacing:-0.018em;line-height:1.15;font-variation-settings:'opsz' 24,'SOFT' 10;"
+            style="font-family:'Fraunces Variable',Georgia,serif;font-size:20px;font-weight:400;letter-spacing:-0.018em;line-height:1.15;font-variation-settings:'opsz' 20,'SOFT' 10;"
           >
             {lead.title}
           </h2>
-          <p class="text-taupe" style="font-family:'Newsreader',Georgia,serif;font-size:15px;line-height:1.5;">
-            {lead.snip}
+          <p class="text-taupe" style="font-family:'Newsreader',Georgia,serif;font-size:11px;line-height:1.5;">
+            {lead.dek}
           </p>
         </a>
       )}
@@ -135,7 +122,7 @@ const flanks = copy.articles.filter(a => a.size === 'flank')
       <!-- Flank 2 (mobile: third) -->
       {flanks[1] && (
         <a href={flanks[1].href} class="no-underline group order-3">
-          <div class="relative overflow-hidden mb-3" style="border-radius:2px;padding-top:125%;background:linear-gradient(160deg, #9C8070 0%, #6E5848 100%);">
+          <div class="relative overflow-hidden mb-3" style={`border-radius:2px;padding-top:125%;background:${fallbackGradients.flank1};`}>
             <img
               src={imageSrcs.flank1}
               alt=""
@@ -150,10 +137,7 @@ const flanks = copy.articles.filter(a => a.size === 'flank')
               <circle cx="11" cy="11" r="5"  stroke="white" stroke-width="1" stroke-opacity="0.4" />
             </svg>
           </div>
-          <p
-            class="font-sans uppercase mb-2"
-            style={`font-size:11px;letter-spacing:0.10em;color:${tagColours[flanks[1].tag_colour]};`}
-          >
+          <p class="font-sans uppercase mb-2" style={`font-size:11px;letter-spacing:0.10em;color:${tagColours[flanks[1].tag_colour]};`}>
             {flanks[1].tag}
           </p>
           <h3
@@ -162,8 +146,8 @@ const flanks = copy.articles.filter(a => a.size === 'flank')
           >
             {flanks[1].title}
           </h3>
-          <p class="text-taupe" style="font-family:'Newsreader',Georgia,serif;font-size:15px;line-height:1.5;">
-            {flanks[1].snip}
+          <p class="text-taupe" style="font-family:'Newsreader',Georgia,serif;font-size:11px;line-height:1.5;">
+            {flanks[1].dek}
           </p>
         </a>
       )}

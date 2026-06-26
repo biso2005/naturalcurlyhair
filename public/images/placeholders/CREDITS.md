@@ -7,14 +7,15 @@ Fill in this table as you source each image. The URL column should point to the 
 | File | Source | Photographer | License | URL |
 |------|--------|--------------|---------|-----|
 | hero.webp | | | | |
-| symptom-hard-water.webp | | | | |
-| symptom-protein-overload.webp | | | | |
-| symptom-low-porosity.webp | | | | |
-| symptom-uk-winter.webp | | | | |
+| symptom-1.webp | | | | |
+| symptom-2.webp | | | | |
+| symptom-3.webp | | | | |
+| symptom-4.webp | | | | |
 | featured-1.webp | | | | |
 | featured-2.webp | | | | |
 | featured-3.webp | | | | |
 | editorial-signature.webp | | | | |
+| tool-section.webp | | | | |
 
 ## License notes
 

@@ -17,43 +17,43 @@ When a placeholder file is absent the component renders a warm gradient fallback
 
 ---
 
-## symptom-hard-water.webp
+## symptom-1.webp
 
-- **Used in:** SymptomDocRow — first symptom tile
+- **Used in:** SymptomDocRow — first symptom tile (4B · LONDON)
 - **Aspect:** 1:1 (square)
 - **Minimum size:** 600×600px
-- **Subject:** textured hair showing signs of coating, buildup, or dullness — ideally 4A–4C range. The image will have a dark gradient applied to the bottom 40% with the text "HARD WATER" over it. Choose a subject with enough contrast in the hair to be legible against the overlay.
-- **Sourcing notes:** this is the hardest to source from stock photography. Closest approximation: natural hair that looks dry or coated rather than moisturised. Any UK natural-hair close-up will work as a placeholder.
+- **Subject:** 4B natural hair in a UK context. The caption describes "Products sitting on top instead of soaking in." The placeholder image shows natural-hair photography at the matching curl type; replace with commissioned photography that genuinely shows the captioned symptom when available.
+- **Sourcing notes:** close-up of 4B hair, ideally dry or coated-looking rather than glossy.
 
 ---
 
-## symptom-protein-overload.webp
+## symptom-2.webp
 
-- **Used in:** SymptomDocRow — second symptom tile
+- **Used in:** SymptomDocRow — second symptom tile (3C · MANCHESTER)
 - **Aspect:** 1:1 (square)
 - **Minimum size:** 600×600px
-- **Subject:** textured hair, ideally showing brittleness or stiffness — hard to depict directly in a still image; use a close-up of dry natural hair as a proxy. Text overlay reads "PROTEIN OVERLOAD".
-- **Sourcing notes:** same search terms as hero. Close-up crop works well here.
+- **Subject:** 3C natural hair. The caption describes "Hair snapping instead of stretching." The placeholder shows natural-hair photography at the matching curl type; replace with photography showing the captioned symptom when available.
+- **Sourcing notes:** close-up of 3C hair, ideally showing brittleness or dryness.
 
 ---
 
-## symptom-low-porosity.webp
+## symptom-3.webp
 
-- **Used in:** SymptomDocRow — third symptom tile
+- **Used in:** SymptomDocRow — third symptom tile (2C · GLASGOW)
 - **Aspect:** 1:1 (square)
 - **Minimum size:** 600×600px
-- **Subject:** natural hair, wavy to curly range (2C–3B). Low porosity is associated with product sitting on the hair rather than absorbing. Text overlay reads "LOW POROSITY".
-- **Sourcing notes:** wavy natural hair, ideally with some product beading visible.
+- **Subject:** 2C wavy-curly hair. The caption describes "Water beading up instead of soaking in." The placeholder shows natural-hair photography at the matching curl type; replace with photography showing the captioned symptom when available.
+- **Sourcing notes:** wavy natural hair, ideally with product or water visible.
 
 ---
 
-## symptom-uk-winter.webp
+## symptom-4.webp
 
-- **Used in:** SymptomDocRow — fourth symptom tile
+- **Used in:** SymptomDocRow — fourth symptom tile (4A · BIRMINGHAM)
 - **Aspect:** 1:1 (square)
 - **Minimum size:** 600×600px
-- **Subject:** natural or Afro-textured hair in a winter/indoor context — scarves, hats, layered clothing, grey light. Text overlay reads "UK WINTER". Mood is important here — should look cold and dry, not tropical.
-- **Sourcing notes:** search "natural hair winter", "afro hair cold weather", "textured hair scarf". If no good match, any close-up of natural hair with cool lighting works.
+- **Subject:** 4A coily hair. The caption describes "Ends papery by day two." The placeholder shows natural-hair photography at the matching curl type; replace with photography showing the captioned symptom when available.
+- **Sourcing notes:** 4A close-up, ideally with dry or papery ends visible.
 
 ---
 
@@ -94,3 +94,13 @@ When a placeholder file is absent the component renders a warm gradient fallback
 - **Minimum size:** 1200×675px
 - **Subject:** two or more people together — a wash day, a consultation, a routine in progress. The section it anchors is about editorial process and authorship. Avoid solo portrait; prefer relational or process image.
 - **Sourcing notes:** search "natural hair salon", "afro hair routine", "curl consultation", "wash day friends". The mood should feel real and working, not aspirational or promotional.
+
+---
+
+## tool-section.webp
+
+- **Used in:** ToolBlock — left column image
+- **Aspect:** 4:5 (portrait)
+- **Minimum size:** 600×750px
+- **Subject:** hands-in-hair / wash-day gesture / someone mid-routine. Not a styled portrait — a real moment. The right column has the tool form; this image anchors the section emotionally.
+- **Sourcing notes:** search "natural hair wash day", "afro hair routine", "hands in hair natural". UK register preferred.
