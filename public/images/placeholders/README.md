@@ -104,3 +104,137 @@ When a placeholder file is absent the component renders a warm gradient fallback
 - **Minimum size:** 600×750px
 - **Subject:** hands-in-hair / wash-day gesture / someone mid-routine. Not a styled portrait — a real moment. The right column has the tool form; this image anchors the section emotionally.
 - **Sourcing notes:** search "natural hair wash day", "afro hair routine", "hands in hair natural". UK register preferred.
+
+---
+
+## hub-hair-problems.webp
+
+- **Used in:** HubHero — hair-problems hub hero background
+- **Aspect:** 16:7 landscape (wide crop) or 16:9 if not available
+- **Minimum size:** 1400px wide
+- **Subject:** natural or Afro-textured hair, close-up or diagnostic register. Berry/plum mood — darker tonality. The overlay darkens the left third heavily.
+- **Sourcing notes:** search "natural hair close-up", "afro hair detail". Avoid smiling portrait register — documentary/observational preferred.
+
+---
+
+## hub-reviews.webp
+
+- **Used in:** HubHero — reviews hub
+- **Aspect:** 16:7 or 16:9
+- **Minimum size:** 1400px wide
+- **Subject:** products — bottles, jars, or ingredients — in a natural-light setting, not studio white. Plum/ink mood.
+- **Sourcing notes:** search "natural hair products", "hair care products natural light". Avoid stock-y product-on-white.
+
+---
+
+## hub-hair-care.webp
+
+- **Used in:** HubHero — hair-care hub
+- **Aspect:** 16:7 or 16:9
+- **Minimum size:** 1400px wide
+- **Subject:** wash day or routine in progress — hands in hair, sectioning, applying product. Warm ochre/amber mood.
+- **Sourcing notes:** search "natural hair wash day", "afro hair routine", "4c hair care".
+
+---
+
+## hub-parents.webp
+
+- **Used in:** HubHero — parents hub
+- **Aspect:** 16:7 or 16:9
+- **Minimum size:** 1400px wide
+- **Subject:** adult hands caring for a child's curly or Afro hair. Warm mood. Real moment, not posed.
+- **Sourcing notes:** search "parent child natural hair", "afro hair child uk", "mixed race child hair".
+
+---
+
+## hub-2a.webp through hub-4c.webp (nine images)
+
+- **Used in:** HubHero for each curl-type hub
+- **Aspect:** 16:7 or 16:9, minimum 1200px wide
+- **Subject:** close-up of hair at that curl type (2A = loose waves, 4C = tight coils). Same documentary register as hero.webp.
+- **Sourcing notes:** search "{curl-type} hair", "natural {curl-type} hair uk". Match the curl type as closely as possible.
+
+---
+
+## symptom-card-dry.webp
+
+- **Used in:** SymptomDirectory — "My hair feels dry no matter what I try" card
+- **Aspect:** 4:3
+- **Minimum size:** 600×450px
+- **Subject:** Afro or curly hair that looks visually dry, dull, or coated — contrast with moisturised hair.
+- **Sourcing notes:** search "dry natural hair", "dull afro hair". Any curl type 3A–4C.
+
+---
+
+## symptom-card-growth.webp
+
+- **Used in:** SymptomDirectory — "My hair isn't growing" card
+- **Aspect:** 4:3
+- **Minimum size:** 600×450px
+- **Subject:** natural hair with visible length — the point being that length retention is possible. Or hands measuring/checking hair length.
+- **Sourcing notes:** search "natural hair length", "4c hair growth", "afro hair length check".
+
+---
+
+## symptom-card-products.webp
+
+- **Used in:** SymptomDirectory — "My products stopped working" card
+- **Aspect:** 4:3
+- **Minimum size:** 600×450px
+- **Subject:** products on a bathroom shelf or being applied to hair. Warm natural light.
+- **Sourcing notes:** search "natural hair products", "hair care routine products".
+
+---
+
+## symptom-card-parent.webp
+
+- **Used in:** SymptomDirectory — "My child's curls and I don't know where to start" card
+- **Aspect:** 4:3
+- **Minimum size:** 600×450px
+- **Subject:** adult caring for a child's curly hair. Warm, reassuring register.
+- **Sourcing notes:** search "parent child curly hair", "mixed race child hair care".
+
+---
+
+## symptom-card-scalp.webp
+
+- **Used in:** SymptomDirectory — "My scalp is itchy, flaky, or sore" card
+- **Aspect:** 4:3
+- **Minimum size:** 600×450px
+- **Subject:** close-up of scalp/parting visible through natural or Afro hair. Neutral register.
+- **Sourcing notes:** search "natural hair scalp", "afro hair parting", "scalp care natural hair".
+
+---
+
+## article-fallbacks/ directory
+
+### article-fallbacks/how-to.webp
+
+- **Used in:** ArticleCard gradient fallback for how-to articles
+- **Aspect:** 4:3
+- **Subject:** hands demonstrating a technique on natural hair.
+
+### article-fallbacks/diagnostic.webp
+
+- **Aspect:** 4:3
+- **Subject:** close-up texture detail of Afro or curly hair.
+
+### article-fallbacks/verdict-skip.webp
+
+- **Aspect:** 4:3
+- **Subject:** product bottle or jar, slightly unflattering framing to suggest scepticism.
+
+### article-fallbacks/verdict-buy.webp
+
+- **Aspect:** 4:3
+- **Subject:** product bottle or jar, clean natural light.
+
+### article-fallbacks/ingredient.webp
+
+- **Aspect:** 4:3
+- **Subject:** ingredients — oil, botanical element, or product label close-up.
+
+### article-fallbacks/uk-context.webp
+
+- **Aspect:** 4:3
+- **Subject:** UK context — hard water limescale in a shower, a map, or a recognisably UK setting.

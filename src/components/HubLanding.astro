@@ -1,64 +1,44 @@
 ---
+import type { CollectionEntry } from 'astro:content'
 import BaseLayout from '../layouts/BaseLayout.astro'
-
-type HubId = '2a' | '2b' | '2c' | '3a' | '3b' | '3c' | '4a' | '4b' | '4c' | 'hair-care' | 'products' | 'parents'
+import HubHero from './hub/HubHero.astro'
+import SymptomDirectory from './hub/SymptomDirectory.astro'
+import GroupedLibrary from './hub/GroupedLibrary.astro'
+import FlatList from './hub/FlatList.astro'
+import hubCopy from '../data/hub_copy.json'
 
 interface Props {
-  hub:         HubId
-  title:       string
-  orientation: string
+  hub: CollectionEntry<'hubs'>
+  articles: CollectionEntry<'articles'>[]
 }
 
-const { hub, title, orientation } = Astro.props
-
-const hubConfig: Record<HubId, { dot: string; border: string; label: string }> = {
-  '2a': { dot: 'bg-hub-2a', border: 'border-l-hub-2a', label: '2A' },
-  '2b': { dot: 'bg-hub-2b', border: 'border-l-hub-2b', label: '2B' },
-  '2c': { dot: 'bg-hub-2c', border: 'border-l-hub-2c', label: '2C' },
-  '3a': { dot: 'bg-hub-3a', border: 'border-l-hub-3a', label: '3A' },
-  '3b': { dot: 'bg-hub-3b', border: 'border-l-hub-3b', label: '3B' },
-  '3c': { dot: 'bg-hub-3c', border: 'border-l-hub-3c', label: '3C' },
-  '4a': { dot: 'bg-hub-4a', border: 'border-l-hub-4a', label: '4A' },
-  '4b': { dot: 'bg-hub-4b', border: 'border-l-hub-4b', label: '4B' },
-  '4c': { dot: 'bg-hub-4c', border: 'border-l-hub-4c', label: '4C' },
-  'hair-care': { dot: 'bg-hub-hair-care', border: 'border-l-hub-hair-care', label: 'Hair Care' },
-  'products':  { dot: 'bg-hub-products',  border: 'border-l-hub-products',  label: 'Products' },
-  'parents':   { dot: 'bg-hub-parents',   border: 'border-l-hub-parents',   label: 'Parents' },
-}
-
-const { dot, border, label } = hubConfig[hub]
+const { hub, articles } = Astro.props
+const mode  = hub.data.mode ?? 'flat'
+const hubId = hub.id
 ---
 
-<BaseLayout title={title}>
-  <div class="max-w-hub mx-auto px-6 py-12">
+<BaseLayout title={`${hub.data.title} — naturalcurlyhair`}>
+  <HubHero
+    hubId={hubId}
+    title={hub.data.title}
+    dek={hub.data.dek}
+    heroImage={hub.data.heroImage}
+  />
 
-    <!-- Hub identifier strip -->
-    <div class={`border-l-4 ${border} pl-5 mb-8 flex items-center gap-3`}>
-      <span class={`block w-3 h-3 rounded-full flex-shrink-0 ${dot}`}></span>
-      <span class="font-mono text-xs tracking-wider uppercase text-taupe">{label}</span>
-    </div>
+  {mode === 'symptom-directory' && (
+    <SymptomDirectory copy={hubCopy} />
+  )}
 
-    <!-- H1 -->
-    <h1 class="font-display-h1 text-5xl text-ink mb-6">{title}</h1>
+  {mode === 'grouped' && (
+    <GroupedLibrary
+      articles={articles}
+      groupBy={hub.data.groupBy ?? 'tag'}
+      hubId={hubId}
+      copy={hubCopy}
+    />
+  )}
 
-    <!-- Orientation -->
-    <p class="font-display-lead text-ink mb-10">{orientation}</p>
-
-    <!-- Photo slot -->
-    <div class="w-full aspect-video bg-cream-2 flex items-center justify-center mb-12 rounded-sm">
-      <p class="font-mono text-xs text-taupe">photography pending</p>
-    </div>
-
-    <!-- Pillar content -->
-    <div class="max-w-prose prose prose-ink mb-20">
-      <slot />
-    </div>
-
-    <!-- Spoke index -->
-    <section>
-      <h2 class="font-display-h2 text-ink mb-8">In this hub</h2>
-      <slot name="spokes" />
-    </section>
-
-  </div>
+  {(mode === 'flat' || !mode) && (
+    <FlatList articles={articles} hubId={hubId} />
+  )}
 </BaseLayout>

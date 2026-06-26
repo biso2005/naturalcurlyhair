@@ -1,0 +1,35 @@
+---
+interface Group {
+  id: string
+  label: string
+}
+
+interface Props {
+  groups: Group[]
+}
+
+const { groups } = Astro.props
+---
+
+<nav
+  class="md:hidden sticky top-0 z-30"
+  style="background:#F8F3EA;border-bottom:1px solid rgba(44,29,23,0.14);"
+  aria-label="Article groups"
+>
+  <ul
+    class="flex flex-nowrap gap-2 px-6 py-3 list-none m-0 p-0"
+    style="overflow-x:auto;scrollbar-width:none;"
+  >
+    {groups.map(group => (
+      <li class="flex-shrink-0">
+        <a
+          href={`#${group.id}`}
+          class="block font-sans uppercase no-underline transition-colors duration-150"
+          style="font-size:11px;letter-spacing:0.08em;color:#6E6056;padding:4px 12px;border-radius:2px;border:1px solid rgba(44,29,23,0.14);"
+          onmouseover="this.style.color='#A2384B';this.style.borderColor='#A2384B'"
+          onmouseout="this.style.color='#6E6056';this.style.borderColor='rgba(44,29,23,0.14)'"
+        >{group.label}</a>
+      </li>
+    ))}
+  </ul>
+</nav>

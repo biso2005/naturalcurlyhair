@@ -10,6 +10,7 @@ export default defineConfig({
   redirects: {
     '/how-we-review/': '/faqs/#how-we-review',
     '/how-we-test/':   '/faqs/#how-we-test',
+    '/products/':      '/reviews/',
   },
   integrations: [
     tailwind({ configFile: './tailwind.config.cjs' }),

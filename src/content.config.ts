@@ -6,7 +6,7 @@ const articles = defineCollection({
   schema: z.object({
     title:       z.string(),
     hub:         z.enum(['2a','2b','2c','3a','3b','3c','4a','4b','4c',
-                         'hair-care','products','parents']),
+                         'hair-care','products','parents','hair-problems','reviews']),
     category:    z.string(),
     dek:         z.string(),
     published:   z.string(),
@@ -32,16 +32,23 @@ const articles = defineCollection({
     draft:            z.boolean().default(false),
     confidence_grade: z.enum(['high','medium','low']).optional(),
     contributor_id:   z.string().optional(),
+    // Hub template fields
+    verdict_type: z.enum(['skip','buy','tested-mixed']).optional(),
+    child_age:    z.enum(['baby','toddler','school-age','teen','multi']).optional(),
   }),
 })
 
 const hubs = defineCollection({
   loader: glob({ pattern: '**/*.mdx', base: './src/content/hubs' }),
   schema: z.object({
-    title:       z.string(),
-    hub:         z.enum(['2a','2b','2c','3a','3b','3c','4a','4b','4c',
-                         'hair-care','products','parents']),
-    dek:         z.string(),
+    title:     z.string(),
+    hub:       z.enum(['2a','2b','2c','3a','3b','3c','4a','4b','4c',
+                       'hair-care','products','parents','hair-problems','reviews']),
+    dek:       z.string(),
+    mode:      z.enum(['symptom-directory','grouped','flat']).optional(),
+    groupBy:   z.enum(['tag','verdict_type','child_age']).optional(),
+    heroImage: z.string().optional(),
+    hubColor:  z.string().optional(),
   }),
 })
 

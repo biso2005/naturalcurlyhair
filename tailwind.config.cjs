@@ -10,6 +10,8 @@ module.exports = {
     'bg-hub-hair-care',    'border-l-hub-hair-care',
     'bg-hub-products',     'border-l-hub-products',
     'bg-hub-parents',      'border-l-hub-parents',
+    'bg-hub-hair-problems', 'border-l-hub-hair-problems',
+    'bg-hub-reviews',      'border-l-hub-reviews',
   ],
   theme: {
     extend: {
@@ -37,6 +39,8 @@ module.exports = {
           'hair-care': '#9DA475',
           products: '#A89042',
           parents: '#7A6B8A',
+          'hair-problems': '#A2384B',
+          reviews: '#3E2230',
         },
       },
       fontFamily: {

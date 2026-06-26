@@ -1,0 +1,117 @@
+---
+interface Props {
+  hubId: string
+  title: string
+  dek: string
+  heroImage?: string
+}
+
+const { hubId, title, dek, heroImage } = Astro.props
+
+const dotColors: Record<string, string> = {
+  '2a': '#93AAAC', '2b': '#6F8E92', '2c': '#4E7176',
+  '3a': '#CB987E', '3b': '#A57256', '3c': '#82513A',
+  '4a': '#9C7494', '4b': '#765577', '4c': '#553D62',
+  'hair-care':     '#9DA475',
+  'products':      '#A89042',
+  'parents':       '#7A6B8A',
+  'hair-problems': '#A2384B',
+  'reviews':       '#3E2230',
+}
+
+const hubLabels: Record<string, string> = {
+  '2a': '2A', '2b': '2B', '2c': '2C',
+  '3a': '3A', '3b': '3B', '3c': '3C',
+  '4a': '4A', '4b': '4B', '4c': '4C',
+  'hair-care':     'HAIR CARE',
+  'products':      'PRODUCTS',
+  'parents':       'PARENTS',
+  'hair-problems': 'HAIR PROBLEMS',
+  'reviews':       'REVIEWS',
+}
+
+const dotColor = dotColors[hubId] ?? '#6E6056'
+const label    = hubLabels[hubId] ?? hubId.toUpperCase()
+---
+
+<section
+  class="relative overflow-hidden"
+  style="background:#2C1D17; min-height:480px;"
+>
+  {heroImage && (
+    <img
+      src={heroImage}
+      alt=""
+      role="presentation"
+      class="absolute inset-0 w-full h-full object-cover"
+      loading="eager"
+      fetchpriority="high"
+      onerror="this.style.display='none'"
+    />
+  )}
+
+  <!-- Desktop: left-third gradient -->
+  <div
+    class="hidden md:block absolute inset-0 pointer-events-none"
+    style="background:linear-gradient(to right, rgba(62,34,48,0.85) 0%, rgba(62,34,48,0.85) 35%, transparent 60%);"
+  ></div>
+
+  <!-- Mobile: bottom-up gradient -->
+  <div
+    class="md:hidden absolute inset-0 pointer-events-none"
+    style="background:linear-gradient(to top, rgba(62,34,48,0.90) 0%, rgba(62,34,48,0.90) 40%, transparent 75%);"
+  ></div>
+
+  <!-- Spiral mark — desktop only, top-right of the photographic frame -->
+  <div class="hidden md:block absolute top-5 right-5 pointer-events-none">
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+      <circle cx="14" cy="14" r="12" stroke="white" stroke-opacity="0.4" stroke-width="1.5" fill="none" />
+      <circle cx="14" cy="14" r="6"  stroke="white" stroke-opacity="0.4" stroke-width="1.5" fill="none" />
+    </svg>
+  </div>
+
+  <!-- Text block — desktop: left side, vertically centred -->
+  <div
+    class="hidden md:flex absolute inset-y-0 left-0 flex-col justify-center px-10 lg:px-16"
+    style="max-width:380px;"
+  >
+    <div class="flex items-center gap-2 mb-4">
+      <span
+        class="block w-2 h-2 rounded-full flex-shrink-0"
+        style={`background:${dotColor};`}
+      ></span>
+      <span
+        class="font-sans text-[10px] uppercase tracking-[0.12em]"
+        style="color:rgba(248,243,234,0.70);"
+      >{label}</span>
+    </div>
+    <h1
+      class="mb-4"
+      style="font-family:'Fraunces Variable',Georgia,serif;font-size:clamp(1.75rem,3vw,2rem);font-weight:400;font-variation-settings:'opsz' 32,'SOFT' 10;color:#F8F3EA;line-height:1.15;"
+    >{title}</h1>
+    <p
+      style="font-family:'Newsreader',Georgia,serif;font-size:0.875rem;font-style:italic;color:rgba(248,243,234,0.90);line-height:1.55;"
+    >{dek}</p>
+  </div>
+
+  <!-- Text block — mobile: bottom, full width -->
+  <div class="md:hidden absolute bottom-0 left-0 right-0 px-5 pb-6">
+    <div class="flex items-center gap-2 mb-3">
+      <span
+        class="block w-2 h-2 rounded-full flex-shrink-0"
+        style={`background:${dotColor};`}
+      ></span>
+      <span
+        class="font-sans text-[10px] uppercase tracking-[0.12em]"
+        style="color:rgba(248,243,234,0.70);"
+      >{label}</span>
+    </div>
+    <h1
+      class="mb-3"
+      style="font-family:'Fraunces Variable',Georgia,serif;font-size:1.5rem;font-weight:400;font-variation-settings:'opsz' 24,'SOFT' 10;color:#F8F3EA;line-height:1.2;"
+    >{title}</h1>
+    <p
+      style="font-family:'Newsreader',Georgia,serif;font-size:0.8125rem;font-style:italic;color:rgba(248,243,234,0.90);line-height:1.55;"
+    >{dek}</p>
+  </div>
+</section>

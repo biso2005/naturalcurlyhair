@@ -1,0 +1,79 @@
+{
+  "diagnostic_banner": {
+    "kicker": "NOT SURE WHICH SYMPTOM?",
+    "body": "Enter your postcode. The diagnostic asks four questions and tells you the most likely cause for your area.",
+    "cta": "Run the diagnostic →",
+    "cta_href": "/tool/"
+  },
+  "symptom_directory": {
+    "section_heading": "Pick the one that sounds closest",
+    "cards": [
+      {
+        "title": "My hair feels dry no matter what I try",
+        "dek": "Five common causes. Most are fixable in one wash cycle.",
+        "image": "/images/placeholders/symptom-card-dry.webp",
+        "href": "/tool/"
+      },
+      {
+        "title": "My hair isn't growing",
+        "dek": "Almost always retention, not growth. Here's what that means.",
+        "image": "/images/placeholders/symptom-card-growth.webp",
+        "href": "/tool/"
+      },
+      {
+        "title": "My products stopped working",
+        "dek": "Usually water, season, or porosity shift. We help diagnose which.",
+        "image": "/images/placeholders/symptom-card-products.webp",
+        "href": "/tool/"
+      },
+      {
+        "title": "My child's curls and I don't know where to start",
+        "dek": "No judgement. We start where you are.",
+        "image": "/images/placeholders/symptom-card-parent.webp",
+        "href": "/tool/"
+      },
+      {
+        "title": "My scalp is itchy, flaky, or sore",
+        "dek": "Some scalp symptoms need a GP. We help you tell which.",
+        "image": "/images/placeholders/symptom-card-scalp.webp",
+        "href": "/tool/"
+      }
+    ],
+    "catchall": {
+      "heading": "Symptom not in this list?",
+      "body": "Start with what you're noticing — the diagnostic accepts any description.",
+      "cta": "Tell us what's bothering you →",
+      "cta_href": "/tool/"
+    }
+  },
+  "group_labels": {
+    "tag": {
+      "how-to": "How-to guides",
+      "diagnostic": "Diagnostic articles",
+      "ingredient": "Ingredient explainers",
+      "uk-context": "UK context"
+    },
+    "verdict_type": {
+      "skip": "Skip these",
+      "buy": "Buy these",
+      "tested-mixed": "Tested but mixed",
+      "_default": "All reviews"
+    },
+    "child_age": {
+      "baby": "Babies",
+      "toddler": "Toddlers",
+      "school-age": "School-age",
+      "teen": "Teens",
+      "multi": "Multi-age",
+      "_default": "All articles"
+    }
+  },
+  "empty_states": {
+    "group_empty": "More articles coming.",
+    "all_uncategorised": "All articles"
+  },
+  "article_count_suffix": "ARTICLES",
+  "see_all_prefix": "See all",
+  "see_all_suffix": "→",
+  "groups_label": "across {n} groups"
+}

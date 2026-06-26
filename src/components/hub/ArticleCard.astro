@@ -1,0 +1,203 @@
+---
+type Variant = 'grid' | 'row'
+
+interface Props {
+  title: string
+  dek?: string
+  href: string
+  tag?: string
+  readTime?: string
+  heroImage?: string
+  hubId: string
+  variant?: Variant
+}
+
+const { title, dek, href, tag, readTime, heroImage, hubId, variant = 'grid' } = Astro.props
+
+const tagColors: Record<string, string> = {
+  'skip':         '#791F1F',
+  'buy':          '#3E2230',
+  'tested-mixed': '#765577',
+  'how-to':       '#B97A2B',
+  'diagnostic':   '#A2384B',
+  'ingredient':   '#6E6056',
+  'uk-context':   '#4E7176',
+}
+
+const tagFallbacks: Record<string, string> = {
+  'how-to':       '/images/placeholders/article-fallbacks/how-to.webp',
+  'diagnostic':   '/images/placeholders/article-fallbacks/diagnostic.webp',
+  'skip':         '/images/placeholders/article-fallbacks/verdict-skip.webp',
+  'buy':          '/images/placeholders/article-fallbacks/verdict-buy.webp',
+  'ingredient':   '/images/placeholders/article-fallbacks/ingredient.webp',
+  'uk-context':   '/images/placeholders/article-fallbacks/uk-context.webp',
+}
+
+const hubGradients: Record<string, string> = {
+  '2a': 'linear-gradient(135deg,#93AAAC 0%,#4E7176 100%)',
+  '2b': 'linear-gradient(135deg,#6F8E92 0%,#4E7176 100%)',
+  '2c': 'linear-gradient(135deg,#4E7176 0%,#2E4447 100%)',
+  '3a': 'linear-gradient(135deg,#CB987E 0%,#82513A 100%)',
+  '3b': 'linear-gradient(135deg,#A57256 0%,#5C3D2E 100%)',
+  '3c': 'linear-gradient(135deg,#82513A 0%,#5C3D2E 100%)',
+  '4a': 'linear-gradient(135deg,#9C7494 0%,#3E2230 100%)',
+  '4b': 'linear-gradient(135deg,#765577 0%,#3E2230 100%)',
+  '4c': 'linear-gradient(135deg,#553D62 0%,#3E2230 100%)',
+  'hair-care':     'linear-gradient(135deg,#9DA475 0%,#6E7A50 100%)',
+  'parents':       'linear-gradient(135deg,#7A6B8A 0%,#3E2230 100%)',
+  'hair-problems': 'linear-gradient(135deg,#A2384B 0%,#3E2230 100%)',
+  'reviews':       'linear-gradient(135deg,#3E2230 0%,#2C1D17 100%)',
+}
+
+const resolvedImage = heroImage ?? (tag ? tagFallbacks[tag] : undefined)
+const fallbackGradient = hubGradients[hubId] ?? 'linear-gradient(135deg,#6E6056 0%,#2C1D17 100%)'
+const tagColor = tag ? (tagColors[tag] ?? '#6E6056') : undefined
+---
+
+{variant === 'grid' ? (
+  <a
+    href={href}
+    class="block no-underline group"
+    style="background:#FFFFFF;border:1px solid rgba(44,29,23,0.14);border-radius:2px;overflow:hidden;transition:border-color 150ms;"
+    onmouseover="this.style.borderColor='#A2384B'"
+    onmouseout="this.style.borderColor='rgba(44,29,23,0.14)'"
+  >
+    <!-- Image region 4:3 -->
+    <div class="relative overflow-hidden" style="padding-top:75%;">
+      <!-- Gradient fallback (always present behind image) -->
+      <div class="absolute inset-0" style={`${fallbackGradient};`}></div>
+      {resolvedImage && (
+        <img
+          src={resolvedImage}
+          alt=""
+          role="presentation"
+          class="absolute inset-0 w-full h-full object-cover"
+          loading="lazy"
+          style="z-index:1;"
+          onerror="this.style.display='none'"
+        />
+      )}
+      <!-- Spiral mark -->
+      <div class="absolute top-2 right-2" style="z-index:2;">
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+          <circle cx="5" cy="5" r="4" stroke="white" stroke-opacity="0.4" stroke-width="1" fill="none" />
+          <circle cx="5" cy="5" r="2" stroke="white" stroke-opacity="0.4" stroke-width="1" fill="none" />
+        </svg>
+      </div>
+      <!-- Tag pill -->
+      {tag && (
+        <div class="absolute bottom-2 left-2" style="z-index:2;">
+          <span
+            class="font-sans uppercase"
+            style={`font-size:9px;color:#F8F3EA;background:${tagColor};padding:2px 6px;border-radius:2px;letter-spacing:0.06em;`}
+          >{tag}</span>
+        </div>
+      )}
+    </div>
+
+    <!-- Card body -->
+    <div class="px-3 py-3">
+      <p
+        class="line-clamp-3"
+        style="font-family:'Newsreader',Georgia,serif;font-size:0.8125rem;color:#2C1D17;line-height:1.25;"
+      >{title}</p>
+    </div>
+  </a>
+) : (
+  /* Row variant — responsive: stacked on mobile, horizontal on desktop */
+  <a
+    href={href}
+    class="flex flex-col md:flex-row md:items-start md:gap-4 no-underline group"
+  >
+    <!-- Image: full-width on mobile, 80×80 fixed on desktop -->
+    <div
+      class="relative overflow-hidden flex-shrink-0 mb-3 md:mb-0"
+      style="border-radius:2px;"
+    >
+      <!-- Mobile: 3:2 aspect -->
+      <div class="md:hidden relative overflow-hidden" style="padding-top:66.67%;">
+        <div class="absolute inset-0" style={`${fallbackGradient};`}></div>
+        {resolvedImage && (
+          <img
+            src={resolvedImage}
+            alt=""
+            role="presentation"
+            class="absolute inset-0 w-full h-full object-cover"
+            loading="lazy"
+            style="z-index:1;"
+            onerror="this.style.display='none'"
+          />
+        )}
+        <div class="absolute top-2 right-2" style="z-index:2;">
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+            <circle cx="5" cy="5" r="4" stroke="white" stroke-opacity="0.4" stroke-width="1" fill="none" />
+            <circle cx="5" cy="5" r="2" stroke="white" stroke-opacity="0.4" stroke-width="1" fill="none" />
+          </svg>
+        </div>
+        {tag && (
+          <div class="absolute bottom-2 left-2" style="z-index:2;">
+            <span
+              class="font-sans uppercase"
+              style={`font-size:9px;color:#F8F3EA;background:${tagColor};padding:2px 6px;border-radius:2px;`}
+            >{tag}</span>
+          </div>
+        )}
+      </div>
+
+      <!-- Desktop: fixed 80×80 -->
+      <div
+        class="hidden md:block relative overflow-hidden"
+        style="width:80px;height:80px;border-radius:2px;flex-shrink:0;"
+      >
+        <div class="absolute inset-0" style={`${fallbackGradient};`}></div>
+        {resolvedImage && (
+          <img
+            src={resolvedImage}
+            alt=""
+            role="presentation"
+            class="absolute inset-0 w-full h-full object-cover"
+            loading="lazy"
+            style="z-index:1;"
+            onerror="this.style.display='none'"
+          />
+        )}
+        <div class="absolute top-1 right-1" style="z-index:2;">
+          <svg width="8" height="8" viewBox="0 0 8 8" fill="none" aria-hidden="true">
+            <circle cx="4" cy="4" r="3" stroke="white" stroke-opacity="0.4" stroke-width="1" fill="none" />
+            <circle cx="4" cy="4" r="1.5" stroke="white" stroke-opacity="0.4" stroke-width="1" fill="none" />
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Text content -->
+    <div class="flex-1 min-w-0">
+      <!-- Tag + read time row -->
+      {(tag || readTime) && (
+        <div class="flex items-center gap-3 mb-1">
+          {tag && (
+            <span
+              class="font-sans uppercase"
+              style={`font-size:9px;color:${tagColor};letter-spacing:0.06em;`}
+            >{tag}</span>
+          )}
+          {readTime && (
+            <span class="font-sans" style="font-size:10px;color:#6E6056;">{readTime}</span>
+          )}
+        </div>
+      )}
+      <p
+        class="transition-colors duration-150"
+        style="font-family:'Newsreader',Georgia,serif;font-size:0.875rem;color:#2C1D17;line-height:1.25;"
+        onmouseover="this.closest('a').querySelector('p') && (this.style.color='#A2384B')"
+        onmouseout="this.style.color='#2C1D17'"
+      >{title}</p>
+      {dek && (
+        <p
+          class="font-sans mt-1 line-clamp-2"
+          style="font-size:11px;color:#6E6056;line-height:1.45;"
+        >{dek}</p>
+      )}
+    </div>
+  </a>
+)}

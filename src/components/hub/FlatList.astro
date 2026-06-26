@@ -1,0 +1,42 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import ArticleCard from './ArticleCard.astro'
+
+interface Props {
+  articles: CollectionEntry<'articles'>[]
+  hubId: string
+}
+
+const { articles, hubId } = Astro.props
+---
+
+<!-- Article count strip -->
+<div
+  class="border-b py-3 px-6 max-w-hub mx-auto"
+  style="border-color:rgba(44,29,23,0.14);"
+>
+  <span class="font-sans" style="font-size:11px;color:#A2384B;">
+    {articles.length} ARTICLES
+  </span>
+</div>
+
+<!-- Article list -->
+<ol class="list-none m-0 p-0 max-w-hub mx-auto">
+  {articles.map(a => (
+    <li
+      class="border-b px-6 py-4"
+      style="border-color:rgba(44,29,23,0.14);"
+    >
+      <ArticleCard
+        title={a.data.title}
+        dek={a.data.dek}
+        href={`/${hubId}/${a.id}`}
+        tag={a.data.category}
+        readTime={a.data.readTime}
+        heroImage={a.data.heroImage}
+        hubId={hubId}
+        variant="row"
+      />
+    </li>
+  ))}
+</ol>

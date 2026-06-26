@@ -1,0 +1,113 @@
+---
+import DiagnosticToolBanner from './DiagnosticToolBanner.astro'
+
+interface SymptomCard {
+  title: string
+  dek: string
+  image: string
+  href: string
+}
+
+interface Props {
+  copy: {
+    diagnostic_banner: {
+      kicker: string
+      body: string
+      cta: string
+      cta_href: string
+    }
+    symptom_directory: {
+      section_heading: string
+      cards: SymptomCard[]
+      catchall: {
+        heading: string
+        body: string
+        cta: string
+        cta_href: string
+      }
+    }
+  }
+}
+
+const { copy } = Astro.props
+const { section_heading, cards, catchall } = copy.symptom_directory
+---
+
+<DiagnosticToolBanner copy={copy.diagnostic_banner} />
+
+<section class="px-6 py-10 max-w-hub mx-auto">
+  <h2
+    class="mb-8"
+    style="font-family:'Fraunces Variable',Georgia,serif;font-size:clamp(1.125rem,2vw,1.25rem);font-weight:400;font-variation-settings:'opsz' 20,'SOFT' 10;color:#2C1D17;"
+  >{section_heading}</h2>
+
+  <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+    {cards.map(card => (
+      <a
+        href={card.href}
+        class="block no-underline group"
+        style="background:#FFFFFF;border:1px solid rgba(44,29,23,0.14);border-radius:2px;overflow:hidden;transition:border-color 150ms;"
+        onmouseover="this.style.borderColor='#A2384B'"
+        onmouseout="this.style.borderColor='rgba(44,29,23,0.14)'"
+      >
+        <!-- Image region 4:3 -->
+        <div class="relative overflow-hidden" style="padding-top:75%;">
+          {card.image && (
+            <img
+              src={card.image}
+              alt=""
+              role="presentation"
+              class="absolute inset-0 w-full h-full object-cover"
+              loading="lazy"
+              onerror="this.style.display='none'"
+            />
+          )}
+          <!-- Gradient fallback (always present; img covers it when loaded) -->
+          <div
+            class="absolute inset-0"
+            style="background:linear-gradient(135deg,#A2384B 0%,#3E2230 100%);z-index:0;"
+          ></div>
+          <!-- Spiral mark -->
+          <div class="absolute top-2 right-2" style="z-index:2;">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+              <circle cx="6" cy="6" r="5" stroke="white" stroke-opacity="0.4" stroke-width="1" fill="none" />
+              <circle cx="6" cy="6" r="2.5" stroke="white" stroke-opacity="0.4" stroke-width="1" fill="none" />
+            </svg>
+          </div>
+        </div>
+
+        <!-- Card body -->
+        <div class="px-3 py-3">
+          <p
+            class="mb-1"
+            style="font-family:'Newsreader',Georgia,serif;font-size:0.8125rem;color:#2C1D17;line-height:1.25;"
+          >{card.title}</p>
+          <p
+            class="font-sans"
+            style="font-size:10px;color:#6E6056;line-height:1.4;"
+          >{card.dek}</p>
+        </div>
+      </a>
+    ))}
+  </div>
+
+  <!-- Catchall CTA -->
+  <div
+    class="mt-8 px-5 py-5"
+    style="background:#F1E8D9;border-radius:2px;"
+  >
+    <h3
+      class="mb-1"
+      style="font-family:'Fraunces Variable',Georgia,serif;font-size:0.9375rem;font-weight:400;font-variation-settings:'opsz' 15,'SOFT' 10;color:#2C1D17;"
+    >{catchall.heading}</h3>
+    <p
+      class="mb-3"
+      style="font-family:'Newsreader',Georgia,serif;font-size:0.8125rem;color:#6E6056;line-height:1.55;"
+    >{catchall.body}</p>
+    <a
+      href={catchall.cta_href}
+      class="font-sans visited:text-berry"
+      style="font-size:11px;color:#A2384B;text-decoration:none;"
+    >{catchall.cta}</a>
+  </div>
+</section>

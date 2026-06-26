@@ -16,6 +16,30 @@ Fill in this table as you source each image. The URL column should point to the 
 | featured-3.webp | | | | |
 | editorial-signature.webp | | | | |
 | tool-section.webp | | | | |
+| hub-hair-problems.webp | | | | |
+| hub-reviews.webp | | | | |
+| hub-hair-care.webp | | | | |
+| hub-parents.webp | | | | |
+| hub-2a.webp | | | | |
+| hub-2b.webp | | | | |
+| hub-2c.webp | | | | |
+| hub-3a.webp | | | | |
+| hub-3b.webp | | | | |
+| hub-3c.webp | | | | |
+| hub-4a.webp | | | | |
+| hub-4b.webp | | | | |
+| hub-4c.webp | | | | |
+| symptom-card-dry.webp | | | | |
+| symptom-card-growth.webp | | | | |
+| symptom-card-products.webp | | | | |
+| symptom-card-parent.webp | | | | |
+| symptom-card-scalp.webp | | | | |
+| article-fallbacks/how-to.webp | | | | |
+| article-fallbacks/diagnostic.webp | | | | |
+| article-fallbacks/verdict-skip.webp | | | | |
+| article-fallbacks/verdict-buy.webp | | | | |
+| article-fallbacks/ingredient.webp | | | | |
+| article-fallbacks/uk-context.webp | | | | |
 
 ## License notes
 
