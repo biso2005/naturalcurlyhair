@@ -8,6 +8,7 @@ export interface ArticleSummary {
   published: string
   readTime: string
   href: string
+  heroImage?: string
 }
 
 function estimateReadTime(wordCount: number): string {
@@ -31,5 +32,6 @@ export async function getLatestArticles(count = 5): Promise<ArticleSummary[]> {
       published: a.data.published,
       readTime: a.data.readTime ?? estimateReadTime(800),
       href: `/${a.data.hub}/${a.id}/`,
+      heroImage: a.data.heroImage,
     }))
 }

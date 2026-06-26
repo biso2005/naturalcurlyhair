@@ -1,6 +1,4 @@
 ---
-import ImagePlaceholder from './ImagePlaceholder.astro'
-
 interface FeaturedArticle {
   tag: string
   tag_colour: 'skip' | 'method' | 'uk'
@@ -26,6 +24,18 @@ const tagColours: Record<string, string> = {
   uk:     '#B97A2B',
 }
 
+const imageSrcs = {
+  lead:   '/images/placeholders/featured-2.webp',
+  flank0: '/images/placeholders/featured-1.webp',
+  flank1: '/images/placeholders/featured-3.webp',
+}
+
+const fallbackGradients = {
+  lead:   'linear-gradient(160deg, #4A3228 0%, #2C1D17 100%)',
+  flank0: 'linear-gradient(160deg, #4E6B70 0%, #2E4447 100%)',
+  flank1: 'linear-gradient(160deg, #9C8070 0%, #6E5848 100%)',
+}
+
 const lead   = copy.articles.find(a => a.size === 'lead')
 const flanks = copy.articles.filter(a => a.size === 'flank')
 ---
@@ -45,19 +55,29 @@ const flanks = copy.articles.filter(a => a.size === 'flank')
       </p>
     </div>
 
-    <!-- Desktop: 1fr / 1.5fr / 1fr; Mobile: stacked, SKIP-VERDICT lead first -->
+    <!-- Desktop: 1fr / 1.5fr / 1fr; Mobile: stacked, lead first -->
     <div class="flex flex-col md:grid md:grid-cols-[1fr_1.5fr_1fr] gap-5">
 
-      <!-- Mobile: lead card first; flanks render after on mobile -->
       <!-- Flank 1 (mobile: second) -->
       {flanks[0] && (
         <a href={flanks[0].href} class="no-underline group order-2 md:order-1">
-          <ImagePlaceholder
-            aspectRatio="4:5"
-            texture="cool"
-            withSpiral={false}
-            class="mb-3"
-          />
+          <!-- Image region: 70% of card -->
+          <div class="relative overflow-hidden mb-3" style="border-radius:2px;padding-top:125%;background:linear-gradient(160deg, #4E6B70 0%, #2E4447 100%);">
+            <img
+              src={imageSrcs.flank0}
+              alt=""
+              aria-hidden="true"
+              class="absolute inset-0 w-full h-full object-cover"
+              loading="lazy"
+              decoding="async"
+              onerror="this.style.display='none'"
+            />
+            <!-- Spiral mark -->
+            <svg class="absolute top-3 right-3" width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+              <circle cx="11" cy="11" r="10" stroke="white" stroke-width="1" stroke-opacity="0.4" />
+              <circle cx="11" cy="11" r="5"  stroke="white" stroke-width="1" stroke-opacity="0.4" />
+            </svg>
+          </div>
           <p
             class="font-sans uppercase mb-2"
             style={`font-size:11px;letter-spacing:0.10em;color:${tagColours[flanks[0].tag_colour]};`}
@@ -70,10 +90,7 @@ const flanks = copy.articles.filter(a => a.size === 'flank')
           >
             {flanks[0].title}
           </h3>
-          <p
-            class="text-taupe"
-            style="font-family:'Newsreader',Georgia,serif;font-size:15px;line-height:1.5;"
-          >
+          <p class="text-taupe" style="font-family:'Newsreader',Georgia,serif;font-size:15px;line-height:1.5;">
             {flanks[0].snip}
           </p>
         </a>
@@ -82,12 +99,21 @@ const flanks = copy.articles.filter(a => a.size === 'flank')
       <!-- Lead card (mobile: first) -->
       {lead && (
         <a href={lead.href} class="no-underline group order-1 md:order-2">
-          <ImagePlaceholder
-            aspectRatio="4:5"
-            texture="dark-warm"
-            withSpiral={false}
-            class="mb-3"
-          />
+          <div class="relative overflow-hidden mb-3" style="border-radius:2px;padding-top:125%;background:linear-gradient(160deg, #4A3228 0%, #2C1D17 100%);">
+            <img
+              src={imageSrcs.lead}
+              alt=""
+              aria-hidden="true"
+              class="absolute inset-0 w-full h-full object-cover"
+              loading="lazy"
+              decoding="async"
+              onerror="this.style.display='none'"
+            />
+            <svg class="absolute top-3 right-3" width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+              <circle cx="11" cy="11" r="10" stroke="white" stroke-width="1" stroke-opacity="0.4" />
+              <circle cx="11" cy="11" r="5"  stroke="white" stroke-width="1" stroke-opacity="0.4" />
+            </svg>
+          </div>
           <p
             class="font-sans uppercase mb-2"
             style={`font-size:11px;letter-spacing:0.10em;color:${tagColours[lead.tag_colour]};`}
@@ -100,10 +126,7 @@ const flanks = copy.articles.filter(a => a.size === 'flank')
           >
             {lead.title}
           </h2>
-          <p
-            class="text-taupe"
-            style="font-family:'Newsreader',Georgia,serif;font-size:15px;line-height:1.5;"
-          >
+          <p class="text-taupe" style="font-family:'Newsreader',Georgia,serif;font-size:15px;line-height:1.5;">
             {lead.snip}
           </p>
         </a>
@@ -112,12 +135,21 @@ const flanks = copy.articles.filter(a => a.size === 'flank')
       <!-- Flank 2 (mobile: third) -->
       {flanks[1] && (
         <a href={flanks[1].href} class="no-underline group order-3">
-          <ImagePlaceholder
-            aspectRatio="4:5"
-            texture="warm-neutral"
-            withSpiral={false}
-            class="mb-3"
-          />
+          <div class="relative overflow-hidden mb-3" style="border-radius:2px;padding-top:125%;background:linear-gradient(160deg, #9C8070 0%, #6E5848 100%);">
+            <img
+              src={imageSrcs.flank1}
+              alt=""
+              aria-hidden="true"
+              class="absolute inset-0 w-full h-full object-cover"
+              loading="lazy"
+              decoding="async"
+              onerror="this.style.display='none'"
+            />
+            <svg class="absolute top-3 right-3" width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+              <circle cx="11" cy="11" r="10" stroke="white" stroke-width="1" stroke-opacity="0.4" />
+              <circle cx="11" cy="11" r="5"  stroke="white" stroke-width="1" stroke-opacity="0.4" />
+            </svg>
+          </div>
           <p
             class="font-sans uppercase mb-2"
             style={`font-size:11px;letter-spacing:0.10em;color:${tagColours[flanks[1].tag_colour]};`}
@@ -130,10 +162,7 @@ const flanks = copy.articles.filter(a => a.size === 'flank')
           >
             {flanks[1].title}
           </h3>
-          <p
-            class="text-taupe"
-            style="font-family:'Newsreader',Georgia,serif;font-size:15px;line-height:1.5;"
-          >
+          <p class="text-taupe" style="font-family:'Newsreader',Georgia,serif;font-size:15px;line-height:1.5;">
             {flanks[1].snip}
           </p>
         </a>

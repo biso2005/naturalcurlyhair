@@ -1,6 +1,4 @@
 ---
-import ImagePlaceholder from './ImagePlaceholder.astro'
-
 interface Card {
   kicker: string
   title: string
@@ -17,7 +15,19 @@ interface Props {
 
 const { copy } = Astro.props
 
-const textures = ['dark-warm', 'mid-warm', 'cool', 'warm-neutral'] as const
+const imageSrcs = [
+  '/images/placeholders/symptom-hard-water.webp',
+  '/images/placeholders/symptom-protein-overload.webp',
+  '/images/placeholders/symptom-low-porosity.webp',
+  '/images/placeholders/symptom-uk-winter.webp',
+]
+
+const fallbackGradients = [
+  'linear-gradient(160deg, #4A3228 0%, #2C1D17 100%)',
+  'linear-gradient(160deg, #4E6B70 0%, #2E4447 100%)',
+  'linear-gradient(160deg, #8C6A58 0%, #5C3D2E 100%)',
+  'linear-gradient(160deg, #9C8070 0%, #6E5848 100%)',
+]
 ---
 
 <section class="bg-cream border-t border-line px-6 pt-12 pb-10">
@@ -35,19 +45,41 @@ const textures = ['dark-warm', 'mid-warm', 'cool', 'warm-neutral'] as const
       </h2>
     </div>
 
-    <!-- Desktop: 4-column row / Mobile: 2×2 grid -->
+    <!-- Desktop: 4-column / Mobile: 2×2 -->
     <div class="grid grid-cols-2 md:grid-cols-4 gap-[14px] md:gap-5">
       {copy.cards.map((card, i) => (
         <a href={card.href} class="no-underline group">
-          <ImagePlaceholder
-            aspectRatio="1:1"
-            texture={textures[i % textures.length]}
-            tag={card.kicker}
-            withSpiral={false}
-            class="mb-3"
-          />
+
+          <!-- Image-dominant tile with label overlaid inside -->
+          <div class="relative overflow-hidden mb-3" style="border-radius:2px;">
+            <div style={`padding-top:100%;background:${fallbackGradients[i % fallbackGradients.length]};`}>
+              <img
+                src={imageSrcs[i % imageSrcs.length]}
+                alt=""
+                aria-hidden="true"
+                class="absolute inset-0 w-full h-full object-cover"
+                loading="lazy"
+                decoding="async"
+                onerror={`this.style.display='none'`}
+              />
+              <!-- Dark gradient on bottom 40% -->
+              <div
+                class="absolute inset-0"
+                style="background:linear-gradient(to top, rgba(44,29,23,0.75) 0%, rgba(44,29,23,0) 60%);"
+              />
+              <!-- Symptom label inside image, lower-left -->
+              <span
+                class="absolute bottom-0 left-0 px-[14px] pb-[14px] font-sans text-cream/90 uppercase"
+                style="font-size:11px;letter-spacing:0.10em;line-height:1;"
+              >
+                {card.kicker}
+              </span>
+            </div>
+          </div>
+
+          <!-- Text below tile -->
           <p class="font-sans text-berry uppercase mb-1" style="font-size:11px;letter-spacing:0.10em;">
-            {card.kicker}
+            SYMPTOM DOCUMENTATION
           </p>
           <h3
             class="text-ink group-hover:text-berry transition-colors duration-150"

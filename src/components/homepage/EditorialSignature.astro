@@ -19,71 +19,81 @@ interface Props {
 }
 
 const { copy, contributors } = Astro.props
+
+const sigSrc = '/images/placeholders/editorial-signature.webp'
 ---
 
-<section class="border-t border-line px-6 pt-12 pb-10" style="background:#F1E8D9;">
-  <div class="max-w-hub mx-auto">
+<section class="border-t border-line" style="background:#F1E8D9;">
 
-    <p class="font-sans text-taupe uppercase mb-8" style="font-size:11px;letter-spacing:0.10em;">
-      {copy.section_kicker}
-    </p>
+  <!-- Hero image anchor: full-width, 16:9, max 320px desktop -->
+  <div
+    class="relative w-full overflow-hidden"
+    style="max-height:320px;background:#3E2230;"
+  >
+    <div style="padding-top:min(56.25%, 320px);position:relative;">
+      <img
+        src={sigSrc}
+        alt=""
+        aria-hidden="true"
+        class="absolute inset-0 w-full h-full object-cover"
+        loading="lazy"
+        decoding="async"
+        onerror="this.style.display='none'"
+      />
+    </div>
+  </div>
 
-    <!-- Desktop: sample left, contributors right; Mobile: stacked -->
-    <div class="flex flex-col md:grid md:grid-cols-[1.4fr_1fr] gap-8 md:gap-12 items-start">
+  <!-- Existing pattern: sample + contributors -->
+  <div class="px-6 pt-12 pb-10">
+    <div class="max-w-hub mx-auto">
 
-      <!-- Sample paragraph -->
-      <div
-        class="px-6 py-5"
-        style="background:#F8F3EA;border-left:2px solid #3E2230;border-radius:2px;"
-      >
-        <p class="font-sans text-taupe uppercase mb-4" style="font-size:11px;letter-spacing:0.10em;">
-          {copy.sample_label}
-        </p>
-        <p
-          class="text-ink"
-          style="font-family:'Newsreader',Georgia,serif;font-size:15px;line-height:1.7;font-style:italic;"
-        >
-          {copy.sample_text}
-        </p>
-      </div>
+      <p class="font-sans text-taupe uppercase mb-8" style="font-size:11px;letter-spacing:0.10em;">
+        {copy.section_kicker}
+      </p>
 
-      <!-- Contributors -->
-      <div>
-        <p class="font-sans text-taupe uppercase mb-5" style="font-size:11px;letter-spacing:0.10em;">
-          {copy.contributors_label}
-        </p>
-        <ul class="list-none m-0 p-0 flex flex-col gap-4">
-          {contributors.map(c => (
-            <li class="flex items-center gap-3">
-              <!-- Placeholder portrait: gradient circle with initials -->
-              <div
-                class="flex-shrink-0 flex items-center justify-center font-sans font-semibold text-cream"
-                style={`width:40px;height:40px;border-radius:50%;background:${c.colour ?? '#6E6056'};font-size:12px;letter-spacing:0.02em;`}
-                aria-hidden="true"
-              >
-                {c.initials ?? c.name.split(' ').map((w: string) => w[0]).join('').slice(0, 2).toUpperCase()}
-              </div>
-              <div>
-                <p
-                  class="text-ink"
-                  style="font-family:'Fraunces Variable',Georgia,serif;font-size:15px;font-weight:400;line-height:1.2;font-variation-settings:'opsz' 16,'SOFT' 10;"
+      <div class="flex flex-col md:grid md:grid-cols-[1.4fr_1fr] gap-8 md:gap-12 items-start">
+
+        <!-- Sample paragraph -->
+        <div class="px-6 py-5" style="background:#F8F3EA;border-left:2px solid #3E2230;border-radius:2px;">
+          <p class="font-sans text-taupe uppercase mb-4" style="font-size:11px;letter-spacing:0.10em;">
+            {copy.sample_label}
+          </p>
+          <p class="text-ink" style="font-family:'Newsreader',Georgia,serif;font-size:15px;line-height:1.7;font-style:italic;">
+            {copy.sample_text}
+          </p>
+        </div>
+
+        <!-- Contributors -->
+        <div>
+          <p class="font-sans text-taupe uppercase mb-5" style="font-size:11px;letter-spacing:0.10em;">
+            {copy.contributors_label}
+          </p>
+          <ul class="list-none m-0 p-0 flex flex-col gap-4">
+            {contributors.map(c => (
+              <li class="flex items-center gap-3">
+                <div
+                  class="flex-shrink-0 flex items-center justify-center font-sans font-semibold text-cream"
+                  style={`width:40px;height:40px;border-radius:50%;background:${c.colour ?? '#6E6056'};font-size:12px;letter-spacing:0.02em;`}
+                  aria-hidden="true"
                 >
-                  {c.name}
-                </p>
-                <p class="font-sans text-taupe" style="font-size:12px;">{c.role}</p>
-              </div>
-            </li>
-          ))}
-        </ul>
+                  {c.initials ?? c.name.split(' ').map((w: string) => w[0]).join('').slice(0, 2).toUpperCase()}
+                </div>
+                <div>
+                  <p class="text-ink" style="font-family:'Fraunces Variable',Georgia,serif;font-size:15px;font-weight:400;line-height:1.2;font-variation-settings:'opsz' 16,'SOFT' 10;">
+                    {c.name}
+                  </p>
+                  <p class="font-sans text-taupe" style="font-size:12px;">{c.role}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
 
-        <p
-          class="text-taupe mt-8"
-          style="font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:15px;line-height:1.4;"
-        >
-          {copy.tagline}
-        </p>
+          <p class="text-taupe mt-8" style="font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:15px;line-height:1.4;">
+            {copy.tagline}
+          </p>
+        </div>
+
       </div>
-
     </div>
   </div>
 </section>

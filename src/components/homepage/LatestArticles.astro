@@ -37,40 +37,57 @@ function formatDate(iso: string): string {
 
     <ol class="list-none m-0 p-0">
       {articles.map(article => (
-        <li class="border-t border-line py-5">
-          <a href={article.href} class="no-underline group block md:flex md:items-baseline md:justify-between md:gap-4">
+        <li class="border-t border-line py-4">
+          <a href={article.href} class="no-underline group flex items-center gap-4">
 
-            <!-- Mobile: two-line layout. Desktop: single-line. -->
-
-            <!-- Date + tag — always on same line -->
-            <div class="flex items-baseline gap-3 mb-1 md:mb-0 md:flex-shrink-0">
-              <span class="font-sans text-taupe" style="font-size:12px;">
-                {formatDate(article.published)}
-              </span>
-              <span
-                class="font-sans text-berry uppercase"
-                style="font-size:11px;letter-spacing:0.10em;"
-              >
-                {article.hub.toUpperCase()}
-              </span>
-            </div>
-
-            <!-- Title: wraps on mobile, truncates on desktop -->
-            <span
-              class="md:flex-1 md:truncate md:mx-3 group-hover:text-berry transition-colors duration-150 block"
-              style="font-family:'Fraunces Variable',Georgia,serif;font-size:17px;font-weight:400;letter-spacing:-0.012em;line-height:1.35;font-variation-settings:'opsz' 18,'SOFT' 10;color:#2C1D17;"
+            <!-- Thumbnail: 50px mobile, 60px desktop -->
+            <div
+              class="flex-shrink-0 overflow-hidden flex items-center justify-center"
+              style="width:50px;height:50px;border-radius:2px;background:#6E6056;"
             >
-              {article.title}
-            </span>
-
-            <!-- Read time + arrow: on same line as title on mobile, end of row on desktop -->
-            <div class="flex items-baseline gap-3 mt-1 md:mt-0 md:flex-shrink-0">
-              <span class="font-sans text-taupe" style="font-size:12px;">
-                {article.readTime}
-              </span>
-              <span class="font-sans text-berry" style="font-size:12px;" aria-hidden="true">→</span>
+              {article.heroImage ? (
+                <img
+                  src={article.heroImage}
+                  alt=""
+                  aria-hidden="true"
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                  decoding="async"
+                  onerror="this.style.display='none'"
+                />
+              ) : (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <circle cx="12" cy="12" r="11" stroke="white" stroke-width="1" stroke-opacity="0.35" />
+                  <circle cx="12" cy="12" r="5"  stroke="white" stroke-width="1" stroke-opacity="0.35" />
+                </svg>
+              )}
             </div>
 
+            <!-- Row content -->
+            <div class="flex-1 min-w-0 md:flex md:items-baseline md:justify-between md:gap-4">
+
+              <div class="flex items-baseline gap-3 mb-1 md:mb-0 md:flex-shrink-0">
+                <span class="font-sans text-taupe" style="font-size:12px;">
+                  {formatDate(article.published)}
+                </span>
+                <span class="font-sans text-berry uppercase" style="font-size:11px;letter-spacing:0.10em;">
+                  {article.hub.toUpperCase()}
+                </span>
+              </div>
+
+              <span
+                class="md:flex-1 md:truncate md:mx-3 group-hover:text-berry transition-colors duration-150 block"
+                style="font-family:'Fraunces Variable',Georgia,serif;font-size:17px;font-weight:400;letter-spacing:-0.012em;line-height:1.35;font-variation-settings:'opsz' 18,'SOFT' 10;color:#2C1D17;"
+              >
+                {article.title}
+              </span>
+
+              <div class="flex items-baseline gap-3 mt-1 md:mt-0 md:flex-shrink-0">
+                <span class="font-sans text-taupe" style="font-size:12px;">{article.readTime}</span>
+                <span class="font-sans text-berry" style="font-size:12px;" aria-hidden="true">→</span>
+              </div>
+
+            </div>
           </a>
         </li>
       ))}

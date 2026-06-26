@@ -1,6 +1,4 @@
 ---
-import ImagePlaceholder from './ImagePlaceholder.astro'
-
 interface Props {
   copy: {
     kicker: string
@@ -17,128 +15,153 @@ interface Props {
 }
 
 const { copy } = Astro.props
+
+const heroSrc = '/images/placeholders/hero.webp'
 ---
 
-<section class="bg-cream px-6 pt-16 pb-12 md:pt-20 md:pb-16">
-  <div class="max-w-hub mx-auto">
+<!-- Full-bleed hero: image fills width, text overlaid -->
+<section class="relative w-full overflow-hidden" style="background:#2C1D17;">
 
-    <!-- Desktop: 1.6fr left (image pair) / 1fr right (thesis + tool) -->
-    <!-- Mobile: stacked — single image with overlay, then tool block -->
-    <div class="grid grid-cols-1 md:grid-cols-[1.6fr_1fr] gap-8 md:gap-10 items-start">
+  <!-- Image + overlay layer -->
+  <div class="relative w-full" style="min-height:480px;">
+    <img
+      src={heroSrc}
+      alt=""
+      aria-hidden="true"
+      class="absolute inset-0 w-full h-full object-cover"
+      loading="eager"
+      fetchpriority="high"
+      decoding="async"
+      onerror="this.style.display='none'"
+    />
 
-      <!-- LEFT: image column -->
-      <div>
+    <!-- Desktop: left-third gradient -->
+    <div
+      class="hidden md:block absolute inset-0"
+      style="background:linear-gradient(to right, rgba(62,34,48,0.85) 0%, rgba(62,34,48,0) 50%);"
+    />
 
-        <!-- Mobile: single image, text overlaid on bottom third -->
-        <div class="relative md:hidden">
-          <ImagePlaceholder
-            aspectRatio="4:5"
-            texture="mid-warm"
-            withSpiral={true}
+    <!-- Mobile: bottom-up gradient -->
+    <div
+      class="md:hidden absolute inset-0"
+      style="background:linear-gradient(to top, rgba(62,34,48,0.90) 0%, rgba(62,34,48,0) 40%);"
+    />
+
+    <!-- Spiral mark, desktop only -->
+    <svg
+      class="hidden md:block absolute top-5 right-6"
+      width="28" height="28" viewBox="0 0 28 28"
+      fill="none" xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <circle cx="14" cy="14" r="13" stroke="white" stroke-width="1" stroke-opacity="0.4" />
+      <circle cx="14" cy="14" r="6"  stroke="white" stroke-width="1" stroke-opacity="0.4" />
+    </svg>
+
+    <!-- Desktop: text + tool, left-anchored, vertically centred -->
+    <div
+      class="hidden md:flex flex-col justify-center absolute inset-y-0 left-0 px-10 lg:px-16"
+      style="max-width:500px;min-height:600px;"
+    >
+      <p class="font-sans uppercase mb-4" style="font-size:11px;letter-spacing:0.10em;color:rgba(248,243,234,0.70);">
+        {copy.kicker}
+      </p>
+      <h1
+        class="mb-4"
+        style="font-family:'Fraunces Variable',Georgia,serif;font-size:34px;font-weight:400;letter-spacing:-0.022em;line-height:1.1;font-variation-settings:'opsz' 36,'SOFT' 20;color:#F8F3EA;"
+      >
+        {copy.headline}
+      </h1>
+      <p
+        class="mb-8"
+        style="font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:17px;line-height:1.45;color:rgba(248,243,234,0.85);"
+      >
+        {copy.tagline}
+      </p>
+
+      <div class="flex flex-col gap-4 px-5 py-6" style="background:#3E2230;border-radius:2px;max-width:360px;">
+        <p class="font-sans uppercase" style="font-size:11px;letter-spacing:0.10em;color:rgba(248,243,234,0.60);">
+          {copy.tool.label}
+        </p>
+        <p style="font-family:'Fraunces Variable',Georgia,serif;font-size:17px;font-weight:400;line-height:1.25;font-variation-settings:'opsz' 18,'SOFT' 10;color:#F8F3EA;">
+          {copy.tool.title}
+        </p>
+        <form action="/tool/postcode" method="get" class="flex flex-col gap-3">
+          <input
+            type="text"
+            name="p"
+            placeholder={copy.tool.input_placeholder}
+            class="font-sans text-ink bg-cream px-4 py-3 w-full focus:outline-none focus:ring-2 focus:ring-berry placeholder:text-taupe"
+            style="font-size:15px;border-radius:2px;"
+            aria-label="Postcode"
           />
-          <div
-            class="absolute bottom-0 left-0 right-0 px-5 pb-6 pt-16"
-            style="background:linear-gradient(to top, rgba(44,29,23,0.85) 0%, transparent 100%);"
+          <button
+            type="submit"
+            class="font-sans font-medium text-ink bg-cream px-5 py-3 hover:bg-cream-2 transition-colors duration-150"
+            style="font-size:15px;border-radius:2px;"
           >
-            <p class="font-sans text-cream/70 uppercase mb-3" style="font-size:11px;letter-spacing:0.10em;">
-              {copy.kicker}
-            </p>
-            <h1
-              class="mb-3 text-cream"
-              style="font-family:'Fraunces Variable',Georgia,serif;font-size:34px;font-weight:400;letter-spacing:-0.022em;line-height:1.1;font-variation-settings:'opsz' 36,'SOFT' 20;"
-            >
-              {copy.headline}
-            </h1>
-            <p
-              class="text-cream/70"
-              style="font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:15px;line-height:1.4;"
-            >
-              {copy.tagline}
-            </p>
-          </div>
-        </div>
-
-        <!-- Desktop: two images side-by-side (1fr / 1fr sub-grid, 12px gap) -->
-        <div class="hidden md:grid md:grid-cols-2 gap-3">
-          <ImagePlaceholder
-            aspectRatio="4:5"
-            texture="dark-warm"
-            withSpiral={true}
-          />
-          <ImagePlaceholder
-            aspectRatio="4:5"
-            texture="mid-warm"
-            withSpiral={true}
-          />
-        </div>
-
-      </div>
-
-      <!-- RIGHT: thesis + tool column -->
-      <div class="flex flex-col gap-6">
-
-        <!-- Thesis block (desktop only — mobile version lives in image overlay above) -->
-        <div class="hidden md:block">
-          <p class="font-sans text-taupe uppercase mb-4" style="font-size:11px;letter-spacing:0.10em;">
-            {copy.kicker}
-          </p>
-          <h1
-            class="mb-3 text-ink"
-            style="font-family:'Fraunces Variable',Georgia,serif;font-size:34px;font-weight:400;letter-spacing:-0.022em;line-height:1.1;font-variation-settings:'opsz' 36,'SOFT' 20;"
-          >
-            {copy.headline}
-          </h1>
-          <p
-            class="text-taupe"
-            style="font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:15px;line-height:1.45;"
-          >
-            {copy.tagline}
-          </p>
-        </div>
-
-        <!-- Tool card -->
-        <div
-          class="flex flex-col gap-4 px-5 py-6"
-          style="background:#3E2230;border-radius:2px;"
+            {copy.tool.cta_primary}
+          </button>
+        </form>
+        <a
+          href="/tool/"
+          class="font-sans hover:text-cream transition-colors duration-150 no-underline"
+          style="font-size:12px;color:rgba(248,243,234,0.60);"
         >
-          <p class="font-sans text-cream/60 uppercase" style="font-size:11px;letter-spacing:0.10em;">
-            {copy.tool.label}
-          </p>
-          <p
-            class="text-cream"
-            style="font-family:'Fraunces Variable',Georgia,serif;font-size:17px;font-weight:400;line-height:1.25;font-variation-settings:'opsz' 18,'SOFT' 10;"
-          >
-            {copy.tool.title}
-          </p>
-
-          <form action="/tool/postcode" method="get" class="flex flex-col gap-3">
-            <input
-              type="text"
-              name="p"
-              placeholder={copy.tool.input_placeholder}
-              class="font-sans text-ink bg-cream px-4 py-3 w-full focus:outline-none focus:ring-2 focus:ring-berry placeholder:text-taupe"
-              style="font-size:15px;border-radius:2px;"
-              aria-label="Postcode"
-            />
-            <button
-              type="submit"
-              class="font-sans font-medium text-ink bg-cream px-5 py-3 hover:bg-cream-2 transition-colors duration-150"
-              style="font-size:15px;border-radius:2px;"
-            >
-              {copy.tool.cta_primary}
-            </button>
-          </form>
-
-          <a
-            href="/tool/"
-            class="font-sans text-cream/60 hover:text-cream transition-colors duration-150 no-underline"
-            style="font-size:12px;"
-          >
-            {copy.tool.cta_alt}
-          </a>
-        </div>
-
+          {copy.tool.cta_alt}
+        </a>
       </div>
     </div>
+
+    <!-- Mobile: text anchored to bottom of image -->
+    <div class="md:hidden absolute bottom-0 left-0 right-0 px-5 pb-6 pt-24">
+      <p class="font-sans uppercase mb-3" style="font-size:11px;letter-spacing:0.10em;color:rgba(248,243,234,0.70);">
+        {copy.kicker}
+      </p>
+      <h1
+        class="mb-3"
+        style="font-family:'Fraunces Variable',Georgia,serif;font-size:28px;font-weight:400;letter-spacing:-0.022em;line-height:1.1;font-variation-settings:'opsz' 30,'SOFT' 20;color:#F8F3EA;"
+      >
+        {copy.headline}
+      </h1>
+      <p style="font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:15px;line-height:1.4;color:rgba(248,243,234,0.85);">
+        {copy.tagline}
+      </p>
+    </div>
   </div>
+
+  <!-- Mobile: tool card below image -->
+  <div class="md:hidden px-5 py-6" style="background:#3E2230;">
+    <p class="font-sans uppercase mb-3" style="font-size:11px;letter-spacing:0.10em;color:rgba(248,243,234,0.60);">
+      {copy.tool.label}
+    </p>
+    <p class="mb-4" style="font-family:'Fraunces Variable',Georgia,serif;font-size:17px;font-weight:400;line-height:1.25;font-variation-settings:'opsz' 18,'SOFT' 10;color:#F8F3EA;">
+      {copy.tool.title}
+    </p>
+    <form action="/tool/postcode" method="get" class="flex flex-col gap-3">
+      <input
+        type="text"
+        name="p"
+        placeholder={copy.tool.input_placeholder}
+        class="font-sans text-ink bg-cream px-4 py-3 w-full focus:outline-none focus:ring-2 focus:ring-berry placeholder:text-taupe"
+        style="font-size:15px;border-radius:2px;"
+        aria-label="Postcode"
+      />
+      <button
+        type="submit"
+        class="font-sans font-medium text-ink bg-cream px-5 py-3 hover:bg-cream-2 transition-colors duration-150"
+        style="font-size:15px;border-radius:2px;"
+      >
+        {copy.tool.cta_primary}
+      </button>
+    </form>
+    <a
+      href="/tool/"
+      class="font-sans hover:text-cream transition-colors duration-150 no-underline block mt-3"
+      style="font-size:12px;color:rgba(248,243,234,0.60);"
+    >
+      {copy.tool.cta_alt}
+    </a>
+  </div>
+
 </section>
