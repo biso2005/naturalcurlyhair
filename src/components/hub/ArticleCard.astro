@@ -49,9 +49,11 @@ const hubGradients: Record<string, string> = {
   'reviews':       'linear-gradient(135deg,#3E2230 0%,#2C1D17 100%)',
 }
 
-const resolvedImage = heroImage ?? (tag ? tagFallbacks[tag] : undefined)
+// uk-context is kept as a frontmatter field for filtering but not shown as a pill
+const visibleTag = tag === 'uk-context' ? undefined : tag
+const resolvedImage = heroImage ?? (visibleTag ? tagFallbacks[visibleTag] : undefined)
 const fallbackGradient = hubGradients[hubId] ?? 'linear-gradient(135deg,#6E6056 0%,#2C1D17 100%)'
-const tagColor = tag ? (tagColors[tag] ?? '#6E6056') : undefined
+const tagColor = visibleTag ? (tagColors[visibleTag] ?? '#6E6056') : undefined
 ---
 
 {variant === 'grid' ? (
@@ -85,12 +87,12 @@ const tagColor = tag ? (tagColors[tag] ?? '#6E6056') : undefined
         </svg>
       </div>
       <!-- Tag pill -->
-      {tag && (
+      {visibleTag && (
         <div class="absolute bottom-2 left-2" style="z-index:2;">
           <span
             class="font-sans uppercase"
             style={`font-size:9px;color:#F8F3EA;background:${tagColor};padding:2px 6px;border-radius:2px;letter-spacing:0.06em;`}
-          >{tag}</span>
+          >{visibleTag}</span>
         </div>
       )}
     </div>
@@ -134,12 +136,12 @@ const tagColor = tag ? (tagColors[tag] ?? '#6E6056') : undefined
             <circle cx="5" cy="5" r="2" stroke="white" stroke-opacity="0.4" stroke-width="1" fill="none" />
           </svg>
         </div>
-        {tag && (
+        {visibleTag && (
           <div class="absolute bottom-2 left-2" style="z-index:2;">
             <span
               class="font-sans uppercase"
               style={`font-size:9px;color:#F8F3EA;background:${tagColor};padding:2px 6px;border-radius:2px;`}
-            >{tag}</span>
+            >{visibleTag}</span>
           </div>
         )}
       </div>
@@ -173,13 +175,13 @@ const tagColor = tag ? (tagColors[tag] ?? '#6E6056') : undefined
     <!-- Text content -->
     <div class="flex-1 min-w-0">
       <!-- Tag + read time row -->
-      {(tag || readTime) && (
+      {(visibleTag || readTime) && (
         <div class="flex items-center gap-3 mb-1">
-          {tag && (
+          {visibleTag && (
             <span
               class="font-sans uppercase"
               style={`font-size:9px;color:${tagColor};letter-spacing:0.06em;`}
-            >{tag}</span>
+            >{visibleTag}</span>
           )}
           {readTime && (
             <span class="font-sans" style="font-size:10px;color:#6E6056;">{readTime}</span>
