@@ -1,0 +1,189 @@
+{
+  "how-we-review": {
+    "kicker": "EDITORIAL PROCESS",
+    "title": "How we review",
+    "standfirst": "Why a site that earns commission still tells you to skip the expensive thing.",
+    "sections": [
+      {
+        "heading": "What we cover",
+        "body": "We write about UK natural curly and Afro-textured hair. We do not write about generic wavy hair, the curly girl method, or US-market products that aren't available here. The site is built around symptoms — the actual things people search for when their hair isn't working — and we route those symptoms to causes using the diagnostic tool, then to articles that explain the cause in depth. Every article is one of three things: a diagnostic piece (what's likely going on with your hair), a method piece (how to do something), or a verdict piece (whether a product or technique is worth your money)."
+      },
+      {
+        "heading": "How the verdicts get decided",
+        "body": "The verdict on any product is decided editorially, before affiliate links are added, by the editor who has not seen the commission rates for the products being reviewed. That's the rule that protects everything. We tilt no verdict toward a payout. The day we did would be the day we started spending the trust we're monetising. There is no version of the site where that's a worthwhile trade.\n\nWhat that looks like in practice: we buy what we test. Products are bought through normal retail channels, not requested as samples from brands; PR samples are declined. No sponsored content, ever — no paid placements, paid reviews, paid features, or paid partnerships. The affiliate model is declared, and is the only commercial model on the site. No gifted reviews — if we recommend a product, we paid for it. No own product — we will never sell our own range. The credibility of the recommendations depends on having nothing to sell."
+      },
+      {
+        "heading": "Confidence-grading",
+        "body": "Every claim on the site signals how sure we are. Some things are well-established (hard water deposits minerals that block moisture absorption). Some things are described, not claimed (the standard first move most curl specialists recommend). Some things are contested (the float test, for example, which is widely repeated and not supported by the chemists or trichologists we trust). Some things we don't know, and we say so.\n\nWhen you see \"confidence: high\" next to a piece, the evidence is strong and the position is conservative. When you see \"confidence: low\" or no confidence claim at all, we're working with thin data and we want you to know that before you act on the advice."
+      },
+      {
+        "heading": "What we won't do",
+        "body": "We don't diagnose, prescribe, or replace a clinician. Where symptoms suggest a medical issue — scalp conditions, hair loss patterns, infection — we route you to a GP, trichologist, or dermatologist. The hair advice and the medical advice run in parallel; the hair advice never replaces the medical advice.\n\nWe don't use AI-generated content for articles, tool outputs, or any reader-facing copy. We use AI tools in the production process the same way a writer might use an editor — the reader never sees that, and the reader never sees AI-written prose."
+      },
+      {
+        "heading": "How to push back on us",
+        "body": "If a verdict is wrong, or a piece of advice doesn't match your experience, the Contact page is the way to say so. We'd rather know."
+      }
+    ],
+    "intro": "NaturalCurly is an independent editorial site. We have nothing of our own to sell — no product line, no subscription box, no own-brand shampoo waiting at the end of a recommendation. What we have is affiliate links, declared on every page, and an editorial position that we will tell you to save your money when saving your money is the right answer.\n\nThe point of explaining how we review is so you can decide for yourself whether to trust the verdicts. The shape of the process is what makes the verdicts credible — not us saying they are."
+  },
+
+  "how-we-test": {
+    "kicker": "METHODOLOGY",
+    "title": "How we test",
+    "standfirst": "Eight weeks, London hard water, real wash days. The protocol behind every verdict.",
+    "intro": "When we review a product, we test it properly. The protocol below is the same one we apply to every verdict article on the site.",
+    "sections": [
+      {
+        "heading": "The test conditions",
+        "body": "Location: London, in the operator's home. Hard water area — Thames Water, calcium carbonate around 280 mg/L, comfortably in the \"very hard\" band by UK water company classification. This matters because most product reviews online were done in soft-water environments where the same product behaves differently. A leave-in that performs well in Manchester (around 60 mg/L) may flake within hours in London. We test in conditions that match the worst-case UK water profile, not the best-case.\n\nHair tested on: UK natural curly and Afro-textured hair across the 3A–4C range. We do not extrapolate from one hair type to another. If we tested a product on 4B hair, the verdict is for 4B hair. If we want to know how it behaves on 3B, we test it on 3B.\n\nTest window: eight weeks minimum. Most product issues emerge between weeks three and six — initial use often goes well, then buildup, dryness, or reversion sets in. A two-week test is a first impression, not a verdict. We don't publish first impressions.\n\nWash days: real ones. We use the product as instructed, in the context of a normal routine, on actual washes — not staged shoots."
+      },
+      {
+        "heading": "What we measure",
+        "body": "For each product we record, across the eight weeks: how the hair feels immediately after use (within the first hour); how the hair feels at 24 hours; how the hair feels at day three (the day most curl products fail or hold); how the product layers with other products in the routine — whether it pills, flakes, builds up, or plays clean; whether wash-day length increases over time (a sign of buildup the product is contributing to); whether the verdict shifts between week one and week eight (often it does). Notes are kept per product. Where a verdict turns on a specific behaviour — pilling at week four, buildup detected at week six — the notes go in the article."
+      },
+      {
+        "heading": "What we don't measure",
+        "body": "We don't measure things we can't measure honestly. We don't quantify shine with a meter. We don't claim \"30% more definition\" because we have no instrument that produces that number reliably on Afro-textured hair, and the studies that produce numbers like that are almost always brand-funded and almost always on hair types that aren't ours. What we report is what we can describe accurately: how the product behaved, in conditions a reader in a UK hard-water area will recognise, over a period long enough for the verdict to be real."
+      },
+      {
+        "heading": "What gets a \"skip this\"",
+        "body": "A \"skip this\" verdict means one of three things: the product genuinely didn't work in our test and we have a cheaper or equally available alternative that did; the product is being sold at a price its ingredients don't justify and a near-identical formulation exists at a fraction of the cost; or the category itself is contested or unnecessary (e.g. most products marketed as \"porosity-specific\" do not, when tested, behave differently across porosities — and a single well-formulated conditioner often outperforms the porosity-specific range from the same brand). We will tell you to skip a product even when we have an affiliate link to it. The link is for the people who decide to buy it anyway; the verdict is for the people who want to know whether they should."
+      },
+      {
+        "heading": "What we'll change about this",
+        "body": "This is version one of our testing methodology. As the site grows, we may add: longer test windows for select cornerstone products; side-by-side testing on more than one hair type; testing in additional UK water profiles (Manchester or Glasgow as contrasting soft-water environments). Any change to the methodology will be noted here with the date it changed."
+      }
+    ]
+  },
+
+  "contact": {
+    "kicker": "GET IN TOUCH",
+    "title": "Contact",
+    "standfirst": "Editorial corrections, product suggestions, feedback. We read everything.",
+    "intro": "The best way to reach us is by email: [OPERATOR TO FILL IN — e.g. hello@naturalcurlyhair.co.uk].",
+    "sections": [
+      {
+        "heading": "Editorial corrections",
+        "body": "If we've got something wrong — a fact, a verdict, a missing source — please tell us. Include the article URL and the specific thing you'd like us to look at. We read every correction. If we agree, we update the piece and note what changed at the bottom."
+      },
+      {
+        "heading": "Product suggestions",
+        "body": "If there's a product you'd like us to test, send us the product name, where you can buy it in the UK, and ideally why you think it's worth testing (or worth telling people to skip). We can't test everything, but we add suggestions to the testing queue and work through them in priority order."
+      },
+      {
+        "heading": "Feedback on the diagnostic tool",
+        "body": "If the tool got something wrong for you — pointed you at the wrong cause, missed something obvious, recommended an action that didn't help — we want to know. The tool gets sharper as more people use it. Your feedback is what makes that happen."
+      },
+      {
+        "heading": "What we can't help with",
+        "body": "We can't diagnose your hair over email. We can't recommend a specific product without testing it. We can't tell you why a single salon visit went badly. For medical hair issues — sudden hair loss, scalp pain, infection — please see a GP, trichologist, or dermatologist. We route to them deliberately on the site, not as a fob-off but because that's where the help actually is."
+      },
+      {
+        "heading": "On response times",
+        "body": "This is a small operation. We aim to reply within five working days. We read everything; we don't reply to everything. If you don't hear back within two weeks, assume we read it and didn't have anything useful to say."
+      }
+    ]
+  },
+
+  "affiliate-disclosure": {
+    "kicker": "AFFILIATE DISCLOSURE",
+    "title": "How we make money",
+    "standfirst": "Affiliate links, declared plainly. What that means, and why it doesn't bend the verdicts.",
+    "callout": "NaturalCurly contains affiliate links. When you buy a product through one of our links, we may earn a small commission at no extra cost to you. We only recommend products we've tested. The verdict on any product is decided editorially, before affiliate links are added, by the editor who has not seen the commission rates. We will tell you to skip a product even when we have an affiliate link to it.",
+    "sections": [
+      {
+        "heading": "What an affiliate link is",
+        "body": "When we link to a product on a retailer's site (Amazon UK, Boots, LookFantastic, Cult Beauty, and others), we use a special tracking link that tells the retailer the visit came from NaturalCurly. If you then buy something — that product, or anything else from that retailer in the same session — we receive a small percentage of the sale as commission. The price you pay does not change. You pay the same as if you'd visited the retailer directly."
+      },
+      {
+        "heading": "Which retailers we have affiliate relationships with",
+        "body": "Awin network (covering retailers including LookFantastic, Boots, Cult Beauty, and others), Amazon UK Associates, and direct brand affiliate programmes where we've applied to specific brands. Where we have an affiliate relationship with a retailer, every link to that retailer on the site is an affiliate link."
+      },
+      {
+        "heading": "How this affects the verdicts",
+        "body": "It doesn't. The verdict on any product is decided editorially, before the affiliate links are added, by the editor who has not seen the commission rates for the products being reviewed. We will recommend the cheapest option in a category if the cheapest option is the best one, even though the cheapest option pays the least commission. We will tell readers to skip products we have affiliate links to. This rule is the asset; it is fixed."
+      },
+      {
+        "heading": "Why we declare every link",
+        "body": "Two reasons. First, it's required by the UK Advertising Standards Authority (ASA) and the Committee of Advertising Practice (CAP) code — affiliate marketing must be clearly disclosed when the publisher has a material connection with the brand or retailer. Second, and more importantly, declaring the link is what makes the verdict credible. If we hid the commercial arrangement and then told you a product was worth buying, you'd have no way to evaluate whether we were telling the truth. The disclosure is the proof of independence, not a disclaimer against it."
+      },
+      {
+        "heading": "What we don't do",
+        "body": "We don't accept sponsored posts, paid placements, paid features, or paid partnerships. We don't accept gifted products from brands. We don't sell our own products. We don't have a subscription box. The affiliate model is the only commercial model on the site, and it's declared on every page where it applies."
+      }
+    ]
+  },
+
+  "privacy": {
+    "kicker": "PRIVACY",
+    "title": "Privacy notice",
+    "standfirst": "What we collect, why we collect it, what we do with it. Plain English first, detail below.",
+    "callout": "We collect very little personal data. We use Cloudflare for hosting, which logs basic technical information (your IP address, browser type, pages visited) for security and performance. If you sign up to our diagnostic profile feature, we collect your email address and the inputs you give the tool. We don't sell, share, or rent your data to anyone. We don't track you across the web. We don't use surveillance advertising. You can request your data, correct it, or delete it by emailing us.",
+    "sections": [
+      {
+        "heading": "Who we are",
+        "body": "[OPERATOR TO FILL IN: registered name and, if applicable, registered address. If operating as a sole trader without a registered company, this can be a contact email and the statement \"operating as a sole trader in the United Kingdom\".] We are the data controller for the personal data described in this notice."
+      },
+      {
+        "heading": "What personal data we collect",
+        "body": "Technical data from your visit: IP address, browser type and version, device type, operating system, pages visited on the site, referring URL, time and date of access. This data is logged automatically by Cloudflare, our hosting provider, for security (detecting and blocking attacks) and basic analytics (how many people visit, which pages, from which countries).\n\nData you give us: if you save a diagnostic profile, we collect your email address and the inputs you provided to the tool (your symptoms, postcode, surface descriptors). If you contact us by email, we hold that correspondence so we can respond and reference it later if you contact us again."
+      },
+      {
+        "heading": "What we do with it",
+        "body": "Technical data is used to keep the site running, secure, and improving. We do not combine technical data with any other identifying information. Diagnostic profile data is used to let you resume your session, to send you a follow-up email at 14 days asking whether the recommendation helped, and to make the tool's recommendations sharper for you over time. We do not use it for anything else. Email correspondence is used to reply to you and to remember context if you write again."
+      },
+      {
+        "heading": "What we don't do",
+        "body": "We don't sell your data. We don't share it with advertisers. We don't track you across other websites. We don't use behavioural or \"interest-based\" advertising. We don't have ad networks, third-party tracking pixels, or fingerprinting scripts on the site. We don't use Facebook Pixel, Google Ads tracking, or equivalent third-party advertising technology."
+      },
+      {
+        "heading": "Who else can see your data",
+        "body": "Cloudflare (hosting and security): processes technical data on our behalf as a sub-processor. [OPERATOR TO FILL IN: any other processor you actually use — e.g. email service for the diagnostic profile follow-up emails (Resend, Buttondown, ConvertKit, etc.), analytics service if any beyond Cloudflare's built-in. List each by name and what they process. If none beyond Cloudflare, say so explicitly.] We do not share data with any other third parties."
+      },
+      {
+        "heading": "How long we keep it",
+        "body": "Technical logs: 30 days (Cloudflare default; we don't retain longer). Diagnostic profile data: until you ask us to delete it, or for two years from your last interaction, whichever is sooner. Email correspondence: indefinitely, until you ask us to delete it."
+      },
+      {
+        "heading": "Your rights under UK GDPR",
+        "body": "You have the right to: request a copy of the personal data we hold about you; ask us to correct data that is inaccurate; ask us to delete your data; ask us to restrict how we use it; object to our processing; and complain to the Information Commissioner's Office (ICO) if you believe we have mishandled your data. To exercise any of these rights, email us at [OPERATOR TO FILL IN: data contact email — can be the same as the main contact email]. We will respond within one month."
+      },
+      {
+        "heading": "Complaints",
+        "body": "If you are not satisfied with how we handle your data, you can complain to the ICO at ico.org.uk or call 0303 123 1113."
+      },
+      {
+        "heading": "Changes to this notice",
+        "body": "We will update this page when our practices change. The date this notice was last updated is shown at the bottom of the page."
+      }
+    ],
+    "last_updated": "[OPERATOR TO FILL IN — date of go-live]"
+  },
+
+  "cookies": {
+    "kicker": "COOKIES",
+    "title": "Cookie notice",
+    "standfirst": "What cookies we use, what they do, and how to turn them off.",
+    "callout": "We use essential cookies to keep the site working. We do not use advertising cookies, tracking cookies, or third-party analytics cookies. You can disable cookies in your browser if you prefer; the site will continue to work.",
+    "sections": [
+      {
+        "heading": "What cookies are",
+        "body": "Cookies are small text files that websites place on your device. They're used to remember things between visits (like whether you're logged in), to keep things working (like security checks), and sometimes to track you across websites for advertising. We only use the first two kinds, never the third."
+      },
+      {
+        "heading": "Cookies we use",
+        "body": "Essential cookies (set by Cloudflare, our hosting provider): used for security (detecting bots, preventing abuse) and basic performance. These cannot be turned off without breaking the site. Diagnostic profile cookies (set by us, only if you save a profile): used to remember your profile across visits so you can resume your session. These are only set if you opt in to saving a profile."
+      },
+      {
+        "heading": "Cookies we don't use",
+        "body": "No Google Analytics. No Facebook Pixel. No advertising cookies of any kind. No third-party tracking. No behavioural retargeting. No fingerprinting."
+      },
+      {
+        "heading": "How to control cookies",
+        "body": "All modern browsers let you block cookies, delete them, or be notified when a site sets one. Look in your browser settings under \"privacy\" or \"cookies\". Blocking essential cookies may prevent parts of the site from working — for example, the diagnostic profile feature won't be able to remember your session."
+      }
+    ],
+    "last_updated": "[OPERATOR TO FILL IN — date of go-live]"
+  }
+}

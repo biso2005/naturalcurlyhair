@@ -1,0 +1,15 @@
+---
+import StandardPage from '../layouts/StandardPage.astro'
+import copy from '../data/footer_pages_copy.json'
+
+const page = copy['cookies']
+---
+
+<StandardPage
+  title={page.title}
+  kicker={page.kicker}
+  standfirst={page.standfirst}
+  callout={page.callout}
+  sections={page.sections}
+  lastUpdated={page.last_updated}
+/>

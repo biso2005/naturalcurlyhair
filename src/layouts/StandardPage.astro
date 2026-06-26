@@ -1,0 +1,101 @@
+---
+import BaseLayout from './BaseLayout.astro'
+
+interface Section {
+  heading: string
+  body: string
+}
+
+interface Props {
+  title: string
+  kicker: string
+  standfirst: string
+  sections: Section[]
+  intro?: string
+  callout?: string
+  lastUpdated?: string
+}
+
+const { title, kicker, standfirst, sections, intro, callout, lastUpdated } = Astro.props
+
+function renderBody(text: string): string {
+  return text
+    .split('\n\n')
+    .map(p => `<p>${p}</p>`)
+    .join('')
+}
+---
+
+<BaseLayout title={`${title} — naturalcurlyhair`}>
+  <div style="background:#F8F3EA;min-height:100vh;">
+    <div class="mx-auto px-6 py-16" style="max-width:680px;">
+
+      <!-- Kicker -->
+      <p class="font-sans uppercase text-taupe mb-4"
+         style="font-size:11px;letter-spacing:0.10em;">
+        {kicker}
+      </p>
+
+      <!-- Title -->
+      <h1 class="text-ink mb-5"
+          style="font-family:'Fraunces Variable',Georgia,serif;font-size:34px;font-weight:400;line-height:1.15;font-variation-settings:'opsz' 36,'SOFT' 10;">
+        {title}
+      </h1>
+
+      <!-- Standfirst -->
+      <p class="text-ink mb-10"
+         style="font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:17px;line-height:1.55;">
+        {standfirst}
+      </p>
+
+      <!-- Optional callout box (affiliate / privacy / cookies summary) -->
+      {callout && (
+        <div class="mb-10 px-5 py-5"
+             style="background:#F1E8D9;border-left:2px solid #A2384B;border-radius:2px;">
+          <p class="text-ink"
+             style="font-family:'Newsreader',Georgia,serif;font-size:15px;line-height:1.7;">
+            {callout}
+          </p>
+        </div>
+      )}
+
+      <!-- Optional intro paragraphs -->
+      {intro && (
+        <div class="mb-10">
+          {intro.split('\n\n').map(para => (
+            <p class="text-ink mb-4"
+               style="font-family:'Newsreader',Georgia,serif;font-size:15px;line-height:1.75;">
+              {para}
+            </p>
+          ))}
+        </div>
+      )}
+
+      <!-- Sections -->
+      {sections.map(section => (
+        <section class="mb-10">
+          <h2 class="text-ink mb-4"
+              style="font-family:'Fraunces Variable',Georgia,serif;font-size:24px;font-weight:400;line-height:1.25;font-variation-settings:'opsz' 24,'SOFT' 10;">
+            {section.heading}
+          </h2>
+          <div style="border-top:1px solid rgba(44,29,23,0.14);margin-bottom:1.25rem;"></div>
+          {section.body.split('\n\n').map(para => (
+            <p class="text-ink mb-4"
+               style="font-family:'Newsreader',Georgia,serif;font-size:15px;line-height:1.75;">
+              {para}
+            </p>
+          ))}
+        </section>
+      ))}
+
+      <!-- Last updated (privacy / cookies only) -->
+      {lastUpdated && (
+        <p class="text-taupe mt-12"
+           style="font-family:'Public Sans Variable',sans-serif;font-size:12px;">
+          Last updated: {lastUpdated}
+        </p>
+      )}
+
+    </div>
+  </div>
+</BaseLayout>
