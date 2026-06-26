@@ -1,49 +1,82 @@
 {
-  "diagnostic_banner": {
-    "kicker": "NOT SURE WHICH SYMPTOM?",
-    "body": "Enter your postcode. The diagnostic asks four questions and tells you the most likely cause for your area.",
-    "cta": "Run the diagnostic →",
-    "cta_href": "/tool/"
-  },
-  "symptom_directory": {
-    "section_heading": "Pick the one that sounds closest",
-    "cards": [
+  "hair_problems": {
+    "hero": {
+      "kicker": "Hair problems",
+      "title": "Five things that go wrong with natural and Afro hair",
+      "standfirst": "What each one looks like, what usually causes it, and the latest pieces on each."
+    },
+    "sections": [
       {
+        "number": "01",
+        "framing_label": "The dryness symptom",
         "title": "My hair feels dry no matter what I try",
-        "dek": "Five common causes. Most are fixable in one wash cycle.",
-        "image": "/images/placeholders/symptom-card-dry.webp",
-        "href": "/tool/postcode?s=S1-dry"
+        "body": "This is most often one of five things — and the float test you've been told to use isn't reliable for figuring out which. Hard water buildup, low porosity, protein-moisture imbalance, and seasonal humidity loss are the usual suspects. The fix depends on which.",
+        "image_path": "/images/placeholders/symptom-section-dry.webp",
+        "image_kicker": "4B",
+        "related_articles": [
+          { "href": "/hair-care/why-is-my-4c-hair-always-dry-uk/", "title": "Why Is My 4C Hair Always Dry? (The UK-Specific Answer)", "tag": "Hair Care" },
+          { "href": "/hair-care/hard-water-curly-hair-uk/", "title": "Hard Water and Curly Hair UK: What's Actually Wrecking Your Curls", "tag": "Problem Solving" },
+          { "href": "/hair-care/why-does-hair-feel-dry-right-after-washing-natural/", "title": "Why Does Natural Hair Feel Dry Right After Washing?", "tag": "Problem Solving" }
+        ]
       },
       {
+        "number": "02",
+        "framing_label": "The retention myth",
         "title": "My hair isn't growing",
-        "dek": "Almost always retention, not growth. Here's what that means.",
-        "image": "/images/placeholders/symptom-card-growth.webp",
-        "href": "/tool/postcode?s=S2-growth"
+        "body": "Almost always retention, not growth. Your hair is growing — at roughly the same rate as everyone else's. What's happening is breakage faster than the growth at the root can keep up. The fix is mechanical, not metabolic.",
+        "image_path": "/images/placeholders/symptom-section-growth.webp",
+        "image_kicker": "4C",
+        "related_articles": [
+          { "href": "/hair-care/why-wont-my-4c-hair-grow-uk/", "title": "Why Won't My 4C Hair Grow? (A UK Answer)", "tag": "Hair Care" },
+          { "href": "/hair-care/breakage-vs-shedding-natural-hair-uk/", "title": "Breakage vs Shedding Natural Hair: How to Tell the Difference", "tag": "Problem Solving" },
+          { "href": "/hair-care/protective-styles-length-retention/", "title": "Protective Styles and Length Retention: What Actually Works", "tag": "Guides" }
+        ]
       },
       {
+        "number": "03",
+        "framing_label": "The routine that broke",
         "title": "My products stopped working",
-        "dek": "Usually water, season, or porosity shift. We help diagnose which.",
-        "image": "/images/placeholders/symptom-card-products.webp",
-        "href": "/tool/postcode?s=S3-products"
+        "body": "Usually water, season, or porosity shift. Moving house can switch you from soft to hard water overnight. Autumn drops indoor humidity below the threshold where glycerin works. Chemical processing changes the cuticle. Same routine, different result.",
+        "image_path": "/images/placeholders/symptom-section-products.webp",
+        "image_kicker": "3C",
+        "related_articles": [
+          { "href": "/hair-care/natural-hair-products-stopped-working/", "title": "Why Your Natural Hair Products Stopped Working", "tag": "Problem Solving" },
+          { "href": "/hair-care/porosity-test-debunk-uk/", "title": "The Porosity Test Is Broken — Here's What Actually Matters", "tag": "Method" },
+          { "href": "/reviews/glycerin-natural-hair-winter-summer-uk/", "title": "Glycerin in Natural Hair Products: Summer vs Winter in the UK", "tag": "Problem Solving" }
+        ]
       },
       {
+        "number": "04",
+        "framing_label": "The parent track",
         "title": "My child's curls and I don't know where to start",
-        "dek": "No judgement. We start where you are.",
-        "image": "/images/placeholders/symptom-card-parent.webp",
-        "href": "/tool/postcode?s=S4-parent"
+        "body": "No judgement. Whether or not you share your child's texture, the foundations are the same — water, detangling, protective styling, products that aren't actively damaging. We start where you are.",
+        "image_path": "/images/placeholders/symptom-section-parent.webp",
+        "image_kicker": "3B · 4YR OLD",
+        "related_articles": [
+          { "href": "/parents/how-to-look-after-mixed-race-childs-hair-uk/", "title": "How to Look After Mixed Race Children's Hair: The Honest UK Starter Guide", "tag": "Parents" },
+          { "href": "/parents/white-parent-black-child-hair-help/", "title": "White Parent, Black Child Hair: Where to Actually Start", "tag": "Guides" },
+          { "href": "/parents/wash-day-routine-mixed-race-child-uk/", "title": "Wash Day Routine for Mixed Race Children UK: Step by Step", "tag": "Parents" }
+        ]
       },
       {
+        "number": "05",
+        "framing_label": "When it's medical",
         "title": "My scalp is itchy, flaky, or sore",
-        "dek": "Some scalp symptoms need a GP. We help you tell which.",
-        "image": "/images/placeholders/symptom-card-scalp.webp",
-        "href": "/tool/postcode?s=S5-scalp"
+        "body": "Some scalp symptoms are routine — buildup, infrequent washing, a new product irritating you. Some are medical and need a GP. CCCA, seborrhoeic dermatitis, and folliculitis all need clinical attention, not deep conditioner. We help you tell which is which.",
+        "image_path": "/images/placeholders/symptom-section-scalp.webp",
+        "image_kicker": "4A",
+        "related_articles": [
+          { "href": "/hair-care/scalp-care-natural-hair-uk/", "title": "Scalp Care for Natural Hair UK: The Part Most Routines Skip", "tag": "Guides" },
+          { "href": "/hair-care/scalp-itchy-after-washing-natural-hair/", "title": "Scalp Itchy After Washing Natural Hair", "tag": "Problem Solving" },
+          { "href": "/hair-care/thinning-edges-natural-hair-uk/", "title": "Thinning Edges on Natural Hair UK: Causes, Recovery, and When to See a Trichologist", "tag": "Problem Solving" }
+        ]
       }
     ],
     "catchall": {
-      "heading": "Symptom not in this list?",
-      "body": "Start with what you're noticing — the diagnostic accepts any description.",
-      "cta": "Tell us what's bothering you →",
-      "cta_href": "/tool/"
+      "kicker": "Not one of these five?",
+      "body": "These are the most common problems but they aren't the only ones. Browse the full hair-care library to find what you're looking for.",
+      "cta": "Browse all articles →",
+      "cta_href": "/hair-care/"
     }
   },
   "group_labels": {

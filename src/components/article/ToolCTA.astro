@@ -1,0 +1,40 @@
+---
+interface Props {
+  headline: string
+  body: string
+  cta_href: string
+  kicker?: string
+  cta_text?: string
+}
+
+const {
+  headline,
+  body,
+  cta_href,
+  kicker = 'Get a personalised answer',
+  cta_text = 'Run the diagnostic →',
+} = Astro.props
+---
+
+<div
+  class="my-8"
+  style="background:#F1E8D9;border-left:3px solid #3E2230;border-radius:2px;padding:18px 20px;"
+>
+  <p
+    class="font-sans uppercase mb-2"
+    style="font-size:10px;color:#A2384B;letter-spacing:0.10em;"
+  >{kicker}</p>
+  <p
+    class="mb-2"
+    style="font-family:'Fraunces Variable',Georgia,serif;font-size:1rem;font-weight:400;font-variation-settings:'opsz' 16,'SOFT' 10;color:#2C1D17;line-height:1.25;"
+  >{headline}</p>
+  <p
+    class="mb-3"
+    style="font-family:'Newsreader',Georgia,serif;font-size:0.75rem;color:#6E6056;line-height:1.55;"
+  >{body}</p>
+  <a
+    href={cta_href}
+    class="font-sans visited:text-berry"
+    style="font-size:11px;color:#A2384B;text-decoration:none;"
+  >{cta_text}</a>
+</div>
