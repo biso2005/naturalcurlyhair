@@ -5,7 +5,7 @@ import StickyGroupNav from './StickyGroupNav.astro'
 
 interface Props {
   articles: CollectionEntry<'articles'>[]
-  groupBy: 'tag' | 'verdict_type' | 'child_age'
+  groupBy: 'category' | 'verdict_type' | 'child_age'
   hubId: string
   copy: {
     group_labels: Record<string, Record<string, string>>
@@ -22,7 +22,10 @@ const { articles, groupBy, hubId, copy } = Astro.props
 // Build groups from articles
 const grouped = new Map<string, CollectionEntry<'articles'>[]>()
 for (const a of articles) {
-  const key = (a.data as Record<string, unknown>)[groupBy] as string | undefined ?? '_default'
+  const key = (groupBy === 'category'
+    ? a.data.category
+    : (a.data as Record<string, unknown>)[groupBy] as string | undefined
+  ) ?? '_default'
   if (!grouped.has(key)) grouped.set(key, [])
   grouped.get(key)!.push(a)
 }

@@ -46,7 +46,7 @@ const hubs = defineCollection({
                        'hair-care','products','parents','hair-problems','reviews']),
     dek:       z.string(),
     mode:      z.enum(['symptom-directory','grouped','flat']).optional(),
-    groupBy:   z.enum(['tag','verdict_type','child_age']).optional(),
+    groupBy:   z.enum(['category','verdict_type','child_age']).optional(),
     heroImage: z.string().optional(),
     hubColor:  z.string().optional(),
   }),

@@ -12,31 +12,31 @@
         "title": "My hair feels dry no matter what I try",
         "dek": "Five common causes. Most are fixable in one wash cycle.",
         "image": "/images/placeholders/symptom-card-dry.webp",
-        "href": "/tool/"
+        "href": "/tool/postcode?s=S1-dry"
       },
       {
         "title": "My hair isn't growing",
         "dek": "Almost always retention, not growth. Here's what that means.",
         "image": "/images/placeholders/symptom-card-growth.webp",
-        "href": "/tool/"
+        "href": "/tool/postcode?s=S2-growth"
       },
       {
         "title": "My products stopped working",
         "dek": "Usually water, season, or porosity shift. We help diagnose which.",
         "image": "/images/placeholders/symptom-card-products.webp",
-        "href": "/tool/"
+        "href": "/tool/postcode?s=S3-products"
       },
       {
         "title": "My child's curls and I don't know where to start",
         "dek": "No judgement. We start where you are.",
         "image": "/images/placeholders/symptom-card-parent.webp",
-        "href": "/tool/"
+        "href": "/tool/postcode?s=S4-parent"
       },
       {
         "title": "My scalp is itchy, flaky, or sore",
         "dek": "Some scalp symptoms need a GP. We help you tell which.",
         "image": "/images/placeholders/symptom-card-scalp.webp",
-        "href": "/tool/"
+        "href": "/tool/postcode?s=S5-scalp"
       }
     ],
     "catchall": {
@@ -47,11 +47,18 @@
     }
   },
   "group_labels": {
-    "tag": {
-      "how-to": "How-to guides",
-      "diagnostic": "Diagnostic articles",
-      "ingredient": "Ingredient explainers",
-      "uk-context": "UK context"
+    "category": {
+      "Guides": "How-to guides",
+      "Routines": "Routines",
+      "Problem Solving": "Diagnostic and problem-solving",
+      "Techniques": "Techniques",
+      "Method": "Methods",
+      "Products": "Product guides",
+      "Hair Care": "Hair care reference",
+      "Parents": "Parent guides",
+      "Curl Types": "By curl type",
+      "FAQ": "FAQs",
+      "_default": "All articles"
     },
     "verdict_type": {
       "skip": "Skip these",
